@@ -9,8 +9,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.omar.recipes.users.entity.ChefUser;
 import org.springframework.validation.annotation.Validated;
 
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,11 +27,11 @@ public class Recipe {
     String name;
     @NotBlank(message = "Recipe description needed")
     String description;
-    @Size(min = 1,message="At least one ingredient needed")
+    @Size(min = 1, message = "At least one ingredient needed")
     @NotNull
     @ElementCollection
     List<String> ingredients;
-    @Size(min = 1,message = "At least one direction needed")
+    @Size(min = 1, message = "At least one direction needed")
     @NotNull
     @ElementCollection
     List<String> directions;
@@ -45,6 +45,16 @@ public class Recipe {
     @JsonIgnore
     ChefUser user;
 
+    @ManyToMany
+    @ElementCollection
+    @JoinTable(  name = "RECIPE_TAGS",
+          
+          joinColumns
+          = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
+          inverseJoinColumns
+          = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
+    private List<Tag> tags=new  ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -57,7 +67,7 @@ public class Recipe {
     }
 
     public Recipe(Long id, String name, String description, List<String> ingredients,
-                  List<String> directions, String category, LocalDateTime date,ChefUser user) {
+        List<String> directions, String category, LocalDateTime date, ChefUser user) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -65,7 +75,7 @@ public class Recipe {
         this.directions = directions;
         this.category = category;
         this.date = date;
-        this.user=user;
+        this.user = user;
     }
 
     public String getName() {
@@ -84,7 +94,7 @@ public class Recipe {
         this.description = description;
     }
 
-    public   List<String> getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
@@ -92,7 +102,7 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public List<String>  getDirections() {
+    public List<String> getDirections() {
         return directions;
     }
 
@@ -126,8 +136,12 @@ public class Recipe {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Recipe recipe = (Recipe) o;
         return Objects.equals(name, recipe.name) && Objects.equals(description, recipe.description) && Objects.equals(ingredients, recipe.ingredients) && Objects.equals(directions, recipe.directions);
     }
@@ -136,4 +150,18 @@ public class Recipe {
     public int hashCode() {
         return Objects.hash(name, description, ingredients, directions);
     }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+    
+
+    public void AddTag(Tag tag) {
+        this.tags.add(tag);
+    }
+    
 }
