@@ -1,0 +1,16 @@
+server:
+  port : 9000
+spring:
+  application:
+    name: RecipeManagementGateway23
+  cloud:
+    gateway:
+      routes:
+        - id: recipe
+          uri: ${RECIPE_SERVICE:http://localhost:8881}
+          predicates:
+            - Path=/recipes/**
+          filter:
+            - AddRequestHeader=X-Request-red, blue
+            - AddResponseHeader=X-Response-Red, Blue
+
