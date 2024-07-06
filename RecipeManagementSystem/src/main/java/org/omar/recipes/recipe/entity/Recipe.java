@@ -6,13 +6,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Validated
@@ -45,15 +45,13 @@ public class Recipe {
     @JsonIgnore
     UserAccount user;
 
-    @ManyToMany
-    @ElementCollection
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(  name = "RECIPE_TAGS",
-          
           joinColumns
           = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
           inverseJoinColumns
           = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
-    private List<Tag> tags=new  ArrayList<>();
+    private Set<Tag> tags=new HashSet<>();
     
     
     private double totalRating; 
@@ -154,11 +152,11 @@ public class Recipe {
         return Objects.hash(name, description, ingredients, directions);
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
     

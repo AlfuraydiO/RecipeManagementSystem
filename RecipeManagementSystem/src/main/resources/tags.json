@@ -1,0 +1,55 @@
+{
+"tags":[
+
+{
+  "name": "Budget-Friendly",
+  "description": "Budget-Friendly meals with cheap ingredients",
+  "type": "Descriptive"
+},
+
+{
+  "name": "Quick & Easy",
+  "description": "This meal is asy and qwick to make less than 20 Minuinetes",
+  "type": "Descriptive"
+},
+
+ { "name": "Baking", "description": "Cooking food in an oven", "type": "Cooking Method" },
+  { "name": "Roasting", "description": "Cooking food in an oven with dry heat", "type": "Cooking Method" },
+  { "name": "Sautéing", "description": "Cooking food quickly in a pan with a small amount of fat", "type": "Cooking Method" },
+  { "name": "Frying", "description": "Cooking food in hot fat", "type": "Cooking Method" },
+  { "name": "Grilling", "description": "Cooking food over direct heat", "type": "Cooking Method" },
+  { "name": "Steaming", "description": "Cooking food by steaming", "type": "Cooking Method" },
+  { "name": "Slow-cooking", "description": "Cooking food slowly over a long period", "type": "Cooking Method" },
+  { "name": "One-Pot", "description": "Recipes requiring only one pot", "type": "Cooking Method" },
+
+ { "name": "Italian", "description": "Italian Cuisine", "type": "Cuisine" },
+  { "name": "Mexican", "description": "Mexican Cuisine", "type": "Cuisine" },
+  { "name": "Indian", "description": "Indian Cuisine", "type": "Cuisine" },
+  { "name": "Chinese", "description": "Chinese Cuisine", "type": "Cuisine" },
+  { "name": "Thai", "description": "Thai Cuisine", "type": "Cuisine" },
+  { "name": "Japanese", "description": "Japanese Cuisine", "type": "Cuisine" },
+  { "name": "American", "description": "American Cuisine", "type": "Cuisine" },
+  { "name": "Mediterranean", "description": "Mediterranean Cuisine", "type": "Cuisine" },
+  { "name": "Middle Eastern", "description": "Middle Eastern Cuisine", "type": "Cuisine" },
+  { "name": "Korean", "description": "Korean Cuisine", "type": "Cuisine" },
+
+ { "name": "Breakfast", "description": "The first meal of the day", "type": "Meal Type" },
+  { "name": "Lunch", "description": "A midday meal", "type": "Meal Type" },
+  { "name": "Dinner", "description": "The main evening meal", "type": "Meal Type" },
+  { "name": "Snack", "description": "A small meal between main meals", "type": "Meal Type" },
+  { "name": "Appetizer", "description": "A food served before a main course", "type": "Meal Type" },
+  { "name": "Dessert", "description": "A sweet course served after a meal", "type": "Meal Type" },
+
+ { "name": "Vegan", "description": "Food suitable for vegans", "type": "Dietary Restriction" },
+  { "name": "Vegetarian", "description": "Food suitable for vegetarians", "type": "Dietary Restriction" },
+  { "name": "Gluten-free", "description": "Food free of gluten", "type": "Dietary Restriction" },
+  { "name": "Dairy-free", "description": "Food free of dairy products", "type": "Dietary Restriction" },
+  { "name": "Nut-free", "description": "Food free of nuts", "type": "Dietary Restriction" },
+  { "name": "Soy-free", "description": "Food free of soy products", "type": "Dietary Restriction" },
+  { "name": "Keto", "description": "Food suitable for a ketogenic diet", "type": "Dietary Restriction" },
+  { "name": "Paleo", "description": "Food suitable for a paleo diet", "type": "Dietary Restriction" },
+  { "name": "Low-carb", "description": "Food low in carbohydrates", "type": "Dietary Restriction" },
+  { "name": "Pedestrian", "description": "Food that includes fish and seafood but not meat", "type": "Dietary Restriction" }
+
+]
+}

@@ -5,17 +5,18 @@
 package org.omar.recipes.recipe.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  *
  * @author oalfuraydi
  */
 @Entity
-public class Tag {
+ public class Tag {
     
   
     @Id
@@ -27,7 +28,10 @@ public class Tag {
     
     private String description;
     
-    private String type;;
+    private String type;
+
+    @ManyToMany(mappedBy = "tags",cascade = CascadeType.PERSIST)
+    private Set<Recipe> recipeSet = new HashSet<>();
     
 
     public Tag() {
@@ -56,8 +60,36 @@ public class Tag {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
-    
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tag tag = (Tag) o;
+        return Objects.equals(name, tag.name) && Objects.equals(type, tag.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
+    }
 }

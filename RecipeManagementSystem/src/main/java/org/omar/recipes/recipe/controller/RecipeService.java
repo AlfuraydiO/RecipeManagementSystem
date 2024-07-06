@@ -1,6 +1,7 @@
 package org.omar.recipes.recipe.controller;
 
 import org.omar.recipes.recipe.entity.Recipe;
+import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.controller.UserAccountService;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +19,13 @@ import java.util.Optional;
 public class RecipeService {
 
    RecipeRepository recipeRepository;
-    UserAccountService userService;
+   UserAccountService userService;
+    TagService tagService;
 
-    public RecipeService(RecipeRepository recipeRepository, UserAccountService userService) {
+    public RecipeService(RecipeRepository recipeRepository, UserAccountService userService, TagService tagService) {
         this.recipeRepository = recipeRepository;
         this.userService = userService;
+        this.tagService = tagService;
     }
 
     public Optional<Recipe> getRecipeById(long id){
@@ -30,7 +34,13 @@ public class RecipeService {
 
      public Optional<Recipe> saveRecipe(Recipe recipe,String email){
         recipe.setDate(LocalDateTime.now());
-        recipe.setUser(userService.loadChefUserByEmail(email));
+        recipe.setUser(email==null?null:userService.loadChefUserByEmail(email));
+        List<Tag> tagList=new ArrayList<>();
+        for(Tag tag:recipe.getTags()){
+            Optional<Tag> optionalTag = tagService.getTag(tag);
+            tagList.add(optionalTag.orElse(tag));
+        }
+        recipe.setTags(new HashSet<>(tagList));
         return Optional.of(recipeRepository.save(recipe));
      }
 
