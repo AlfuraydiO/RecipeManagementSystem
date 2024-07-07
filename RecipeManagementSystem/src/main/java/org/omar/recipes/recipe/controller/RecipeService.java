@@ -1,5 +1,6 @@
 package org.omar.recipes.recipe.controller;
 
+import jakarta.transaction.Transactional;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.controller.UserAccountService;
@@ -8,18 +9,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import org.omar.recipes.rating.controller.RecipeRatingEvent;
+import org.omar.recipes.rating.entity.Rating;
+import org.springframework.context.event.EventListener;
 
 @Service
+@Transactional
 public class RecipeService {
 
-   RecipeRepository recipeRepository;
-   UserAccountService userService;
+    RecipeRepository recipeRepository;
+    UserAccountService userService;
     TagService tagService;
 
     public RecipeService(RecipeRepository recipeRepository, UserAccountService userService, TagService tagService) {
@@ -28,62 +32,72 @@ public class RecipeService {
         this.tagService = tagService;
     }
 
-    public Optional<Recipe> getRecipeById(long id){
+    public Optional<Recipe> getRecipeById(long id) {
         return recipeRepository.findById(id);
-     }
+    }
+    
+    public boolean existsById(long id) {
+        return recipeRepository.existsById(id);
+    }
 
-     public Optional<Recipe> saveRecipe(Recipe recipe,String email){
+    public Optional<Recipe> saveRecipe(Recipe recipe, String email) {
         recipe.setDate(LocalDateTime.now());
-        recipe.setUser(email==null?null:userService.loadChefUserByEmail(email));
-        List<Tag> tagList=new ArrayList<>();
-        for(Tag tag:recipe.getTags()){
+        recipe.setUser(email == null ? null : userService.loadUserByEmail(email));
+        List<Tag> tagList = new ArrayList<>();
+        for (Tag tag : recipe.getTags()) {
             Optional<Tag> optionalTag = tagService.getTag(tag);
             tagList.add(optionalTag.orElse(tag));
         }
         recipe.setTags(new HashSet<>(tagList));
         return Optional.of(recipeRepository.save(recipe));
-     }
+    }
 
-    public ResponseEntity<?> updateRecipe(Long id, Recipe recipe, String email){
+    public ResponseEntity<?> updateRecipe(Long id, Recipe recipe, String email) {
         Optional<Recipe> exists = recipeRepository.findById(id);
-        if(exists.isPresent()){
-            UserAccount chefUser = userService.loadChefUserByEmail(email);
-            if(exists.get().getUser().getEmail().equals(email)){
+        if (exists.isPresent()) {
+            UserAccount chefUser = userService.loadUserByEmail(email);
+            if (exists.get().getUser().getEmail().equals(email)) {
                 recipe.setDate(LocalDateTime.now());
                 recipe.setId(exists.get().getId());
                 recipe.setUser(chefUser);
                 Recipe saved = recipeRepository.save(recipe);
                 return ResponseEntity.noContent().build();
-            }else {
+            } else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    public List<Recipe> SearchRecipe(String category, String name){
-    if(!category.isEmpty()){
-        return recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
-    }
-    if(!name.isEmpty()){
-        return recipeRepository.findByNameContainingIgnoreCaseOrderByDateDesc(name);
-    }
-    return new ArrayList<Recipe>();
+    public List<Recipe> SearchRecipe(String category, String name) {
+        if (!category.isEmpty()) {
+            return recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
+        }
+        if (!name.isEmpty()) {
+            return recipeRepository.findByNameContainingIgnoreCaseOrderByDateDesc(name);
+        }
+        return new ArrayList<Recipe>();
     }
 
-    public HttpStatus removeRecipe(Long id, String email){
+    public HttpStatus removeRecipe(Long id, String email) {
         Optional<Recipe> byId = recipeRepository.findById(id);
-        if(byId.isPresent()){
-            if (byId.get().getUser().getEmail().equals(email)){
+        if (byId.isPresent()) {
+            if (byId.get().getUser().getEmail().equals(email)) {
                 recipeRepository.delete(byId.get());
                 return HttpStatus.NO_CONTENT;
-            }else{
+            } else {
                 return HttpStatus.FORBIDDEN;
             }
-        }else {
+        } else {
             return HttpStatus.NOT_FOUND;
         }
 
+    }
+
+    @EventListener
+    void onRating(RecipeRatingEvent event) {
+        Rating source = (Rating) event.getSource();
+        System.out.println("REcipe "+source.getRecipe()+" was rated"+source.getRecipeRating());
     }
 }

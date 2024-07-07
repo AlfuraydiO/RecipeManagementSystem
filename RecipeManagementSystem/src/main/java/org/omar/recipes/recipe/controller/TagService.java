@@ -1,15 +1,10 @@
 package org.omar.recipes.recipe.controller;
 
-import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.recipe.entity.Tag;
-import org.omar.recipes.users.controller.UserAccountService;
-import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

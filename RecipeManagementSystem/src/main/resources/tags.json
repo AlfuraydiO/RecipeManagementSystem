@@ -2,6 +2,7 @@
 "tags":[
 
 {
+   "id":1,
   "name": "Budget-Friendly",
   "description": "Budget-Friendly meals with cheap ingredients",
   "type": "Descriptive"

@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 @Entity
 @Validated
 @DynamicUpdate
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"recipe_id","user_account_id"})})
 public class Rating {
 
     @Id
@@ -38,6 +39,16 @@ public class Rating {
 
     public Rating() {
     }
+
+    public Rating(UserAccount userAccount, Recipe recipe, Double recipeRating, LocalDateTime localDateTime, String review) {
+        this.userAccount = userAccount;
+        this.recipe = recipe;
+        this.recipeRating = recipeRating;
+        this.localDateTime = localDateTime;
+        this.review = review;
+    }
+    
+    
 
     public Long getId() {
         return id;

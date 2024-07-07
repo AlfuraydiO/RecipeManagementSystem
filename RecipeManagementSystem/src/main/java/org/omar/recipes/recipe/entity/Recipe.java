@@ -5,9 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.io.Serializable;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.validation.annotation.Validated;
 
@@ -17,7 +16,7 @@ import java.util.*;
 @Entity
 @Validated
 @DynamicUpdate
-public class Recipe {
+public class Recipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,16 +44,24 @@ public class Recipe {
     @JsonIgnore
     UserAccount user;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   // @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    //@ElementCollection
     @JoinTable(  name = "RECIPE_TAGS",
-          joinColumns
+          joinColumns 
           = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
           inverseJoinColumns
           = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
     private Set<Tag> tags=new HashSet<>();
     
     
-    private double totalRating; 
+    private double totalRating;
+
+    public Recipe(Long id) {
+        this.id = id;
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -163,6 +170,14 @@ public class Recipe {
 
     public void AddTag(Tag tag) {
         this.tags.add(tag);
+        tag.getRecipeSet().add(this);
+        
+    }
+    
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+        tag.getRecipeSet().remove(this);
+        
     }
 
     public double getTotalRating() {

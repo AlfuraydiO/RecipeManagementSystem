@@ -4,7 +4,7 @@ package org.omar.recipes.users.controller;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.omar.recipes.users.entity.UserAccount;
-import org.omar.recipes.users.entity.RegistrationRequest;
+import org.omar.recipes.users.boundary.RegistrationRequest;
 import org.omar.recipes.users.entity.UserAdapter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +33,7 @@ public class UserAccountService implements UserDetailsService {
      }
 
      public ResponseEntity<String> saveUser(RegistrationRequest request){
-         Optional<UserAccount> userByEmail = userRepository.findChefUserByEmail(request.email());
+         Optional<UserAccount> userByEmail = userRepository.findUserByEmail(request.email());
          if(userByEmail.isEmpty()){
              return ResponseEntity.badRequest().body("User does not exits");
          }
@@ -74,21 +74,21 @@ public class UserAccountService implements UserDetailsService {
     }
 
 
-    public UserAccount loadChefUserByEmail(String username) throws UsernameNotFoundException {
-        return userRepository.findChefUserByEmail(username)
+    public UserAccount loadUserByEmail(String email) throws UsernameNotFoundException {
+        return userRepository.findUserByEmail(email)
                 .orElseThrow(()->new UsernameNotFoundException("Not found"));
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserAccount user=userRepository.findChefUserByEmail(username)
+        UserAccount user=userRepository.findUserByEmail(username)
                 .orElseThrow(()->new UsernameNotFoundException("Not found"));
         return new UserAdapter(user);
     }
 
     public ResponseEntity<String> saveNewUser(RegistrationRequest request) {
-        Optional<UserAccount> userByEmail = userRepository.findChefUserByEmail(request.email());
+        Optional<UserAccount> userByEmail = userRepository.findUserByEmail(request.email());
         if(userByEmail.isPresent()){
             return ResponseEntity.badRequest().body("Email already exists");
         }

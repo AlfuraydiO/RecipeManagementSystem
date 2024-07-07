@@ -5,9 +5,11 @@ import org.springframework.data.repository.CrudRepository;
 
 
 import java.util.Optional;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserAccountRepository extends CrudRepository<UserAccount, Long> {
 
-  Optional<UserAccount> findChefUserByEmail(String email);
+  Optional<UserAccount> findUserByEmail(String email);
 
 }

@@ -27,7 +27,7 @@ public class RatingController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Rating> getRecipe(@PathVariable Long id) {
+    public ResponseEntity<Rating> getRating(@PathVariable Long id) {
         Optional<Rating> ratingByid = ratingService.getRatingById(id);
         if (ratingByid.isPresent()) {
             return ResponseEntity.ok(ratingByid.get());
@@ -36,19 +36,19 @@ public class RatingController {
     }
  
     @PutMapping("{id}")
-    public ResponseEntity updateRecipe(@AuthenticationPrincipal UserDetails userDetails,@PathVariable Long id, @RequestBody @Valid Rating rating) {
-        ResponseEntity<?> responseEntity = ratingService.updateRating(id, rating, userDetails.getUsername());
+    public ResponseEntity updateRating(@AuthenticationPrincipal UserDetails userDetails,@PathVariable Long id, @RequestBody @Valid RatingRequest ratingRequest) {
+        ResponseEntity<?> responseEntity = ratingService.updateRating(id, ratingRequest, userDetails.getUsername());
         return responseEntity;
     }
 
     @PostMapping(value = "new", produces = "application/json")
-    public ResponseEntity PostRecipe(@AuthenticationPrincipal UserDetails userDetails,@RequestBody @Valid Rating rating) {
-        Optional<Rating> rating1 = ratingService.saveRecipe(rating,userDetails.getUsername());
+    public ResponseEntity PostRating(@AuthenticationPrincipal UserDetails userDetails,@RequestBody @Valid RatingRequest ratingRequest) {
+        Optional<Rating> rating1 = ratingService.saveRecipe(ratingRequest,userDetails.getUsername());
         return ResponseEntity.ok(new id(rating1.get().getId()));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteRecipe(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+    public ResponseEntity deleteRating(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
         HttpStatus status = ratingService.removeRecipe(id,userDetails.getUsername());
          return ResponseEntity.status(status.value()).build();
     }

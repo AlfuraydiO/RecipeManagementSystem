@@ -1,4 +1,4 @@
-package org.omar.recipes.users.entity;
+package org.omar.recipes.users.boundary;
 
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;

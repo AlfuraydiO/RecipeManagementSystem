@@ -2,7 +2,6 @@ package org.omar.recipes.users.boundary;
 
 import jakarta.validation.Valid;
 import org.omar.recipes.users.controller.UserAccountService;
-import org.omar.recipes.users.entity.RegistrationRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
