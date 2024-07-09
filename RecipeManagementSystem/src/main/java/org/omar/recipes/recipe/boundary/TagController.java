@@ -28,11 +28,8 @@ public class TagController {
 
     @GetMapping("{id}")
     public ResponseEntity<Tag> getTag(@PathVariable Long id) {
-        Optional<Tag> tagById = tagService.getTagById(id);
-        if (tagById.isPresent()) {
-            return ResponseEntity.ok(tagById.get());
-        }
-        return ResponseEntity.status(404).build();
+       Tag tagById = tagService.getTagById(id);
+       return ResponseEntity.ok(tagById);
     }
 
     @GetMapping("search/")

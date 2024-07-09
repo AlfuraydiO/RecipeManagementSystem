@@ -28,11 +28,8 @@ public class RatingController {
 
     @GetMapping("{id}")
     public ResponseEntity<Rating> getRating(@PathVariable Long id) {
-        Optional<Rating> ratingByid = ratingService.getRatingById(id);
-        if (ratingByid.isPresent()) {
-            return ResponseEntity.ok(ratingByid.get());
-        }
-        return ResponseEntity.status(404).build();
+        Rating ratingByid = ratingService.getRatingById(id);
+            return ResponseEntity.ok(ratingByid); 
     }
  
     @PutMapping("{id}")

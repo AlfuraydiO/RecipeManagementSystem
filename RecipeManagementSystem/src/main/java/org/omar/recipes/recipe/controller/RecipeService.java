@@ -1,6 +1,8 @@
 package org.omar.recipes.recipe.controller;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.controller.UserAccountService;
@@ -14,9 +16,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.omar.recipes.rating.controller.RecipeRatingEvent;
 import org.omar.recipes.rating.entity.Rating;
+import org.omar.recipes.recipe.boundary.RecipeRequest;
 import org.springframework.context.event.EventListener;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Transactional
@@ -25,48 +30,69 @@ public class RecipeService {
     RecipeRepository recipeRepository;
     UserAccountService userService;
     TagService tagService;
+    Validator validator;
+    
+    int counter=0;
 
-    public RecipeService(RecipeRepository recipeRepository, UserAccountService userService, TagService tagService) {
+    public RecipeService(RecipeRepository recipeRepository, UserAccountService userService, TagService tagService, Validator validator) {
         this.recipeRepository = recipeRepository;
         this.userService = userService;
         this.tagService = tagService;
+        this.validator = validator;
     }
 
     public Optional<Recipe> getRecipeById(long id) {
         return recipeRepository.findById(id);
     }
-    
+
     public boolean existsById(long id) {
         return recipeRepository.existsById(id);
     }
 
-    public Optional<Recipe> saveRecipe(Recipe recipe, String email) {
+    public Recipe saveRecipe(RecipeRequest request, String email) {
+        Recipe recipe = new Recipe(null, request.name(), request.description(), request.ingredients(),
+            request.directions(), request.category());
         recipe.setDate(LocalDateTime.now());
         recipe.setUser(email == null ? null : userService.loadUserByEmail(email));
+        Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
+        if (!violations.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, violations.stream().map(ConstraintViolation::getMessage).toList().toString());
+        }
         List<Tag> tagList = new ArrayList<>();
-        for (Tag tag : recipe.getTags()) {
-            Optional<Tag> optionalTag = tagService.getTag(tag);
-            tagList.add(optionalTag.orElse(tag));
+        for (int id : request.tags()) {
+            Tag tag = tagService.getTagById(id);
+            tagList.add(tag);
         }
         recipe.setTags(new HashSet<>(tagList));
-        return Optional.of(recipeRepository.save(recipe));
+        return recipeRepository.save(recipe);
     }
 
-    public ResponseEntity<?> updateRecipe(Long id, Recipe recipe, String email) {
+    public ResponseEntity<?> updateRecipe(Long id, RecipeRequest request, String email) {
         Optional<Recipe> exists = recipeRepository.findById(id);
         if (exists.isPresent()) {
             UserAccount chefUser = userService.loadUserByEmail(email);
             if (exists.get().getUser().getEmail().equals(email)) {
+                Recipe recipe = new Recipe(exists.get().getId(), request.name(), request.description(), request.ingredients(),
+                    request.directions(), request.category());
                 recipe.setDate(LocalDateTime.now());
-                recipe.setId(exists.get().getId());
                 recipe.setUser(chefUser);
+                        Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
+                if (!violations.isEmpty()) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, violations.stream().map(ConstraintViolation::getMessage).toList().toString());
+                }
+                List<Tag> tagList = new ArrayList<>();
+                for (int tagid : request.tags()) {
+                    Tag tag = tagService.getTagById(tagid);
+                    tagList.add(tag);
+                }
+                recipe.setTags(new HashSet<>(tagList));
                 Recipe saved = recipeRepository.save(recipe);
                 return ResponseEntity.noContent().build();
             } else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are Unauthorized to update this recipe id " + id);
             }
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe " + id + " Not Found !");
         }
     }
 
@@ -87,17 +113,19 @@ public class RecipeService {
                 recipeRepository.delete(byId.get());
                 return HttpStatus.NO_CONTENT;
             } else {
-                return HttpStatus.FORBIDDEN;
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are Unauthorized to delete this recipe id " + id);
             }
         } else {
-            return HttpStatus.NOT_FOUND;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe " + id + " Not Found !");
         }
 
     }
 
     @EventListener
     void onRating(RecipeRatingEvent event) {
+        System.err.println("Counter"+counter);
         Rating source = (Rating) event.getSource();
-        System.out.println("REcipe "+source.getRecipe()+" was rated"+source.getRecipeRating());
+        System.out.println("REcipe " + source.getRecipe() + " was rated" + source.getRecipeRating());
     }
+
 }

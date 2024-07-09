@@ -4,8 +4,12 @@
  */
 package org.omar.recipes.rating.boundary;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 /**
  *
  * @author oalfuraydi
  */
-public record RatingRequest(long recipeId,double rating,String review) {}
+public record RatingRequest(@NotNull long recipeId,@Min(value =1)@Max(value = 10) double rating,String review) {}

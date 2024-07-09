@@ -14,6 +14,7 @@ import org.omar.recipes.recipe.controller.RecipeService;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Transactional
@@ -31,8 +32,10 @@ public class RatingService {
         this.accountService = accountService;
     }
 
-    public Optional<Rating> getRatingById(long id) {
-        return ratingRepository.findById(id);
+    public Rating getRatingById(long id) {
+        Optional<Rating> rating = ratingRepository.findById(id);
+        Rating ratingByid = rating.orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Recipe "+id+" Not Found !"));
+        return ratingByid;
     }
 
     public Optional<Rating> saveRecipe(RatingRequest ratingrequest, String email) {
@@ -42,7 +45,7 @@ public class RatingService {
         rating.setRecipeRating(ratingrequest.rating());
         rating.setReview(ratingrequest.review());
         if(!recipeService.existsById(ratingrequest.recipeId())){
-         return Optional.empty();
+          throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Recipe "+ratingrequest.recipeId()+" Not Found !");
         }
         rating.setRecipe(new Recipe(ratingrequest.recipeId()));
         Optional<Rating> optionalRating = Optional.of(ratingRepository.save(rating));
@@ -64,10 +67,10 @@ public class RatingService {
                 Rating saved = ratingRepository.save(rating);
                 return ResponseEntity.noContent().build();
             } else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                  throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"You are Unauthorized to update this rating id "+id);
             }
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"rating "+id+" Not Found !");
         }
     }
 
@@ -78,10 +81,10 @@ public class RatingService {
                 ratingRepository.delete(byId.get());
                 return HttpStatus.NO_CONTENT;
             } else {
-                return HttpStatus.FORBIDDEN;
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"You are Unauthorized to delete this rating, id "+id);
             }
         } else {
-            return HttpStatus.NOT_FOUND;
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND,"rating "+id+" Not Found !");
         }
 
     }

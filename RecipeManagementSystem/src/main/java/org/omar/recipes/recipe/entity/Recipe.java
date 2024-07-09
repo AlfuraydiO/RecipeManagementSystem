@@ -75,15 +75,13 @@ public class Recipe implements Serializable {
     }
 
     public Recipe(Long id, String name, String description, List<String> ingredients,
-        List<String> directions, String category, LocalDateTime date, UserAccount user) {
+        List<String> directions, String category ) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
         this.directions = directions;
         this.category = category;
-        this.date = date;
-        this.user = user;
     }
 
     public String getName() {

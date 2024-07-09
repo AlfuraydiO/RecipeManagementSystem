@@ -30,7 +30,8 @@ import java.util.Set;
     private String description;
     
     private String type;
-
+    
+    @JsonIgnore
     @ManyToMany(mappedBy = "tags",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private Set<Recipe> recipeSet = new HashSet<>();
     

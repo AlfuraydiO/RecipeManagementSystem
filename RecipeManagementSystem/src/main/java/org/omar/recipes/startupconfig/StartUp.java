@@ -17,7 +17,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.omar.recipes.rating.controller.RatingService;
 import org.omar.recipes.rating.entity.Rating;
+import org.omar.recipes.users.boundary.RegistrationRequest;
 import org.omar.recipes.users.controller.UserAccountRepository;
+import org.omar.recipes.users.controller.UserAccountService;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -30,16 +32,14 @@ public class StartUp implements CommandLineRunner {
     TagRepository tagRepository;
     RecipeService recipeService;
     RatingService ratingService;
-    UserAccountRepository accountRepository;
+    UserAccountService userAccountService;
 
-    public StartUp(TagRepository tagRepository, RecipeService recipeService, RatingService ratingService, UserAccountRepository accountRepository) {
+    public StartUp(TagRepository tagRepository, RecipeService recipeService, RatingService ratingService, UserAccountService userAccountService) {
         this.tagRepository = tagRepository;
         this.recipeService = recipeService;
         this.ratingService = ratingService;
-        this.accountRepository = accountRepository;
+        this.userAccountService = userAccountService;
     }
-
-    
 
     @Override
     public void run(String... args) throws Exception {
@@ -54,18 +54,13 @@ public class StartUp implements CommandLineRunner {
         for(Tag tag:tags.tags){
             tagRepository.save(tag);
         }
-        UserAccount account=new UserAccount();
-        account.setAuthority("ROLE_CHEF");
-        account.setEmail("omar@email.com");
-        account.setEnabled(true);
-        account.setPassword("21423333");
-        account.setAccountNonLocked(true);
-        accountRepository.save(account);
+         
+        userAccountService.saveUser(new RegistrationRequest("omar@email.com", "21423333", "ROLE_CHEF") );
         path = pathlist.stream().filter(e -> e.getFileName().toString().equals("recipes.json")).findFirst();
          reader = Files.newBufferedReader(path.get());
          collected = reader.lines().collect(Collectors.joining("\n"));
         Recipes recipes = objectMapper.readValue(collected, Recipes.class);
-        for(Recipe recipe:recipes.recipes){
+       /* for(Recipe recipe:recipes.recipes){
             recipeService.saveRecipe(recipe,"omar@email.com");
         }
         Recipe get = recipes.recipes.get(2);
@@ -86,7 +81,6 @@ public class StartUp implements CommandLineRunner {
         }
        // saveRecipe.get().setRecipeRating(10.0);
         //ratingService.updateRating(saveRecipe.get().getId(), rating, "omar@email.com");
-        
-
+        */
     }
 }

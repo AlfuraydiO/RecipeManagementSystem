@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("api/recipe/")
@@ -31,8 +32,10 @@ public class RecipeController {
         Optional<Recipe> recipeById = recipeService.getRecipeById(id);
         if (recipeById.isPresent()) {
             return ResponseEntity.ok(recipeById.get());
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Recipe "+id+" Not Found !");
         }
-        return ResponseEntity.status(404).build();
+ 
     }
 
     @GetMapping("search/")
@@ -45,15 +48,15 @@ public class RecipeController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity updateRecipe(@AuthenticationPrincipal UserDetails userDetails,@PathVariable Long id, @RequestBody @Valid Recipe recipe) {
+    public ResponseEntity updateRecipe(@AuthenticationPrincipal UserDetails userDetails,@PathVariable Long id,@RequestBody RecipeRequest recipe) {
         ResponseEntity<?> responseEntity = recipeService.updateRecipe(id, recipe, userDetails.getUsername());
         return responseEntity;
     }
 
     @PostMapping(value = "new", produces = "application/json")
-    public ResponseEntity PostRecipe(@AuthenticationPrincipal UserDetails userDetails,@RequestBody @Valid Recipe recipe) {
-        Optional<Recipe> recipe1 = recipeService.saveRecipe(recipe,userDetails.getUsername());
-        return ResponseEntity.ok(new id(recipe1.get().getId()));
+    public ResponseEntity PostRecipe(@AuthenticationPrincipal UserDetails userDetails,@RequestBody RecipeRequest recipe) {
+        Recipe recipe1 = recipeService.saveRecipe(recipe,userDetails.getUsername());
+        return ResponseEntity.ok(new id(recipe1.getId()));
     }
 
     @DeleteMapping("{id}")

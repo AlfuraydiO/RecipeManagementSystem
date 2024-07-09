@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class TagService {
@@ -17,8 +18,14 @@ public class TagService {
         this.tagRepository = tagRepository;
     }
     
-    public Optional<Tag> getTagById(long id){
-        return tagRepository.findById(id);
+    public Tag getTagById(long id){
+        Optional<Tag> findById = tagRepository.findById(id);
+        if(findById.isPresent()){
+            return findById.get();
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tag was not found id "+id);
+        }
+         
     }
 
     public Optional<Tag> getTag(Tag tag){
@@ -39,7 +46,7 @@ public class TagService {
                 tagRepository.delete(byId.get());
                 return HttpStatus.NO_CONTENT;
         }else {
-            return HttpStatus.NOT_FOUND;
+             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tag was not found id "+id);
         }
 
     }
