@@ -20,8 +20,8 @@ public class SecurityConfig {
 
                     .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
                     .requestMatchers(HttpMethod.GET,"/api/**").authenticated()
-                    .requestMatchers(HttpMethod.POST,"/api/**").hasAnyRole("CHEF")
-                    .requestMatchers(HttpMethod.PUT,"/api/**").hasAnyRole("CHEF")
+                    .requestMatchers(HttpMethod.POST,"/api/recipe/*").hasAnyRole("CHEF")
+                    .requestMatchers(HttpMethod.PUT,"/api/recipe/**").hasAnyRole("CHEF")
                     .requestMatchers(HttpMethod.DELETE,"/api/**").authenticated()
                     .requestMatchers("/h2-console/**").permitAll()
                     .requestMatchers("/actuator/**").permitAll()

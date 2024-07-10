@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserAccountService implements UserDetailsService {
@@ -21,6 +24,10 @@ public class UserAccountService implements UserDetailsService {
     private final UserAccountRepository userRepository;
     private final PasswordEncoder passwordEncoder ;
     private  Validator validator;
+    
+    private static final Logger LOG = Logger.getLogger(UserAccountService.class.getName());
+    
+    
 
     public UserAccountService(PasswordEncoder passwordEncoder, UserAccountRepository userRepository, Validator validator) {
         this.passwordEncoder = passwordEncoder;
@@ -35,7 +42,7 @@ public class UserAccountService implements UserDetailsService {
      public ResponseEntity<String> saveUser(RegistrationRequest request){
          Optional<UserAccount> userByEmail = userRepository.findUserByEmail(request.email());
          if(userByEmail.isEmpty()){
-             return ResponseEntity.badRequest().body("User does not exits");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No user exsit with provided Email");
          }
          var user = new UserAccount();
          user.setEmail(request.email());
@@ -90,7 +97,9 @@ public class UserAccountService implements UserDetailsService {
     public ResponseEntity<String> saveNewUser(RegistrationRequest request) {
         Optional<UserAccount> userByEmail = userRepository.findUserByEmail(request.email());
         if(userByEmail.isPresent()){
+              LOG.warning("Email Already exists");
             return ResponseEntity.badRequest().body("Email already exists");
+          
         }
         var user = new UserAccount();
         user.setEmail(request.email());
@@ -104,6 +113,7 @@ public class UserAccountService implements UserDetailsService {
             userRepository.save(user);
             return ResponseEntity.ok().build();
         } else {
+            LOG.warning(" Constraint Violation exists");
             return ResponseEntity.badRequest().body(violations.stream().map(ConstraintViolation::getMessage).toList().toString());
         }
     }

@@ -14,25 +14,28 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import org.omar.recipes.rating.controller.RecipeRatingEvent;
+import java.util.concurrent.TimeUnit;
+import org.omar.recipes.rating.controller.RatingService;
 import org.omar.recipes.rating.entity.Rating;
 import org.omar.recipes.recipe.boundary.RecipeRequest;
-import org.springframework.context.event.EventListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Transactional
 public class RecipeService {
 
-    RecipeRepository recipeRepository;
-    UserAccountService userService;
-    TagService tagService;
-    Validator validator;
-    
-    int counter=0;
+    private RecipeRepository recipeRepository;
+    private UserAccountService userService;
+    private TagService tagService;
+    private Validator validator;
+    private RatingService ratingService;
 
     public RecipeService(RecipeRepository recipeRepository, UserAccountService userService, TagService tagService, Validator validator) {
         this.recipeRepository = recipeRepository;
@@ -40,6 +43,8 @@ public class RecipeService {
         this.tagService = tagService;
         this.validator = validator;
     }
+   
+    
 
     public Optional<Recipe> getRecipeById(long id) {
         return recipeRepository.findById(id);
@@ -120,12 +125,44 @@ public class RecipeService {
         }
 
     }
-
-    @EventListener
-    void onRating(RecipeRatingEvent event) {
-        System.err.println("Counter"+counter);
-        Rating source = (Rating) event.getSource();
-        System.out.println("REcipe " + source.getRecipe() + " was rated" + source.getRecipeRating());
+    
+    @Scheduled(timeUnit = TimeUnit.SECONDS,fixedDelay = 10l)
+    public void UpdateRecipeRating(){
+        Iterable<Recipe> allRecipes = this.getAllRecipes();
+        Iterator<Recipe> iterator = allRecipes.iterator();
+        while (iterator.hasNext()) {
+            Recipe next = iterator.next();
+            long CountRatingByRecipe = ratingService.CountRatingByRecipe(next.getId());
+            if(CountRatingByRecipe>0){
+                long totalRatingscore=0;
+                List<Rating> ratingById = ratingService.getRatingsByRecipe(next.getId());
+                for (Rating rating : ratingById) {
+                    totalRatingscore+=rating.getRecipeRating();
+                }
+                next.setTotalRating(totalRatingscore/CountRatingByRecipe);
+                try {
+                     recipeRepository.save(next);
+                } catch (Exception e) {
+                    System.err.println("issue"); 
+                }
+               
+            }
+            
+        }
     }
+    
+     public Iterable<Recipe> getAllRecipes() {
+        return recipeRepository.findAll();
+    }
+
+    public RatingService getRatingService() {
+        return ratingService;
+    }
+    @Autowired
+    public void setRatingService(@Lazy RatingService ratingService) {
+        this.ratingService = ratingService;
+    }
+        
+     
 
 }

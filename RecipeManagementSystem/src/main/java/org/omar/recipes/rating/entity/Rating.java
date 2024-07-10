@@ -3,6 +3,7 @@ package org.omar.recipes.rating.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @DynamicUpdate
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"recipe_id","user_account_id"})})
-public class Rating {
+public class Rating implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +28,7 @@ public class Rating {
 
     @ManyToOne
     @NotNull
+    @JsonIgnore
     private Recipe recipe;
     
     @NotNull
@@ -47,8 +49,6 @@ public class Rating {
         this.localDateTime = localDateTime;
         this.review = review;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -90,6 +90,17 @@ public class Rating {
         this.localDateTime = localDateTime;
     }
 
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+    
+    
+    
+     
     @Override
     public int hashCode() {
         int hash = 5;
@@ -122,16 +133,5 @@ public class Rating {
             return false;
         }
         return Objects.equals(this.localDateTime, other.localDateTime);
-    }
-
-    public String getReview() {
-        return review;
-    }
-
-    public void setReview(String review) {
-        this.review = review;
-    }
-    
-    
-    
+    }   
 }

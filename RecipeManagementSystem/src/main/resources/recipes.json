@@ -26,14 +26,8 @@
           "name": "Italian",
           "description": "Italian Cuisine",
           "type": "Cuisine"
+    }]
         },
-        {
-          "name": "Quick & Easy",
-          "description": "This meal is asy and quick to make less than 20 Minutes",
-          "type": "Descriptive"
-        }
-      ]
-    },
 
 
     {
@@ -91,6 +85,7 @@
       "tags": [  { "name": "Mexican", "description": "Mexican Cuisine", "type": "Cuisine" }
       ]
     },
+    
     {
       "name": "Spicy Chicken Stir-Fry",
       "category": "DINNER",

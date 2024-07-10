@@ -16,12 +16,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.omar.recipes.rating.controller.RatingService;
-import org.omar.recipes.rating.entity.Rating;
 import org.omar.recipes.users.boundary.RegistrationRequest;
-import org.omar.recipes.users.controller.UserAccountRepository;
 import org.omar.recipes.users.controller.UserAccountService;
-import org.omar.recipes.users.entity.UserAccount;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 
 @Component
 public class StartUp implements CommandLineRunner {
@@ -55,7 +52,8 @@ public class StartUp implements CommandLineRunner {
             tagRepository.save(tag);
         }
          
-        userAccountService.saveUser(new RegistrationRequest("omar@email.com", "21423333", "ROLE_CHEF") );
+        ResponseEntity<String> saveUser = userAccountService.saveNewUser(new RegistrationRequest("omar@email.com", "21423333", "ROLE_CHEF") );
+        System.err.println("saveUser "+saveUser.toString());
         path = pathlist.stream().filter(e -> e.getFileName().toString().equals("recipes.json")).findFirst();
          reader = Files.newBufferedReader(path.get());
          collected = reader.lines().collect(Collectors.joining("\n"));

@@ -1,14 +1,18 @@
 package org.omar.recipes.users.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
+import java.io.Serializable;
 
 import java.util.Objects;
 
 @Entity
-public class UserAccount {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class UserAccount implements Serializable{
 
     @Id
     @GeneratedValue
@@ -19,13 +23,16 @@ public class UserAccount {
     @NotNull
     @NotBlank(message = "Email must be not blank")
     private String email;
+    @JsonIgnore
     @Size(min = 8,message = "Password must be at least 8 characters")
     @NotBlank(message = "Password must not be blank")
     @NotNull
     private String password;
+    @JsonIgnore
     private String authority;
-
+    @JsonIgnore
     private boolean isAccountNonLocked;
+    @JsonIgnore
     private boolean isEnabled;
 
     public UserAccount() {
@@ -67,7 +74,7 @@ public class UserAccount {
     public void setEnabled(boolean enabled) {
         this.isEnabled = enabled;
     }
-
+     @JsonIgnore
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
@@ -75,7 +82,7 @@ public class UserAccount {
     public void setAccountNonLocked(boolean accountNonLocked) {
         isAccountNonLocked = accountNonLocked;
     }
-
+     @JsonIgnore
     public boolean isEnabled() {
         return isEnabled;
     }
@@ -104,4 +111,6 @@ public class UserAccount {
                 ", isEnabled=" + isEnabled +
                 '}';
     }
+
+    
 }

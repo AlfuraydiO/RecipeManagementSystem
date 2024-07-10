@@ -1,0 +1,462 @@
+2024-07-10 14:13:07 ERROR 108676 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.model.processor.ImplicitModelHandler - Could not create component [encoder] of type [net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder] java.lang.ClassNotFoundException: net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[logstash] - No encoder set for the appender named "logstash".
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:347)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:223)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:138)
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:369)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:329)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.omar.recipes.RecipesApplication.main(RecipesApplication.java:18)
+Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.model.processor.ImplicitModelHandler - Could not create component [encoder] of type [net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder] java.lang.ClassNotFoundException: net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[logstash] - No encoder set for the appender named "logstash".
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.reportConfigurationErrorsIfNecessary(LogbackLoggingSystem.java:277)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:255)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:81)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:61)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:189)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:332)
+	... 19 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder
+		at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+		at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at ch.qos.logback.core.util.Loader.loadClass(Loader.java:132)
+		at ch.qos.logback.core.model.processor.ImplicitModelHandler.doComplex(ImplicitModelHandler.java:134)
+		at ch.qos.logback.core.model.processor.ImplicitModelHandler.handle(ImplicitModelHandler.java:94)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:241)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.traversalLoop(DefaultProcessor.java:90)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.process(DefaultProcessor.java:106)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.processModel(GenericXMLConfigurator.java:208)
+		at org.springframework.boot.logging.logback.SpringBootJoranConfigurator.processModel(SpringBootJoranConfigurator.java:122)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:170)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:122)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:65)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.configureByResourceUrl(LogbackLoggingSystem.java:287)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:249)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.withLoggingSuppressed(LogbackLoggingSystem.java:467)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:244)
+		... 23 common frames omitted
+
+2024-07-10 14:13:55.457 ERROR 108308 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.model.processor.ImplicitModelHandler - Could not create component [encoder] of type [net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder] java.lang.ClassNotFoundException: net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[logstash] - No encoder set for the appender named "logstash".
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:347)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:223)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:138)
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:369)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:329)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.omar.recipes.RecipesApplication.main(RecipesApplication.java:18)
+Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.model.processor.ImplicitModelHandler - Could not create component [encoder] of type [net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder] java.lang.ClassNotFoundException: net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[logstash] - No encoder set for the appender named "logstash".
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.reportConfigurationErrorsIfNecessary(LogbackLoggingSystem.java:277)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:255)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:81)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:61)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:189)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:332)
+	... 19 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder
+		at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+		at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at ch.qos.logback.core.util.Loader.loadClass(Loader.java:132)
+		at ch.qos.logback.core.model.processor.ImplicitModelHandler.doComplex(ImplicitModelHandler.java:134)
+		at ch.qos.logback.core.model.processor.ImplicitModelHandler.handle(ImplicitModelHandler.java:94)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:241)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.traversalLoop(DefaultProcessor.java:90)
+		at ch.qos.logback.core.model.processor.DefaultProcessor.process(DefaultProcessor.java:106)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.processModel(GenericXMLConfigurator.java:208)
+		at org.springframework.boot.logging.logback.SpringBootJoranConfigurator.processModel(SpringBootJoranConfigurator.java:122)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:170)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:122)
+		at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:65)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.configureByResourceUrl(LogbackLoggingSystem.java:287)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:249)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.withLoggingSuppressed(LogbackLoggingSystem.java:467)
+		at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:244)
+		... 23 common frames omitted
+
+2024-07-10 14:14:17.265  INFO 108016 --- [           main] org.omar.recipes.RecipesApplication      : Starting RecipesApplication using Java 21.0.3 with PID 108016 (C:\Users\oalfuraydi.MURL097631B55LG\Documents\NetBeansProjects\RecipeManagementSystem\RecipeManagementSystem\target\classes started by oalfuraydi in C:\Users\oalfuraydi.MURL097631B55LG\Documents\NetBeansProjects\RecipeManagementSystem\RecipeManagementSystem)
+2024-07-10 14:14:17.266  INFO 108016 --- [           main] org.omar.recipes.RecipesApplication      : No active profile set, falling back to 1 default profile: "default"
+2024-07-10 14:14:17.872  INFO 108016 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-10 14:14:17.945  INFO 108016 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 4 JPA repository interfaces.
+2024-07-10 14:14:18.730  INFO 108016 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8881 (http)
+2024-07-10 14:14:18.743  INFO 108016 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-10 14:14:18.743  INFO 108016 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-07-10 14:14:18.851  INFO 108016 --- [           main] o.a.c.c.C.[.[localhost].[/recipes]       : Initializing Spring embedded WebApplicationContext
+2024-07-10 14:14:18.852  INFO 108016 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1533 ms
+2024-07-10 14:14:18.881  INFO 108016 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-10 14:14:19.194  INFO 108016 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/recipes_db user=SA
+2024-07-10 14:14:19.196  INFO 108016 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-10 14:14:19.213  INFO 108016 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/recipes_db'
+2024-07-10 14:14:19.344  INFO 108016 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-10 14:14:19.409  INFO 108016 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-07-10 14:14:19.446  INFO 108016 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-10 14:14:19.685  INFO 108016 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-10 14:14:19.730  WARN 108016 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-10 14:14:20.775  INFO 108016 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-10 14:14:20.790 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists rating cascade 
+2024-07-10 14:14:20.796 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists recipe cascade 
+2024-07-10 14:14:20.796 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_directions cascade 
+2024-07-10 14:14:20.798 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_ingredients cascade 
+2024-07-10 14:14:20.798 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_tags cascade 
+2024-07-10 14:14:20.798 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists tag cascade 
+2024-07-10 14:14:20.799 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop table if exists user_account cascade 
+2024-07-10 14:14:20.800 DEBUG 108016 --- [           main] org.hibernate.SQL                        : drop sequence if exists user_account_seq
+2024-07-10 14:14:20.805 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create sequence user_account_seq start with 1 increment by 50
+2024-07-10 14:14:20.808 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table rating (recipe_rating float(53) not null, user_account_id integer not null, id bigint generated by default as identity, local_date_time timestamp(6), recipe_id bigint not null, review varchar(255), primary key (id), unique (recipe_id, user_account_id))
+2024-07-10 14:14:20.815 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table recipe (total_rating float(53) not null, user_id integer, date timestamp(6), id bigint generated by default as identity, category varchar(255), description varchar(255), name varchar(255), primary key (id))
+2024-07-10 14:14:20.817 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table recipe_directions (recipe_id bigint not null, directions varchar(255))
+2024-07-10 14:14:20.817 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table recipe_ingredients (recipe_id bigint not null, ingredients varchar(255))
+2024-07-10 14:14:20.818 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table recipe_tags (recipe_id bigint not null, tag_id bigint not null, primary key (recipe_id, tag_id))
+2024-07-10 14:14:20.819 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table tag (id bigint generated by default as identity, description varchar(255), name varchar(255), type varchar(255), primary key (id))
+2024-07-10 14:14:20.820 DEBUG 108016 --- [           main] org.hibernate.SQL                        : create table user_account (id integer not null, is_account_non_locked boolean not null, is_enabled boolean not null, authority varchar(255), email varchar(255) not null, password varchar(255) not null, primary key (id))
+2024-07-10 14:14:20.821 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists rating add constraint FK6x7y7iu3omnr3wcg93jkfdorb foreign key (recipe_id) references recipe
+2024-07-10 14:14:20.826 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists rating add constraint FKbqx3ax5vtii2ougjc4hff9lqo foreign key (user_account_id) references user_account
+2024-07-10 14:14:20.828 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists recipe add constraint FK4uv82bjbxffsbkh4hegafwdeh foreign key (user_id) references user_account
+2024-07-10 14:14:20.829 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_directions add constraint FKkopnyxdjmwwlt5vlvw4rd28gy foreign key (recipe_id) references recipe
+2024-07-10 14:14:20.830 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_ingredients add constraint FKhnsmvxdlwxqq6x2wbgnoef5gr foreign key (recipe_id) references recipe
+2024-07-10 14:14:20.831 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_tags add constraint FKgy8nnobn2frdv1h9n5unnv9x6 foreign key (tag_id) references tag
+2024-07-10 14:14:20.832 DEBUG 108016 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_tags add constraint FKm8d9e65tioqhbd8eanewapglx foreign key (recipe_id) references recipe
+2024-07-10 14:14:20.839  INFO 108016 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-10 14:14:21.076  INFO 108016 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-10 14:14:21.595  WARN 108016 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-10 14:14:21.920  INFO 108016 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3c2b7322, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7731504, org.springframework.security.web.context.SecurityContextHolderFilter@519b726a, org.springframework.web.filter.CorsFilter@43c25e89, org.springframework.security.web.authentication.logout.LogoutFilter@4951c45f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@fb69ab1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@708378cc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17eb35fa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b71ccf2, org.springframework.security.web.access.ExceptionTranslationFilter@77524169, org.springframework.security.web.access.intercept.AuthorizationFilter@6eed5b68]
+2024-07-10 14:14:22.193  INFO 108016 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8881 (http) with context path '/recipes'
+2024-07-10 14:14:22.206  INFO 108016 --- [           main] org.omar.recipes.RecipesApplication      : Started RecipesApplication in 5.557 seconds (process running for 6.14)
+2024-07-10 14:14:22.307 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.312 DEBUG 108016 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:14:22.335 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.337 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.339 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.340 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.340 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.341 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.342 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.343 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.344 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.345 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.347 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.349 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.351 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.353 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.354 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.356 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.357 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.358 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.359 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.360 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.361 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.361 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.362 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.363 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.364 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.365 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.366 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.367 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.368 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.368 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.369 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.370 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.370 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.371 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.372 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:14:22.414 DEBUG 108016 --- [           main] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:14:22.527 DEBUG 108016 --- [           main] org.hibernate.SQL                        : select next value for user_account_seq
+2024-07-10 14:14:22.536 DEBUG 108016 --- [           main] org.hibernate.SQL                        : insert into user_account (authority,email,is_account_non_locked,is_enabled,password,id) values (?,?,?,?,?,?)
+2024-07-10 14:14:32.337 DEBUG 108016 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:14:36.872  INFO 108016 --- [omcat-handler-1] o.a.c.c.C.[.[localhost].[/recipes]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-10 14:14:36.872  INFO 108016 --- [omcat-handler-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-10 14:14:36.873  INFO 108016 --- [omcat-handler-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-07-10 14:14:36.944 DEBUG 108016 --- [omcat-handler-1] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:14:37.022 DEBUG 108016 --- [omcat-handler-1] org.hibernate.SQL                        : select next value for user_account_seq
+2024-07-10 14:14:37.023 DEBUG 108016 --- [omcat-handler-1] org.hibernate.SQL                        : insert into user_account (authority,email,is_account_non_locked,is_enabled,password,id) values (?,?,?,?,?,?)
+2024-07-10 14:14:37.711 DEBUG 108016 --- [omcat-handler-3] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:14:37.718  WARN 108016 --- [omcat-handler-3] o.o.r.u.controller.UserAccountService    : Email Already exists
+2024-07-10 14:14:42.343 DEBUG 108016 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:16:01  INFO 108308 --- [           main] org.omar.recipes.RecipesApplication      : Starting RecipesApplication using Java 21.0.3 with PID 108308 (C:\Users\oalfuraydi.MURL097631B55LG\Documents\NetBeansProjects\RecipeManagementSystem\RecipeManagementSystem\target\classes started by oalfuraydi in C:\Users\oalfuraydi.MURL097631B55LG\Documents\NetBeansProjects\RecipeManagementSystem\RecipeManagementSystem)
+2024-07-10 14:16:01  INFO 108308 --- [           main] org.omar.recipes.RecipesApplication      : No active profile set, falling back to 1 default profile: "default"
+2024-07-10 14:16:01  INFO 108308 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-10 14:16:01  INFO 108308 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 4 JPA repository interfaces.
+2024-07-10 14:16:02  INFO 108308 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8881 (http)
+2024-07-10 14:16:02  INFO 108308 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-10 14:16:02  INFO 108308 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-07-10 14:16:02  INFO 108308 --- [           main] o.a.c.c.C.[.[localhost].[/recipes]       : Initializing Spring embedded WebApplicationContext
+2024-07-10 14:16:02  INFO 108308 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1502 ms
+2024-07-10 14:16:02  INFO 108308 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-10 14:16:03  INFO 108308 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/recipes_db user=SA
+2024-07-10 14:16:03  INFO 108308 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-10 14:16:03  INFO 108308 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/recipes_db'
+2024-07-10 14:16:03  INFO 108308 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-10 14:16:03  INFO 108308 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-07-10 14:16:03  INFO 108308 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-10 14:16:03  INFO 108308 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-10 14:16:03  WARN 108308 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-10 14:16:04  INFO 108308 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists rating cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists recipe cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_directions cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_ingredients cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_tags cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists tag cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop table if exists user_account cascade 
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : drop sequence if exists user_account_seq
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create sequence user_account_seq start with 1 increment by 50
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table rating (recipe_rating float(53) not null, user_account_id integer not null, id bigint generated by default as identity, local_date_time timestamp(6), recipe_id bigint not null, review varchar(255), primary key (id), unique (recipe_id, user_account_id))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table recipe (total_rating float(53) not null, user_id integer, date timestamp(6), id bigint generated by default as identity, category varchar(255), description varchar(255), name varchar(255), primary key (id))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table recipe_directions (recipe_id bigint not null, directions varchar(255))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table recipe_ingredients (recipe_id bigint not null, ingredients varchar(255))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table recipe_tags (recipe_id bigint not null, tag_id bigint not null, primary key (recipe_id, tag_id))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table tag (id bigint generated by default as identity, description varchar(255), name varchar(255), type varchar(255), primary key (id))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : create table user_account (id integer not null, is_account_non_locked boolean not null, is_enabled boolean not null, authority varchar(255), email varchar(255) not null, password varchar(255) not null, primary key (id))
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists rating add constraint FK6x7y7iu3omnr3wcg93jkfdorb foreign key (recipe_id) references recipe
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists rating add constraint FKbqx3ax5vtii2ougjc4hff9lqo foreign key (user_account_id) references user_account
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists recipe add constraint FK4uv82bjbxffsbkh4hegafwdeh foreign key (user_id) references user_account
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_directions add constraint FKkopnyxdjmwwlt5vlvw4rd28gy foreign key (recipe_id) references recipe
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_ingredients add constraint FKhnsmvxdlwxqq6x2wbgnoef5gr foreign key (recipe_id) references recipe
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_tags add constraint FKgy8nnobn2frdv1h9n5unnv9x6 foreign key (tag_id) references tag
+2024-07-10 14:16:04 DEBUG 108308 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_tags add constraint FKm8d9e65tioqhbd8eanewapglx foreign key (recipe_id) references recipe
+2024-07-10 14:16:04  INFO 108308 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-10 14:16:04  INFO 108308 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-10 14:16:05  WARN 108308 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-10 14:16:05  INFO 108308 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7f8586f9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@248227db, org.springframework.security.web.context.SecurityContextHolderFilter@7d25d10e, org.springframework.web.filter.CorsFilter@fb69ab1, org.springframework.security.web.authentication.logout.LogoutFilter@67d8e214, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@104972a0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@77524169, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74161ed7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5ac3c6cd, org.springframework.security.web.access.ExceptionTranslationFilter@4190b111, org.springframework.security.web.access.intercept.AuthorizationFilter@53e6c017]
+2024-07-10 14:16:06  INFO 108308 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8881 (http) with context path '/recipes'
+2024-07-10 14:16:06  INFO 108308 --- [           main] org.omar.recipes.RecipesApplication      : Started RecipesApplication in 5.47 seconds (process running for 6.06)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : select next value for user_account_seq
+2024-07-10 14:16:06 DEBUG 108308 --- [           main] org.hibernate.SQL                        : insert into user_account (authority,email,is_account_non_locked,is_enabled,password,id) values (?,?,?,?,?,?)
+2024-07-10 14:16:16 DEBUG 108308 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:16:26 DEBUG 108308 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:16:36 DEBUG 108308 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:16:46 DEBUG 108308 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:16:56 DEBUG 108308 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:27:46  INFO 94732 --- [           main] org.omar.recipes.RecipesApplication      : Starting RecipesApplication using Java 21.0.3 with PID 94732 (C:\Users\oalfuraydi.MURL097631B55LG\Documents\NetBeansProjects\RecipeManagementSystem\RecipeManagementSystem\target\classes started by oalfuraydi in C:\Users\oalfuraydi.MURL097631B55LG\Documents\NetBeansProjects\RecipeManagementSystem\RecipeManagementSystem)
+2024-07-10 14:27:46  INFO 94732 --- [           main] org.omar.recipes.RecipesApplication      : No active profile set, falling back to 1 default profile: "default"
+2024-07-10 14:27:47  INFO 94732 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-10 14:27:47  INFO 94732 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 4 JPA repository interfaces.
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8881 (http)
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.a.c.c.C.[.[localhost].[/recipes]       : Initializing Spring embedded WebApplicationContext
+2024-07-10 14:27:48  INFO 94732 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1488 ms
+2024-07-10 14:27:48  INFO 94732 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-10 14:27:48  INFO 94732 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/recipes_db user=SA
+2024-07-10 14:27:48  INFO 94732 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/recipes_db'
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-10 14:27:48  INFO 94732 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-07-10 14:27:48  INFO 94732 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-10 14:27:49  INFO 94732 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-10 14:27:49  WARN 94732 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-10 14:27:50  INFO 94732 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists rating cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists recipe cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_directions cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_ingredients cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists recipe_tags cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists tag cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop table if exists user_account cascade 
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : drop sequence if exists user_account_seq
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create sequence user_account_seq start with 1 increment by 50
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table rating (recipe_rating float(53) not null, user_account_id integer not null, id bigint generated by default as identity, local_date_time timestamp(6), recipe_id bigint not null, review varchar(255), primary key (id), unique (recipe_id, user_account_id))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table recipe (total_rating float(53) not null, user_id integer, date timestamp(6), id bigint generated by default as identity, category varchar(255), description varchar(255), name varchar(255), primary key (id))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table recipe_directions (recipe_id bigint not null, directions varchar(255))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table recipe_ingredients (recipe_id bigint not null, ingredients varchar(255))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table recipe_tags (recipe_id bigint not null, tag_id bigint not null, primary key (recipe_id, tag_id))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table tag (id bigint generated by default as identity, description varchar(255), name varchar(255), type varchar(255), primary key (id))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : create table user_account (id integer not null, is_account_non_locked boolean not null, is_enabled boolean not null, authority varchar(255), email varchar(255) not null, password varchar(255) not null, primary key (id))
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists rating add constraint FK6x7y7iu3omnr3wcg93jkfdorb foreign key (recipe_id) references recipe
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists rating add constraint FKbqx3ax5vtii2ougjc4hff9lqo foreign key (user_account_id) references user_account
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists recipe add constraint FK4uv82bjbxffsbkh4hegafwdeh foreign key (user_id) references user_account
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_directions add constraint FKkopnyxdjmwwlt5vlvw4rd28gy foreign key (recipe_id) references recipe
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_ingredients add constraint FKhnsmvxdlwxqq6x2wbgnoef5gr foreign key (recipe_id) references recipe
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_tags add constraint FKgy8nnobn2frdv1h9n5unnv9x6 foreign key (tag_id) references tag
+2024-07-10 14:27:50 DEBUG 94732 --- [           main] org.hibernate.SQL                        : alter table if exists recipe_tags add constraint FKm8d9e65tioqhbd8eanewapglx foreign key (recipe_id) references recipe
+2024-07-10 14:27:50  INFO 94732 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-10 14:27:50  INFO 94732 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-10 14:27:51  WARN 94732 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-10 14:27:51  INFO 94732 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@9223122, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3c2b7322, org.springframework.security.web.context.SecurityContextHolderFilter@27e80cfa, org.springframework.web.filter.CorsFilter@7731504, org.springframework.security.web.authentication.logout.LogoutFilter@47de4dce, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@248227db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34272839, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@708378cc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43c25e89, org.springframework.security.web.access.ExceptionTranslationFilter@3979ff82, org.springframework.security.web.access.intercept.AuthorizationFilter@42bb0492]
+2024-07-10 14:27:51  INFO 94732 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8881 (http) with context path '/recipes'
+2024-07-10 14:27:51  INFO 94732 --- [           main] org.omar.recipes.RecipesApplication      : Started RecipesApplication in 5.739 seconds (process running for 6.388)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:51 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into tag (description,name,type,id) values (?,?,?,default)
+2024-07-10 14:27:52 DEBUG 94732 --- [           main] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:27:52 DEBUG 94732 --- [           main] org.hibernate.SQL                        : select next value for user_account_seq
+2024-07-10 14:27:52 DEBUG 94732 --- [           main] org.hibernate.SQL                        : insert into user_account (authority,email,is_account_non_locked,is_enabled,password,id) values (?,?,?,?,?,?)
+2024-07-10 14:28:01 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:28:11 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:28:21 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:28:31 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:28:41 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:28:51 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:29:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:29:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:29:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:29:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:29:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:29:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:30:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:30:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:30:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:30:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:30:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:30:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:31:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:31:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:31:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:31:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:31:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:31:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:32:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:32:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:32:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:32:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:32:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:32:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:33:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:33:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:33:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:33:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:33:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:33:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:34:57  INFO 94732 --- [omcat-handler-1] o.a.c.c.C.[.[localhost].[/recipes]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-10 14:34:57  INFO 94732 --- [omcat-handler-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-10 14:34:57  INFO 94732 --- [omcat-handler-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-10 14:34:57 DEBUG 94732 --- [omcat-handler-1] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:34:57 DEBUG 94732 --- [omcat-handler-1] org.hibernate.SQL                        : select next value for user_account_seq
+2024-07-10 14:34:57 DEBUG 94732 --- [omcat-handler-1] org.hibernate.SQL                        : insert into user_account (authority,email,is_account_non_locked,is_enabled,password,id) values (?,?,?,?,?,?)
+2024-07-10 14:34:58 DEBUG 94732 --- [omcat-handler-3] org.hibernate.SQL                        : select ua1_0.id,ua1_0.authority,ua1_0.email,ua1_0.is_account_non_locked,ua1_0.is_enabled,ua1_0.password from user_account ua1_0 where ua1_0.email=?
+2024-07-10 14:34:58  WARN 94732 --- [omcat-handler-3] o.o.r.u.controller.UserAccountService    : Email Already exists
+2024-07-10 14:35:02 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:35:12 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:35:22 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:35:32 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:35:42 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:35:52 DEBUG 94732 --- [   scheduling-1] org.hibernate.SQL                        : select r1_0.id,r1_0.category,r1_0.date,r1_0.description,r1_0.name,r1_0.total_rating,r1_0.user_id from recipe r1_0
+2024-07-10 14:35:53  INFO 94732 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists rating cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists recipe cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists recipe_directions cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists recipe_ingredients cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists recipe_tags cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists tag cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop table if exists user_account cascade 
+2024-07-10 14:35:53 DEBUG 94732 --- [ionShutdownHook] org.hibernate.SQL                        : drop sequence if exists user_account_seq
+2024-07-10 14:35:53  INFO 94732 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-07-10 14:35:53  INFO 94732 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
