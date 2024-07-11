@@ -1,7 +1,6 @@
 package org.omar.recipes.recipe.boundary;
 
 import jakarta.validation.Valid;
-import org.omar.recipes.recipe.controller.TagRepository;
 import org.omar.recipes.recipe.controller.TagService;
 import org.omar.recipes.recipe.entity.Tag;
 import org.springframework.http.HttpStatus;
@@ -28,8 +27,8 @@ public class TagController {
 
     @GetMapping("{id}")
     public ResponseEntity<Tag> getTag(@PathVariable Long id) {
-       Tag tagById = tagService.getTagById(id);
-       return ResponseEntity.ok(tagById);
+        Tag tagById = tagService.getTagById(id);
+        return ResponseEntity.ok(tagById);
     }
 
     @GetMapping("search/")
@@ -43,7 +42,7 @@ public class TagController {
 
     @PutMapping("{id}")
     public ResponseEntity updateTag(@PathVariable Long id, @RequestBody @Valid Tag tag) {
-        ResponseEntity<?> responseEntity = tagService.updateTag(id,tag);
+        ResponseEntity<?> responseEntity = tagService.updateTag(id, tag);
         return responseEntity;
     }
 

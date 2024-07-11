@@ -6,13 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class UserAccount implements Serializable{
+public class UserAccount implements Serializable {
 
     @Id
     @GeneratedValue
@@ -24,7 +24,7 @@ public class UserAccount implements Serializable{
     @NotBlank(message = "Email must be not blank")
     private String email;
     @JsonIgnore
-    @Size(min = 8,message = "Password must be at least 8 characters")
+    @Size(min = 8, message = "Password must be at least 8 characters")
     @NotBlank(message = "Password must not be blank")
     @NotNull
     private String password;
@@ -74,7 +74,8 @@ public class UserAccount implements Serializable{
     public void setEnabled(boolean enabled) {
         this.isEnabled = enabled;
     }
-     @JsonIgnore
+
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
@@ -82,7 +83,8 @@ public class UserAccount implements Serializable{
     public void setAccountNonLocked(boolean accountNonLocked) {
         isAccountNonLocked = accountNonLocked;
     }
-     @JsonIgnore
+
+    @JsonIgnore
     public boolean isEnabled() {
         return isEnabled;
     }
@@ -112,5 +114,5 @@ public class UserAccount implements Serializable{
                 '}';
     }
 
-    
+
 }

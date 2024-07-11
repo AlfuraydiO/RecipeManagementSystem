@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-public record RegistrationRequest(@NotNull String email, @NotNull String password,@NotNull String role) {
+public record RegistrationRequest(@NotNull String email, @NotNull String password, @NotNull String role) {
 }

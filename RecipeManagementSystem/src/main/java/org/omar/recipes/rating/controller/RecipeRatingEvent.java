@@ -7,7 +7,6 @@ package org.omar.recipes.rating.controller;
 import org.springframework.context.ApplicationEvent;
 
 /**
- *
  * @author oalfuraydi
  */
 public class RecipeRatingEvent extends ApplicationEvent {
@@ -15,6 +14,6 @@ public class RecipeRatingEvent extends ApplicationEvent {
     public RecipeRatingEvent(Object source) {
         super(source);
     }
-    
-  
+
+
 }

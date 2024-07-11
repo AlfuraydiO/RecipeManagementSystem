@@ -3,19 +3,20 @@ package org.omar.recipes.rating.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import org.hibernate.annotations.DynamicUpdate;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.validation.annotation.Validated;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 @Entity
 @Validated
 @DynamicUpdate
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"recipe_id","user_account_id"})})
-public class Rating implements Serializable{
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"recipe_id", "user_account_id"})})
+public class Rating implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +31,14 @@ public class Rating implements Serializable{
     @NotNull
     @JsonIgnore
     private Recipe recipe;
-    
+
     @NotNull
     private Double recipeRating;
-    
+
     private LocalDateTime localDateTime;
-    
-    private String review; 
-    
+
+    private String review;
+
 
     public Rating() {
     }
@@ -97,10 +98,8 @@ public class Rating implements Serializable{
     public void setReview(String review) {
         this.review = review;
     }
-    
-    
-    
-     
+
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -133,5 +132,5 @@ public class Rating implements Serializable{
             return false;
         }
         return Objects.equals(this.localDateTime, other.localDateTime);
-    }   
+    }
 }

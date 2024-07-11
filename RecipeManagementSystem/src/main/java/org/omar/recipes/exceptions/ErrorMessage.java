@@ -7,9 +7,8 @@ package org.omar.recipes.exceptions;
 import org.springframework.http.HttpStatusCode;
 
 /**
- *
  * @author oalfuraydi
  */
-public record ErrorMessage(String date,HttpStatusCode httpstatus,String message) {
+public record ErrorMessage(String date, HttpStatusCode httpstatus, String message) {
 
 }

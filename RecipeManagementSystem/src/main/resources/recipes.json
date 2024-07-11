@@ -26,10 +26,9 @@
           "name": "Italian",
           "description": "Italian Cuisine",
           "type": "Cuisine"
-    }]
-        },
-
-
+        }
+      ]
+    },
     {
       "name": "Scrambled Eggs with Toast",
       "category": "BREAKFAST",
@@ -49,11 +48,13 @@
         "Meanwhile, toast bread to your liking.",
         "Serve scrambled eggs on toast and enjoy!"
       ],
-      "tags": [{
-        "name": "Quick & Easy",
-        "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-        "type": "Descriptive"
-      }]
+      "tags": [
+        {
+          "name": "Quick & Easy",
+          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
+          "type": "Descriptive"
+        }
+      ]
     },
     {
       "name": "Black Bean Burgers",
@@ -82,10 +83,14 @@
         "Place patties on the prepared baking sheet and bake for 20 minutes per side, or until golden brown and heated through.",
         "Serve burgers on hamburger buns with your favorite toppings."
       ],
-      "tags": [  { "name": "Mexican", "description": "Mexican Cuisine", "type": "Cuisine" }
+      "tags": [
+        {
+          "name": "Mexican",
+          "description": "Mexican Cuisine",
+          "type": "Cuisine"
+        }
       ]
     },
-    
     {
       "name": "Spicy Chicken Stir-Fry",
       "category": "DINNER",
@@ -116,8 +121,17 @@
         "Add the cooked chicken back to the pan and toss to coat with the sauce.",
         "Serve over cooked rice (optional) and enjoy!"
       ],
-      "tags": [  { "name": "Frying", "description": "Cooking food in hot fat", "type": "Cooking Method" },
-        { "name": "Roasting", "description": "Cooking food in an oven with dry heat", "type": "Cooking Method" }
+      "tags": [
+        {
+          "name": "Frying",
+          "description": "Cooking food in hot fat",
+          "type": "Cooking Method"
+        },
+        {
+          "name": "Roasting",
+          "description": "Cooking food in an oven with dry heat",
+          "type": "Cooking Method"
+        }
       ]
     },
     {
@@ -136,7 +150,12 @@
         "Repeat layers with remaining yogurt, granola, and berries.",
         "Drizzle with honey (optional) and serve immediately."
       ],
-      "tags": [  { "name": "Keto", "description": "Food suitable for a ketogenic diet", "type": "Dietary Restriction" }
+      "tags": [
+        {
+          "name": "Keto",
+          "description": "Food suitable for a ketogenic diet",
+          "type": "Dietary Restriction"
+        }
       ]
     },
     {
@@ -162,12 +181,18 @@
         "Bring to a boil, then reduce heat, cover, and simmer for 15 minutes, or until rice is cooked and fluffy.",
         "Stir in remaining parsley and lemon slices. Serve immediately."
       ],
-      "tags": [{
-                    "id":"1",
-        "name": "Budget-Friendly",
-        "description": "Budget-Friendly meals with cheap ingredients",
-        "type": "Descriptive"
-      } ,{ "name": "One-Pot", "description": "Recipes requiring only one pot", "type": "Cooking Method" }
+      "tags": [
+        {
+          "id": "1",
+          "name": "Budget-Friendly",
+          "description": "Budget-Friendly meals with cheap ingredients",
+          "type": "Descriptive"
+        },
+        {
+          "name": "One-Pot",
+          "description": "Recipes requiring only one pot",
+          "type": "Cooking Method"
+        }
       ]
     },
     {
@@ -197,8 +222,17 @@
         "Place patties on the prepared baking sheet and bake for 20 minutes per side, or until golden brown and heated through.",
         "Serve burgers on hamburger buns with your favorite toppings."
       ],
-      "tags": [ { "name": "Vegan", "description": "Food suitable for vegans", "type": "Dietary Restriction" },
-        { "name": "American", "description": "American Cuisine", "type": "Cuisine" }
+      "tags": [
+        {
+          "name": "Vegan",
+          "description": "Food suitable for vegans",
+          "type": "Dietary Restriction"
+        },
+        {
+          "name": "American",
+          "description": "American Cuisine",
+          "type": "Cuisine"
+        }
       ]
     },
     {
@@ -220,16 +254,19 @@
         "Top with lettuce (optional) and the other slice of bread.",
         "Cut the sandwich in half and enjoy!"
       ],
-      "tags": [{
-        "name": "Quick & Easy",
-        "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-        "type": "Descriptive"
-      },{
-            "id":"1",
-        "name": "Budget-Friendly",
-        "description": "Budget-Friendly meals with cheap ingredients",
-        "type": "Descriptive"
-      }]
+      "tags": [
+        {
+          "name": "Quick & Easy",
+          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
+          "type": "Descriptive"
+        },
+        {
+          "id": "1",
+          "name": "Budget-Friendly",
+          "description": "Budget-Friendly meals with cheap ingredients",
+          "type": "Descriptive"
+        }
+      ]
     },
     {
       "name": "Chicken Caesar Salad",
@@ -247,11 +284,18 @@
         "Drizzle with Caesar salad dressing to taste and toss to coat.",
         "Serve immediately."
       ],
-      "tags": [{
-        "name": "Quick & Easy",
-        "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-        "type": "Descriptive"
-      }, { "name": "Italian", "description": "Italian Cuisine", "type": "Cuisine" }]
+      "tags": [
+        {
+          "name": "Quick & Easy",
+          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
+          "type": "Descriptive"
+        },
+        {
+          "name": "Italian",
+          "description": "Italian Cuisine",
+          "type": "Cuisine"
+        }
+      ]
     },
     {
       "name": "Veggie Wraps",
@@ -274,8 +318,17 @@
         "Drizzle with a little olive oil (optional) for extra flavor.",
         "Roll up the tortilla tightly and enjoy!"
       ],
-      "tags": [  { "name": "Mexican", "description": "Mexican Cuisine", "type": "Cuisine" },
-       { "name": "Frying", "description": "Cooking food in hot fat", "type": "Cooking Method" }
+      "tags": [
+        {
+          "name": "Mexican",
+          "description": "Mexican Cuisine",
+          "type": "Cuisine"
+        },
+        {
+          "name": "Frying",
+          "description": "Cooking food in hot fat",
+          "type": "Cooking Method"
+        }
       ]
     },
     {
@@ -295,12 +348,22 @@
         "Drizzle with vinaigrette dressing (optional) to taste.",
         "Serve the salad alongside the reheated soup."
       ],
-      "tags": [{
-        "name": "Quick & Easy",
-        "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-        "type": "Descriptive"
-      },  { "name": "One-Pot", "description": "Recipes requiring only one pot", "type": "Cooking Method" },
-        { "name": "Low-Calori", "description": "Low-Calori", "type": "Cooking Method" }
+      "tags": [
+        {
+          "name": "Quick & Easy",
+          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
+          "type": "Descriptive"
+        },
+        {
+          "name": "One-Pot",
+          "description": "Recipes requiring only one pot",
+          "type": "Cooking Method"
+        },
+        {
+          "name": "Low-Calori",
+          "description": "Low-Calori",
+          "type": "Cooking Method"
+        }
       ]
     }
   ]

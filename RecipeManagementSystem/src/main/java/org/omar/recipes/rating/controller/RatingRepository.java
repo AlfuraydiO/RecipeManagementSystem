@@ -1,10 +1,11 @@
 package org.omar.recipes.rating.controller;
 
-import java.util.List;
-import org.springframework.data.repository.CrudRepository;
 import org.omar.recipes.rating.entity.Rating;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface RatingRepository extends CrudRepository<Rating, Long> {
 

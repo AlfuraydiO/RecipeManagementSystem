@@ -1,21 +1,20 @@
 package org.omar.recipes.rating.controller;
 
 import jakarta.transaction.Transactional;
+import org.omar.recipes.rating.boundary.RatingRequest;
+import org.omar.recipes.rating.entity.Rating;
+import org.omar.recipes.recipe.controller.RecipeService;
+import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.users.controller.UserAccountService;
+import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.omar.recipes.rating.boundary.RatingRequest;
-import org.omar.recipes.rating.entity.Rating;
-import org.omar.recipes.recipe.controller.RecipeService;
-import org.omar.recipes.recipe.entity.Recipe;
-import org.omar.recipes.users.entity.UserAccount;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Transactional
@@ -94,10 +93,10 @@ public class RatingService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe with id" + id + " Not Found !");
         }
         List<Rating> ratings = new ArrayList<>();
-        ratings=ratingRepository.findRatingByRecipe(id);
+        ratings = ratingRepository.findRatingByRecipe(id);
         return ratings;
     }
-    
+
     public long CountRatingByRecipe(long id) {
         if (!recipeService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe with id" + id + " Not Found !");

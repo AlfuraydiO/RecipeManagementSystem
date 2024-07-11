@@ -1,17 +1,15 @@
 package org.omar.recipes.rating.boundary;
 
 import jakarta.validation.Valid;
-import java.util.List;
-import org.omar.recipes.recipe.entity.Recipe;
-import org.springframework.http.HttpStatus;
+import org.omar.recipes.rating.controller.RatingService;
+import org.omar.recipes.rating.entity.Rating;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
-import org.omar.recipes.rating.controller.RatingService;
-import org.omar.recipes.rating.entity.Rating;
 
 @RestController
 @RequestMapping("api/rating/")
@@ -23,7 +21,8 @@ public class RatingController {
         this.ratingService = ratingService;
     }
 
-    public record id(long id) {}
+    public record id(long id) {
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<Rating> getRating(@PathVariable Long id) {

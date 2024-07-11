@@ -1,11 +1,15 @@
 package org.omar.recipes.startupconfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.omar.recipes.rating.controller.RatingService;
 import org.omar.recipes.recipe.controller.RecipeService;
 import org.omar.recipes.recipe.controller.TagRepository;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.recipe.entity.Tag;
+import org.omar.recipes.users.boundary.RegistrationRequest;
+import org.omar.recipes.users.controller.UserAccountService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -15,16 +19,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.omar.recipes.rating.controller.RatingService;
-import org.omar.recipes.users.boundary.RegistrationRequest;
-import org.omar.recipes.users.controller.UserAccountService;
-import org.springframework.http.ResponseEntity;
 
 @Component
 public class StartUp implements CommandLineRunner {
 
-    public record tags(List<Tag> tags){}
-    record Recipes(List<Recipe> recipes){}
+    public record tags(List<Tag> tags) {
+    }
+
+    record Recipes(List<Recipe> recipes) {
+    }
 
     TagRepository tagRepository;
     RecipeService recipeService;
@@ -48,15 +51,15 @@ public class StartUp implements CommandLineRunner {
         String collected = reader.lines().collect(Collectors.joining("\n"));
         ObjectMapper objectMapper = new ObjectMapper();
         tags tags = objectMapper.readValue(collected, tags.class);
-        for(Tag tag:tags.tags){
+        for (Tag tag : tags.tags) {
             tagRepository.save(tag);
         }
-         
-        ResponseEntity<String> saveUser = userAccountService.saveNewUser(new RegistrationRequest("omar@email.com", "21423333", "ROLE_CHEF") );
-        System.err.println("saveUser "+saveUser.toString());
+
+        ResponseEntity<String> saveUser = userAccountService.saveNewUser(new RegistrationRequest("omar@email.com", "21423333", "ROLE_CHEF"));
+        System.err.println("saveUser " + saveUser.toString());
         path = pathlist.stream().filter(e -> e.getFileName().toString().equals("recipes.json")).findFirst();
-         reader = Files.newBufferedReader(path.get());
-         collected = reader.lines().collect(Collectors.joining("\n"));
+        reader = Files.newBufferedReader(path.get());
+        collected = reader.lines().collect(Collectors.joining("\n"));
         Recipes recipes = objectMapper.readValue(collected, Recipes.class);
        /* for(Recipe recipe:recipes.recipes){
             recipeService.saveRecipe(recipe,"omar@email.com");

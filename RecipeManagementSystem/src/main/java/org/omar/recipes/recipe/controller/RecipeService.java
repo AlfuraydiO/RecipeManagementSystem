@@ -3,29 +3,24 @@ package org.omar.recipes.recipe.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.omar.recipes.rating.controller.RatingService;
+import org.omar.recipes.rating.entity.Rating;
+import org.omar.recipes.recipe.boundary.RecipeRequest;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.controller.UserAccountService;
 import org.omar.recipes.users.entity.UserAccount;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import org.omar.recipes.rating.controller.RatingService;
-import org.omar.recipes.rating.entity.Rating;
-import org.omar.recipes.recipe.boundary.RecipeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
@@ -43,8 +38,7 @@ public class RecipeService {
         this.tagService = tagService;
         this.validator = validator;
     }
-   
-    
+
 
     public Optional<Recipe> getRecipeById(long id) {
         return recipeRepository.findById(id);
@@ -56,7 +50,7 @@ public class RecipeService {
 
     public Recipe saveRecipe(RecipeRequest request, String email) {
         Recipe recipe = new Recipe(null, request.name(), request.description(), request.ingredients(),
-            request.directions(), request.category());
+                request.directions(), request.category());
         recipe.setDate(LocalDateTime.now());
         recipe.setUser(email == null ? null : userService.loadUserByEmail(email));
         Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
@@ -78,10 +72,10 @@ public class RecipeService {
             UserAccount chefUser = userService.loadUserByEmail(email);
             if (exists.get().getUser().getEmail().equals(email)) {
                 Recipe recipe = new Recipe(exists.get().getId(), request.name(), request.description(), request.ingredients(),
-                    request.directions(), request.category());
+                        request.directions(), request.category());
                 recipe.setDate(LocalDateTime.now());
                 recipe.setUser(chefUser);
-                        Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
+                Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
                 if (!violations.isEmpty()) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, violations.stream().map(ConstraintViolation::getMessage).toList().toString());
                 }
@@ -125,44 +119,44 @@ public class RecipeService {
         }
 
     }
-    
-    @Scheduled(timeUnit = TimeUnit.SECONDS,fixedDelay = 10l)
-    public void UpdateRecipeRating(){
+
+    @Scheduled(timeUnit = TimeUnit.SECONDS, fixedDelay = 10l)
+    public void UpdateRecipeRating() {
         Iterable<Recipe> allRecipes = this.getAllRecipes();
         Iterator<Recipe> iterator = allRecipes.iterator();
         while (iterator.hasNext()) {
             Recipe next = iterator.next();
             long CountRatingByRecipe = ratingService.CountRatingByRecipe(next.getId());
-            if(CountRatingByRecipe>0){
-                long totalRatingscore=0;
+            if (CountRatingByRecipe > 0) {
+                long totalRatingscore = 0;
                 List<Rating> ratingById = ratingService.getRatingsByRecipe(next.getId());
                 for (Rating rating : ratingById) {
-                    totalRatingscore+=rating.getRecipeRating();
+                    totalRatingscore += rating.getRecipeRating();
                 }
-                next.setTotalRating(totalRatingscore/CountRatingByRecipe);
+                next.setTotalRating(totalRatingscore / CountRatingByRecipe);
                 try {
-                     recipeRepository.save(next);
+                    recipeRepository.save(next);
                 } catch (Exception e) {
-                    System.err.println("issue"); 
+                    System.err.println("issue");
                 }
-               
+
             }
-            
+
         }
     }
-    
-     public Iterable<Recipe> getAllRecipes() {
+
+    public Iterable<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
 
     public RatingService getRatingService() {
         return ratingService;
     }
+
     @Autowired
     public void setRatingService(@Lazy RatingService ratingService) {
         this.ratingService = ratingService;
     }
-        
-     
+
 
 }

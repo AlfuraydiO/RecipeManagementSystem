@@ -6,12 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @RequestMapping("api/")
 public class UserController {
 
     private final UserAccountService userService;
+
     public UserController(UserAccountService userService) {
         this.userService = userService;
     }

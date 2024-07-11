@@ -6,35 +6,34 @@ package org.omar.recipes.recipe.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 /**
- *
  * @author oalfuraydi
  */
 @Entity
- public class Tag implements Serializable{
-    
+public class Tag implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
-    
+
     //@Column(unique = true,length = 55)
     private String name;
-    
+
     private String description;
-    
+
     private String type;
-    
+
     @JsonIgnore
-    @ManyToMany(mappedBy = "tags",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "tags", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Recipe> recipeSet = new HashSet<>();
-    
+
 
     public Tag() {
     }
@@ -45,8 +44,7 @@ import java.util.Set;
         this.description = description;
         this.type = type;
     }
-    
-    
+
 
     public String getName() {
         return name;
@@ -56,7 +54,7 @@ import java.util.Set;
         this.name = name;
     }
 
-    
+
     public Long getId() {
         return id;
     }
@@ -85,7 +83,7 @@ import java.util.Set;
     @Override
     public String toString() {
         return "Tag{" +
-                "id=" +id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
@@ -118,7 +116,6 @@ import java.util.Set;
         return Objects.equals(this.type, other.type);
     }
 
-   
 
     public Set<Recipe> getRecipeSet() {
         return recipeSet;
@@ -127,6 +124,6 @@ import java.util.Set;
     public void setRecipeSet(Set<Recipe> recipeSet) {
         this.recipeSet = recipeSet;
     }
-    
-    
+
+
 }

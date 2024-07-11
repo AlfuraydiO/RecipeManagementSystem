@@ -5,13 +5,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.io.Serializable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.validation.annotation.Validated;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Validated
@@ -45,23 +48,22 @@ public class Recipe implements Serializable {
     UserAccount user;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-   // @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    // @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     //@ElementCollection
-    @JoinTable(  name = "RECIPE_TAGS",
-          joinColumns 
-          = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
-          inverseJoinColumns
-          = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
-    private Set<Tag> tags=new HashSet<>();
-    
-    
+    @JoinTable(name = "RECIPE_TAGS",
+            joinColumns
+                    = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns
+                    = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
+    private Set<Tag> tags = new HashSet<>();
+
+
     private double totalRating;
 
     public Recipe(Long id) {
         this.id = id;
     }
-    
-    
+
 
     public Long getId() {
         return id;
@@ -75,7 +77,7 @@ public class Recipe implements Serializable {
     }
 
     public Recipe(Long id, String name, String description, List<String> ingredients,
-        List<String> directions, String category ) {
+                  List<String> directions, String category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -164,18 +166,18 @@ public class Recipe implements Serializable {
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
-    
+
 
     public void AddTag(Tag tag) {
         this.tags.add(tag);
         tag.getRecipeSet().add(this);
-        
+
     }
-    
+
     public void removeTag(Tag tag) {
         this.tags.remove(tag);
         tag.getRecipeSet().remove(this);
-        
+
     }
 
     public double getTotalRating() {
@@ -185,5 +187,5 @@ public class Recipe implements Serializable {
     public void setTotalRating(double totalRating) {
         this.totalRating = totalRating;
     }
-    
+
 }

@@ -1,0 +1,9 @@
+Type of Intermittent Fasting	Description	Meals
+16/8 Method	Fast for 16 hours and eat within an 8-hour window each day.	Varies within eating window
+5:2 Diet	Eat normally for 5 days and restrict calories (500-600) on 2 non-consecutive days.	Varies on eating days, restricted on fasting days
+Eat Stop Eat	Do a 24-hour fast once or twice a week.	One large meal during eating window
+Alternate-Day Fasting	Fast every other day.	Varies on eating days, none on fasting days
+The Warrior Diet	Eat small amounts of fruits and vegetables during the day, with one large meal at night.	Small amounts throughout the day, one large meal at night
+12:12 Method	Fast for 12 hours and eat within a 12-hour window each day.	Varies within eating window
+
+
