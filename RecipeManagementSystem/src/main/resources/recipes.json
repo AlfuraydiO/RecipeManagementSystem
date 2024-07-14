@@ -2,7 +2,6 @@
   "recipes": [
     {
       "name": "Cheesy Tomato Pasta",
-      "category": "DINNER",
       "description": "A quick and easy weeknight meal",
       "ingredients": [
         "1 pound dried pasta (penne, rotini, or your favorite)",
@@ -31,7 +30,6 @@
     },
     {
       "name": "Scrambled Eggs with Toast",
-      "category": "BREAKFAST",
       "description": "A classic and satisfying breakfast",
       "ingredients": [
         "2 eggs",
@@ -58,7 +56,6 @@
     },
     {
       "name": "Black Bean Burgers",
-      "category": "DINNER",
       "description": "A delicious and vegetarian alternative to traditional burgers",
       "ingredients": [
         "1 (15-ounce) can black beans, rinsed and drained",
@@ -93,7 +90,6 @@
     },
     {
       "name": "Spicy Chicken Stir-Fry",
-      "category": "DINNER",
       "description": "A quick and flavorful dish with a kick",
       "ingredients": [
         "1 pound boneless, skinless chicken breasts, thinly sliced",
@@ -136,7 +132,6 @@
     },
     {
       "name": "Greek Yogurt Parfait",
-      "category": "BREAKFAST",
       "description": "A healthy and delicious layered breakfast",
       "ingredients": [
         "1 cup plain Greek yogurt",
@@ -160,7 +155,6 @@
     },
     {
       "name": "One-Pot Lemon Garlic Chicken and Rice",
-      "category": "DINNER",
       "description": "A simple and flavorful one-pot meal",
       "ingredients": [
         "1 pound boneless, skinless chicken breasts, cut into bite-sized pieces",
@@ -197,7 +191,6 @@
     },
     {
       "name": "Black Bean Burgers",
-      "category": "DINNER",
       "description": "A delicious and vegetarian alternative to traditional burgers",
       "ingredients": [
         "1 (15-ounce) can black beans, rinsed and drained",
@@ -237,7 +230,6 @@
     },
     {
       "name": "Tuna Salad Sandwich",
-      "category": "LUNCH",
       "description": "A classic and easy lunch option",
       "ingredients": [
         "2 slices of bread",
@@ -270,7 +262,6 @@
     },
     {
       "name": "Chicken Caesar Salad",
-      "category": "LUNCH",
       "description": "A hearty and flavorful salad",
       "ingredients": [
         "4 cups romaine lettuce, chopped",
@@ -299,7 +290,6 @@
     },
     {
       "name": "Veggie Wraps",
-      "category": "LUNCH",
       "description": "A customizable and light lunch option",
       "ingredients": [
         "2 whole wheat tortillas",
@@ -333,7 +323,6 @@
     },
     {
       "name": "Leftover Soup and Salad",
-      "category": "LUNCH",
       "description": "A quick and easy way to use up leftovers",
       "ingredients": [
         "1 serving leftover soup (any kind)",

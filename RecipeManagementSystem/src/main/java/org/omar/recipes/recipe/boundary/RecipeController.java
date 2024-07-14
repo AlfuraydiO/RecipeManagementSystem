@@ -37,11 +37,11 @@ public class RecipeController {
     }
 
     @GetMapping("search/")
-    public ResponseEntity<List<Recipe>> searchRecipe(@RequestParam(required = false, defaultValue = "") String category, @RequestParam(defaultValue = "", required = false) String name) {
-        if (category.isEmpty() && name.isEmpty()) {
+    public ResponseEntity<List<Recipe>> searchRecipe( @RequestParam(defaultValue = "", required = false) String name) {
+        if (name.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        List<Recipe> recipes = recipeService.SearchRecipe(category, name);
+        List<Recipe> recipes = recipeService.SearchRecipe(name);
         return ResponseEntity.ok(recipes);
     }
 

@@ -50,7 +50,7 @@ public class RecipeService {
 
     public Recipe saveRecipe(RecipeRequest request, String email) {
         Recipe recipe = new Recipe(null, request.name(), request.description(), request.ingredients(),
-                request.directions(), request.category());
+                request.directions());
         recipe.setDate(LocalDateTime.now());
         recipe.setUser(email == null ? null : userService.loadUserByEmail(email));
         Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
@@ -58,10 +58,11 @@ public class RecipeService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, violations.stream().map(ConstraintViolation::getMessage).toList().toString());
         }
         List<Tag> tagList = new ArrayList<>();
+        if(request.tags()!=null){
         for (int id : request.tags()) {
             Tag tag = tagService.getTagById(id);
             tagList.add(tag);
-        }
+        }}
         recipe.setTags(new HashSet<>(tagList));
         return recipeRepository.save(recipe);
     }
@@ -72,7 +73,7 @@ public class RecipeService {
             UserAccount chefUser = userService.loadUserByEmail(email);
             if (exists.get().getUser().getEmail().equals(email)) {
                 Recipe recipe = new Recipe(exists.get().getId(), request.name(), request.description(), request.ingredients(),
-                        request.directions(), request.category());
+                        request.directions());
                 recipe.setDate(LocalDateTime.now());
                 recipe.setUser(chefUser);
                 Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
@@ -95,10 +96,7 @@ public class RecipeService {
         }
     }
 
-    public List<Recipe> SearchRecipe(String category, String name) {
-        if (!category.isEmpty()) {
-            return recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
-        }
+    public List<Recipe> SearchRecipe(String name) {
         if (!name.isEmpty()) {
             return recipeRepository.findByNameContainingIgnoreCaseOrderByDateDesc(name);
         }
@@ -120,7 +118,7 @@ public class RecipeService {
 
     }
 
-    @Scheduled(timeUnit = TimeUnit.SECONDS, fixedDelay = 10l)
+    @Scheduled(timeUnit = TimeUnit.MINUTES, fixedDelay = 10l)
     public void UpdateRecipeRating() {
         Iterable<Recipe> allRecipes = this.getAllRecipes();
         Iterator<Recipe> iterator = allRecipes.iterator();

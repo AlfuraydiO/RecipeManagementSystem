@@ -2,6 +2,8 @@ package org.omar.recipes.startupconfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.omar.recipes.rating.controller.RatingService;
+import org.omar.recipes.rating.entity.Rating;
+import org.omar.recipes.recipe.boundary.RecipeRequest;
 import org.omar.recipes.recipe.controller.RecipeService;
 import org.omar.recipes.recipe.controller.TagRepository;
 import org.omar.recipes.recipe.entity.Recipe;
@@ -9,6 +11,7 @@ import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.boundary.RegistrationRequest;
 import org.omar.recipes.users.controller.UserAccountService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -61,8 +64,12 @@ public class StartUp implements CommandLineRunner {
         reader = Files.newBufferedReader(path.get());
         collected = reader.lines().collect(Collectors.joining("\n"));
         Recipes recipes = objectMapper.readValue(collected, Recipes.class);
-       /* for(Recipe recipe:recipes.recipes){
-            recipeService.saveRecipe(recipe,"omar@email.com");
+        for(Recipe recipe:recipes.recipes){
+            recipeService.saveRecipe(new RecipeRequest(recipe.getName(),
+                    recipe.getDescription(),
+                    recipe.getIngredients(),
+                    recipe.getDirections(),
+                    null),"omar@email.com");
         }
         Recipe get = recipes.recipes.get(2);
         Rating rating =new Rating();
@@ -82,6 +89,6 @@ public class StartUp implements CommandLineRunner {
         }
        // saveRecipe.get().setRecipeRating(10.0);
         //ratingService.updateRating(saveRecipe.get().getId(), rating, "omar@email.com");
-        */
+
     }
 }

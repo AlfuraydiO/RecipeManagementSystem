@@ -13,26 +13,25 @@ import java.util.Set;
  * @author oalfuraydi
  */
 public enum IntermittentfastingTypes {
-    Hours16Till8(2,7,EnumSet.of(Meal.LANUCH,Meal.DINNER,Meal.SNACK),false),
-    Days5OnAnd2Off(2,5,EnumSet.of(Meal.BREAKFAST,Meal.LANUCH,Meal.DINNER,Meal.SNACK),true),
+    Hours16Till8(2,EnumSet.allOf(DayOfWeek.class),EnumSet.of(Meal.LANUCH,Meal.DINNER,Meal.SNACK),false),
+    Days5OnAnd2Off(2,EnumSet.of(DayOfWeek.MONDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.SATURDAY,DayOfWeek.SUNDAY),EnumSet.of(Meal.BREAKFAST,Meal.LANUCH,Meal.DINNER,Meal.SNACK),true),
     AlternateDay(0,3,new HashSet<Meal>(),true),
     OMaD(1,7,EnumSet.of(Meal.BREAKFAST,Meal.LANUCH,Meal.DINNER,Meal.SNACK),false),
     TwelveTillTwelve(2,7,EnumSet.of(Meal.LANUCH,Meal.BREAKFAST,Meal.DINNER,Meal.SNACK),true);
     
     private int NumberOfMeals;
     //Consider a set for the Number of days since we can exlicly deifned which days;
-    private int daysOfTheWeek;
+    private Set<DayOfWeek> fastingDays;
     private Set<Meal> meales =new HashSet<>() ;
     private boolean isAlternate;
 
-    private IntermittentfastingTypes(int NumberOfMeal, int daysOfTheWeek, Set<Meal> meales,boolean isAlternate) {
-        this.NumberOfMeals = NumberOfMeal;
-        this.daysOfTheWeek = daysOfTheWeek;
+
+    IntermittentfastingTypes(int numberOfMeals, Set<DayOfWeek> fastingDays, Set<Meal> meales, boolean isAlternate) {
+        NumberOfMeals = numberOfMeals;
+        this.fastingDays = fastingDays;
         this.meales = meales;
-        this.isAlternate=isAlternate;
+        this.isAlternate = isAlternate;
     }
-    
-    
 
     public int getNumberOfMeal() {
         return NumberOfMeals;
@@ -43,11 +42,11 @@ public enum IntermittentfastingTypes {
     }
 
     public int getDaysOfTheWeek() {
-        return daysOfTheWeek;
+        return fastingDays;
     }
 
-    public void setDaysOfTheWeek(int daysOfTheWeek) {
-        this.daysOfTheWeek = daysOfTheWeek;
+    public void setDaysOfTheWeek(int fastingDays) {
+        this.fastingDays = fastingDays;
     }
 
     public Set<Meal> getMeales() {

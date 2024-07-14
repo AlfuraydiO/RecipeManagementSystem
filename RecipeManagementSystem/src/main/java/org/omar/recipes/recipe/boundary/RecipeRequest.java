@@ -10,6 +10,5 @@ public record RecipeRequest(
         String description,
         List<String> ingredients,
         List<String> directions,
-        String category,
         int[] tags) {
 }
