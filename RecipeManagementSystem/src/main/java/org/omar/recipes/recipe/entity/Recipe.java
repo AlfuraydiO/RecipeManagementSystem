@@ -189,7 +189,6 @@ public class Recipe implements Serializable {
                 ", date=" + date +
                 ", user=" + user +
                 ", tags=" + tags +
-                ", totalRating=" + totalRating +
                 '}';
     }
 }

@@ -3,7 +3,7 @@ package org.omar.recipes.startupconfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.omar.recipes.rating.controller.RatingService;
 import org.omar.recipes.rating.entity.Rating;
-import org.omar.recipes.recipe.boundary.RecipeRequest;
+import org.omar.recipes.recipe.boundary.requestAndResponseBodies.RecipeRequest;
 import org.omar.recipes.recipe.controller.RecipeService;
 import org.omar.recipes.recipe.controller.TagRepository;
 import org.omar.recipes.recipe.entity.Recipe;
@@ -59,7 +59,6 @@ public class StartUp implements CommandLineRunner {
         }
 
         ResponseEntity<String> saveUser = userAccountService.saveNewUser(new RegistrationRequest("omar@email.com", "21423333", "ROLE_CHEF"));
-        System.err.println("saveUser " + saveUser.toString());
         path = pathlist.stream().filter(e -> e.getFileName().toString().equals("recipes.json")).findFirst();
         reader = Files.newBufferedReader(path.get());
         collected = reader.lines().collect(Collectors.joining("\n"));

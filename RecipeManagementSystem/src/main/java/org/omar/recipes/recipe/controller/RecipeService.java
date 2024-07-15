@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.omar.recipes.rating.controller.RatingService;
 import org.omar.recipes.rating.entity.Rating;
-import org.omar.recipes.recipe.boundary.RecipeRequest;
+import org.omar.recipes.recipe.boundary.requestAndResponseBodies.RecipeRequest;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.controller.UserAccountService;

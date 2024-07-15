@@ -1,5 +1,7 @@
 package org.omar.recipes.recipe.boundary;
 
+import org.omar.recipes.recipe.boundary.requestAndResponseBodies.RecipeRequest;
+import org.omar.recipes.recipe.boundary.requestAndResponseBodies.idResponse;
 import org.omar.recipes.recipe.controller.RecipeService;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,6 @@ public class RecipeController {
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
-    }
-
-    public record id(long id) {
     }
 
     @GetMapping("{id}")
@@ -54,7 +53,7 @@ public class RecipeController {
     @PostMapping(value = "new", produces = "application/json")
     public ResponseEntity PostRecipe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody RecipeRequest recipe) {
         Recipe recipe1 = recipeService.saveRecipe(recipe, userDetails.getUsername());
-        return ResponseEntity.ok(new id(recipe1.getId()));
+        return ResponseEntity.ok(new idResponse(recipe1.getId()));
     }
 
     @DeleteMapping("{id}")

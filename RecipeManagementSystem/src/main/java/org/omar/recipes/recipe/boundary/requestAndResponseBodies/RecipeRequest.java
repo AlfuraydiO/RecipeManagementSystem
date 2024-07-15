@@ -1,4 +1,4 @@
-package org.omar.recipes.recipe.boundary;
+package org.omar.recipes.recipe.boundary.requestAndResponseBodies;
 
 import java.util.List;
 
