@@ -1,359 +1,338 @@
 {
-  "recipes": [
-    {
-      "name": "Cheesy Tomato Pasta",
-      "description": "A quick and easy weeknight meal",
-      "ingredients": [
-        "1 pound dried pasta (penne, rotini, or your favorite)",
-        "1 (28-ounce) can crushed tomatoes",
-        "1/2 cup grated Parmesan cheese",
-        "1/4 cup chopped fresh basil (optional)",
-        "1 tablespoon olive oil",
-        "1 clove garlic, minced",
-        "Salt and pepper to taste"
-      ],
-      "directions": [
-        "Bring a large pot of salted water to a boil. Cook pasta according to package directions.",
-        "Meanwhile, heat olive oil in a large skillet over medium heat. Add garlic and cook for 30 seconds, until fragrant.",
-        "Pour in crushed tomatoes, bring to a simmer, and cook for 5 minutes, stirring occasionally.",
-        "Drain pasta and add it to the sauce. Toss to combine.",
-        "Remove from heat and stir in Parmesan cheese and basil (if using). Season with salt and pepper to taste.",
-        "Serve immediately."
-      ],
-      "tags": [
+    "recipes": [
         {
-          "name": "Italian",
-          "description": "Italian Cuisine",
-          "type": "Cuisine"
-        }
-      ]
-    },
-    {
-      "name": "Scrambled Eggs with Toast",
-      "description": "A classic and satisfying breakfast",
-      "ingredients": [
-        "2 eggs",
-        "1 tablespoon milk",
-        "1 tablespoon butter",
-        "Salt and pepper to taste",
-        "2 slices bread"
-      ],
-      "directions": [
-        "Whisk together eggs and milk in a bowl. Season with salt and pepper.",
-        "Heat butter in a skillet over medium heat. Pour in egg mixture.",
-        "As the eggs begin to cook, gently push cooked portions from the edge towards the center with a spatula, allowing the uncooked liquid to fill the empty space.",
-        "Continue cooking until eggs are scrambled to desired doneness.",
-        "Meanwhile, toast bread to your liking.",
-        "Serve scrambled eggs on toast and enjoy!"
-      ],
-      "tags": [
-        {
-          "name": "Quick & Easy",
-          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-          "type": "Descriptive"
-        }
-      ]
-    },
-    {
-      "name": "Black Bean Burgers",
-      "description": "A delicious and vegetarian alternative to traditional burgers",
-      "ingredients": [
-        "1 (15-ounce) can black beans, rinsed and drained",
-        "1/2 cup cooked brown rice",
-        "1/4 cup rolled oats",
-        "1/4 cup chopped red onion",
-        "1/4 cup chopped bell pepper (any color)",
-        "1 clove garlic, minced",
-        "1 tablespoon olive oil",
-        "1 tablespoon chopped fresh cilantro",
-        "1/2 teaspoon chili powder",
-        "1/4 teaspoon cumin",
-        "Salt and pepper to taste",
-        "Hamburger buns"
-      ],
-      "directions": [
-        "Preheat oven to 375°F (190°C). Line a baking sheet with parchment paper.",
-        "In a large bowl, mash black beans with a fork until slightlychunky.",
-        "Stir in cooked brown rice, rolled oats, red onion, bell pepper, garlic, olive oil, cilantro, chili powder, cumin, salt, and pepper.",
-        "Mix well until combined and the mixture holds its shape.",
-        "Form the mixture into 4 equal patties.",
-        "Place patties on the prepared baking sheet and bake for 20 minutes per side, or until golden brown and heated through.",
-        "Serve burgers on hamburger buns with your favorite toppings."
-      ],
-      "tags": [
-        {
-          "name": "Mexican",
-          "description": "Mexican Cuisine",
-          "type": "Cuisine"
-        }
-      ]
-    },
-    {
-      "name": "Spicy Chicken Stir-Fry",
-      "description": "A quick and flavorful dish with a kick",
-      "ingredients": [
-        "1 pound boneless, skinless chicken breasts, thinly sliced",
-        "1 tablespoon soy sauce",
-        "1 tablespoon cornstarch",
-        "1 tablespoon vegetable oil",
-        "1 red bell pepper, sliced",
-        "1 green bell pepper, sliced",
-        "1 cup broccoli florets",
-        "1/2 cup chopped onion",
-        "1 clove garlic, minced",
-        "1/4 cup chicken broth",
-        "1 tablespoon sriracha (or to taste)",
-        "1 tablespoon brown sugar",
-        "1 teaspoon sesame oil",
-        "Cooked rice (optional)"
-      ],
-      "directions": [
-        "In a bowl, toss chicken with soy sauce and cornstarch. Set aside to marinate for 10 minutes.",
-        "Heat oil in a large skillet or wok over high heat. Add chicken and cook for 5-7 minutes, or until browned and cooked through.",
-        "Remove chicken from the pan and set aside.",
-        "Add bell peppers, broccoli, and onion to the pan. Cook for 3-4 minutes, or until softened slightly.",
-        "Stir in garlic and cook for another 30 seconds.",
-        "In a small bowl, whisk together chicken broth, sriracha, brown sugar, and sesame oil. Pour the sauce into the pan with the vegetables.",
-        "Add the cooked chicken back to the pan and toss to coat with the sauce.",
-        "Serve over cooked rice (optional) and enjoy!"
-      ],
-      "tags": [
-        {
-          "name": "Frying",
-          "description": "Cooking food in hot fat",
-          "type": "Cooking Method"
+            "name": "Cheesy Tomato Pasta",
+            "description": "A quick and easy weeknight meal",
+            "ingredients": [
+                "1 pound dried pasta (penne, rotini, or your favorite)",
+                "1 (28-ounce) can crushed tomatoes",
+                "1/2 cup grated Parmesan cheese",
+                "1/4 cup chopped fresh basil (optional)",
+                "1 tablespoon olive oil",
+                "1 clove garlic, minced",
+                "Salt and pepper to taste"
+            ],
+            "directions": [
+                "Bring a large pot of salted water to a boil. Cook pasta according to package directions.",
+                "Meanwhile, heat olive oil in a large skillet over medium heat. Add garlic and cook for 30 seconds, until fragrant.",
+                "Pour in crushed tomatoes, bring to a simmer, and cook for 5 minutes, stirring occasionally.",
+                "Drain pasta and add it to the sauce. Toss to combine.",
+                "Remove from heat and stir in Parmesan cheese and basil (if using). Season with salt and pepper to taste.",
+                "Serve immediately."
+            ],
+            "tags": [1, 2, 27, 11]
         },
         {
-          "name": "Roasting",
-          "description": "Cooking food in an oven with dry heat",
-          "type": "Cooking Method"
-        }
-      ]
-    },
-    {
-      "name": "Greek Yogurt Parfait",
-      "description": "A healthy and delicious layered breakfast",
-      "ingredients": [
-        "1 cup plain Greek yogurt",
-        "1/4 cup granola",
-        "1/4 cup fresh berries (your choice)",
-        "1 tablespoon honey (optional)"
-      ],
-      "directions": [
-        "In a glass or jar, layer half of the Greek yogurt.",
-        "Top with half of the granola and half of the berries.",
-        "Repeat layers with remaining yogurt, granola, and berries.",
-        "Drizzle with honey (optional) and serve immediately."
-      ],
-      "tags": [
-        {
-          "name": "Keto",
-          "description": "Food suitable for a ketogenic diet",
-          "type": "Dietary Restriction"
-        }
-      ]
-    },
-    {
-      "name": "One-Pot Lemon Garlic Chicken and Rice",
-      "description": "A simple and flavorful one-pot meal",
-      "ingredients": [
-        "1 pound boneless, skinless chicken breasts, cut into bite-sized pieces",
-        "1 tablespoon olive oil",
-        "1/2 teaspoon dried oregano",
-        "1/4 teaspoon garlic powder",
-        "Salt and pepper to taste",
-        "1 cup long-grain white rice",
-        "1 (14.5-ounce) can diced tomatoes, undrained",
-        "1 cup chicken broth",
-        "1/2 cup chopped fresh parsley",
-        "1 lemon, sliced"
-      ],
-      "directions": [
-        "Heat olive oil in a large pot or Dutch oven over medium heat. Season chicken with oregano, garlic powder, salt, and pepper.",
-        "Add chicken to the pot and cook for 5-7 minutes, or until browned on all sides.",
-        "Stir in rice, diced tomatoes with their juices, chicken broth, and half of the parsley.",
-        "Bring to a boil, then reduce heat, cover, and simmer for 15 minutes, or until rice is cooked and fluffy.",
-        "Stir in remaining parsley and lemon slices. Serve immediately."
-      ],
-      "tags": [
-        {
-          "id": "1",
-          "name": "Budget-Friendly",
-          "description": "Budget-Friendly meals with cheap ingredients",
-          "type": "Descriptive"
+            "name": "Scrambled Eggs with Toast",
+            "description": "A classic and satisfying breakfast",
+            "ingredients": [
+                "2 eggs",
+                "1 tablespoon milk",
+                "1 tablespoon butter",
+                "Salt and pepper to taste",
+                "2 slices bread"
+            ],
+            "directions": [
+                "Whisk together eggs and milk in a bowl. Season with salt and pepper.",
+                "Heat butter in a skillet over medium heat. Pour in egg mixture.",
+                "As the eggs begin to cook, gently push cooked portions from the edge towards the center with a spatula, allowing the uncooked liquid to fill the empty space.",
+                "Continue cooking until eggs are scrambled to desired doneness.",
+                "Meanwhile, toast bread to your liking.",
+                "Serve scrambled eggs on toast and enjoy!"
+            ],
+            "tags": [1, 2, 6,37]
         },
         {
-          "name": "One-Pot",
-          "description": "Recipes requiring only one pot",
-          "type": "Cooking Method"
-        }
-      ]
-    },
-    {
-      "name": "Black Bean Burgers",
-      "description": "A delicious and vegetarian alternative to traditional burgers",
-      "ingredients": [
-        "1 (15-ounce) can black beans, rinsed and drained",
-        "1/2 cup cooked brown rice",
-        "1/4 cup rolled oats",
-        "1/4 cup chopped red onion",
-        "1/4 cup chopped bell pepper (any color)",
-        "1 clove garlic, minced",
-        "1 tablespoon olive oil",
-        "1 tablespoon chopped fresh cilantro",
-        "1/2 teaspoon chili powder",
-        "1/4 teaspoon cumin",
-        "Salt and pepper to taste",
-        "Hamburger buns"
-      ],
-      "directions": [
-        "Preheat oven to 375°F (190°C). Line a baking sheet with parchment paper.",
-        "In a large bowl, mash black beans with a fork until slightlychunky.",
-        "Stir in cooked brown rice, rolled oats, red onion, bell pepper, garlic, olive oil, cilantro, chili powder, cumin, salt, and pepper.",
-        "Mix well until combined and the mixture holds its shape.",
-        "Form the mixture into 4 equal patties.",
-        "Place patties on the prepared baking sheet and bake for 20 minutes per side, or until golden brown and heated through.",
-        "Serve burgers on hamburger buns with your favorite toppings."
-      ],
-      "tags": [
-        {
-          "name": "Vegan",
-          "description": "Food suitable for vegans",
-          "type": "Dietary Restriction"
+            "name": "Black Bean Burgers",
+            "description": "A delicious and vegetarian alternative to traditional burgers",
+            "ingredients": [
+                "1 (15-ounce) can black beans, rinsed and drained",
+                "1/2 cup cooked brown rice",
+                "1/4 cup rolled oats",
+                "1/4 cup chopped red onion",
+                "1/4 cup chopped bell pepper (any color)",
+                "1 clove garlic, minced",
+                "1 tablespoon olive oil",
+                "1 tablespoon chopped fresh cilantro",
+                "1/2 teaspoon chili powder",
+                "1/4 teaspoon cumin",
+                "Salt and pepper to taste",
+                "Hamburger buns"
+            ],
+            "directions": [
+                "Preheat oven to 375°F (190°C). Line a baking sheet with parchment paper.",
+                "In a large bowl, mash black beans with a fork until slightlychunky.",
+                "Stir in cooked brown rice, rolled oats, red onion, bell pepper, garlic, olive oil, cilantro, chili powder, cumin, salt, and pepper.",
+                "Mix well until combined and the mixture holds its shape.",
+                "Form the mixture into 4 equal patties.",
+                "Place patties on the prepared baking sheet and bake for 20 minutes per side, or until golden brown and heated through.",
+                "Serve burgers on hamburger buns with your favorite toppings."
+            ],
+            "tags": [1, 37, 28, 12, 22, 23]
         },
         {
-          "name": "American",
-          "description": "American Cuisine",
-          "type": "Cuisine"
-        }
-      ]
-    },
-    {
-      "name": "Tuna Salad Sandwich",
-      "description": "A classic and easy lunch option",
-      "ingredients": [
-        "2 slices of bread",
-        "1 can (5 oz) tuna in water, drained",
-        "1/4 cup mayonnaise",
-        "1 tablespoon chopped celery",
-        "1/4 teaspoon dried onion powder",
-        "Salt and pepper to taste",
-        "Lettuce (optional)"
-      ],
-      "directions": [
-        "In a bowl, mix together tuna, mayonnaise, celery, onion powder, salt, and pepper.",
-        "Spread the tuna salad mixture onto one slice of bread.",
-        "Top with lettuce (optional) and the other slice of bread.",
-        "Cut the sandwich in half and enjoy!"
-      ],
-      "tags": [
-        {
-          "name": "Quick & Easy",
-          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-          "type": "Descriptive"
+            "name": "Spicy Chicken Stir-Fry",
+            "description": "A quick and flavorful dish with a kick",
+            "ingredients": [
+                "1 pound boneless, skinless chicken breasts, thinly sliced",
+                "1 tablespoon soy sauce",
+                "1 tablespoon cornstarch",
+                "1 tablespoon vegetable oil",
+                "1 red bell pepper, sliced",
+                "1 green bell pepper, sliced",
+                "1 cup broccoli florets",
+                "1/2 cup chopped onion",
+                "1 clove garlic, minced",
+                "1/4 cup chicken broth",
+                "1 tablespoon sriracha (or to taste)",
+                "1 tablespoon brown sugar",
+                "1 teaspoon sesame oil",
+                "Cooked rice (optional)"
+            ],
+            "directions": [
+                "In a bowl, toss chicken with soy sauce and cornstarch. Set aside to marinate for 10 minutes.",
+                "Heat oil in a large skillet or wok over high heat. Add chicken and cook for 5-7 minutes, or until browned and cooked through.",
+                "Remove chicken from the pan and set aside.",
+                "Add bell peppers, broccoli, and onion to the pan. Cook for 3-4 minutes, or until softened slightly.",
+                "Stir in garlic and cook for another 30 seconds.",
+                "In a small bowl, whisk together chicken broth, sriracha, brown sugar, and sesame oil. Pour the sauce into the pan with the vegetables.",
+                "Add the cooked chicken back to the pan and toss to coat with the sauce.",
+                "Serve over cooked rice (optional) and enjoy!"
+            ],
+            "tags": [6, 9, 2, 22, 23, 33, 32, 15]
         },
         {
-          "id": "1",
-          "name": "Budget-Friendly",
-          "description": "Budget-Friendly meals with cheap ingredients",
-          "type": "Descriptive"
-        }
-      ]
-    },
-    {
-      "name": "Chicken Caesar Salad",
-      "description": "A hearty and flavorful salad",
-      "ingredients": [
-        "4 cups romaine lettuce, chopped",
-        "1 grilled or baked chicken breast, sliced",
-        "1/2 cup croutons",
-        "1/4 cup grated Parmesan cheese",
-        "Caesar salad dressing (store-bought or homemade)"
-      ],
-      "directions": [
-        "In a large bowl, combine romaine lettuce, chicken, croutons, and Parmesan cheese.",
-        "Drizzle with Caesar salad dressing to taste and toss to coat.",
-        "Serve immediately."
-      ],
-      "tags": [
-        {
-          "name": "Quick & Easy",
-          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-          "type": "Descriptive"
+            "name": "Greek Yogurt Parfait",
+            "description": "A healthy and delicious layered breakfast",
+            "ingredients": [
+                "1 cup plain Greek yogurt",
+                "1/4 cup granola",
+                "1/4 cup fresh berries (your choice)",
+                "1 tablespoon honey (optional)"
+            ],
+            "directions": [
+                "In a glass or jar, layer half of the Greek yogurt.",
+                "Top with half of the granola and half of the berries.",
+                "Repeat layers with remaining yogurt, granola, and berries.",
+                "Drizzle with honey (optional) and serve immediately."
+            ],
+            "tags": [21, 22, 1, 2, 37, 32]
         },
         {
-          "name": "Italian",
-          "description": "Italian Cuisine",
-          "type": "Cuisine"
-        }
-      ]
-    },
-    {
-      "name": "Veggie Wraps",
-      "description": "A customizable and light lunch option",
-      "ingredients": [
-        "2 whole wheat tortillas",
-        "1 cup chopped mixed greens",
-        "1/2 cup hummus",
-        "1/4 cup chopped cucumber",
-        "1/4 cup chopped bell pepper (any color)",
-        "1/4 cup shredded carrots",
-        "1/4 cup crumbled feta cheese (optional)",
-        "Olive oil (optional)"
-      ],
-      "directions": [
-        "Spread hummus evenly onto one tortilla.",
-        "Layer mixed greens, cucumber, bell pepper, and carrots on top of the hummus.",
-        "Sprinkle with feta cheese (optional).",
-        "Drizzle with a little olive oil (optional) for extra flavor.",
-        "Roll up the tortilla tightly and enjoy!"
-      ],
-      "tags": [
-        {
-          "name": "Mexican",
-          "description": "Mexican Cuisine",
-          "type": "Cuisine"
+            "name": "One-Pot Lemon Garlic Chicken",
+            "description": "A simple and flavorful one-pot meal",
+            "ingredients": [
+                "1 pound boneless, skinless chicken breasts, cut into bite-sized pieces",
+                "1 tablespoon olive oil",
+                "1/2 teaspoon dried oregano",
+                "1/4 teaspoon garlic powder",
+                "Salt and pepper to taste",
+                "1 cup long-grain white rice",
+                "1 (14.5-ounce) can diced tomatoes, undrained",
+                "1 cup chicken broth",
+                "1/2 cup chopped fresh parsley",
+                "1 lemon, sliced"
+            ],
+            "directions": [
+                "Heat olive oil in a large pot or Dutch oven over medium heat. Season chicken with oregano, garlic powder, salt, and pepper.",
+                "Add chicken to the pot and cook for 5-7 minutes, or until browned on all sides.",
+                "Stir in rice, diced tomatoes with their juices, chicken broth, and half of the parsley.",
+                "Bring to a boil, then reduce heat, cover, and simmer for 15 minutes, or until rice is cooked and fluffy.",
+                "Stir in remaining parsley and lemon slices. Serve immediately."
+            ],
+            "tags": [10, 22, 23, 37, 33]
         },
         {
-          "name": "Frying",
-          "description": "Cooking food in hot fat",
-          "type": "Cooking Method"
-        }
-      ]
-    },
-    {
-      "name": "Leftover Soup and Salad",
-      "description": "A quick and easy way to use up leftovers",
-      "ingredients": [
-        "1 serving leftover soup (any kind)",
-        "2 cups mixed greens",
-        "1/4 cup cherry tomatoes, halved",
-        "1/4 cup crumbled feta cheese (optional)",
-        "Vinaigrette dressing (optional)"
-      ],
-      "directions": [
-        "Reheat leftover soup according to package instructions.",
-        "In a bowl, combine mixed greens, cherry tomatoes, and feta cheese (optional).",
-        "Drizzle with vinaigrette dressing (optional) to taste.",
-        "Serve the salad alongside the reheated soup."
-      ],
-      "tags": [
-        {
-          "name": "Quick & Easy",
-          "description": "This meal is asy and qwick to make less than 20 Minuinetes",
-          "type": "Descriptive"
+            "name": "Tuna Salad Sandwich",
+            "description": "A classic and easy lunch option",
+            "ingredients": [
+                "2 slices of bread",
+                "1 can (5 oz) tuna in water, drained",
+                "1/4 cup mayonnaise",
+                "1 tablespoon chopped celery",
+                "1/4 teaspoon dried onion powder",
+                "Salt and pepper to taste",
+                "Lettuce (optional)"
+            ],
+            "directions": [
+                "In a bowl, mix together tuna, mayonnaise, celery, onion powder, salt, and pepper.",
+                "Spread the tuna salad mixture onto one slice of bread.",
+                "Top with lettuce (optional) and the other slice of bread.",
+                "Cut the sandwich in half and enjoy!"
+            ],
+            "tags": [1, 2, 36, 22, 21]
         },
         {
-          "name": "One-Pot",
-          "description": "Recipes requiring only one pot",
-          "type": "Cooking Method"
+            "name": "Chicken Caesar Salad",
+            "description": "A hearty and flavorful salad",
+            "ingredients": [
+                "4 cups romaine lettuce, chopped",
+                "1 grilled or baked chicken breast, sliced",
+                "1/2 cup croutons",
+                "1/4 cup grated Parmesan cheese",
+                "Caesar salad dressing (store-bought or homemade)"
+            ],
+            "directions": [
+                "In a large bowl, combine romaine lettuce, chicken, croutons, and Parmesan cheese.",
+                "Drizzle with Caesar salad dressing to taste and toss to coat.",
+                "Serve immediately."
+            ],
+            "tags": [1, 2, 29, 33, 22, 21, 32, 35]
         },
         {
-          "name": "Low-Calori",
-          "description": "Low-Calori",
-          "type": "Cooking Method"
+            "name": "Veggie Wraps",
+            "description": "A customizable and light lunch option",
+            "ingredients": [
+                "2 whole wheat tortillas",
+                "1 cup chopped mixed greens",
+                "1/2 cup hummus",
+                "1/4 cup chopped cucumber",
+                "1/4 cup chopped bell pepper (any color)",
+                "1/4 cup shredded carrots",
+                "1/4 cup crumbled feta cheese (optional)",
+                "Olive oil (optional)"
+            ],
+            "directions": [
+                "Spread hummus evenly onto one tortilla.",
+                "Layer mixed greens, cucumber, bell pepper, and carrots on top of the hummus.",
+                "Sprinkle with feta cheese (optional).",
+                "Drizzle with a little olive oil (optional) for extra flavor.",
+                "Roll up the tortilla tightly and enjoy!"
+            ],
+            "tags": [1, 12, 22, 21, 28, 27, 31, 32]
+        },
+        {
+            "name": "Leftover Soup and Salad",
+            "description": "A quick and easy way to use up leftovers",
+            "ingredients": [
+                "1 serving leftover soup (any kind)",
+                "2 cups mixed greens",
+                "1/4 cup cherry tomatoes, halved",
+                "1/4 cup crumbled feta cheese (optional)",
+                "Vinaigrette dressing (optional)"
+            ],
+            "directions": [
+                "Reheat leftover soup according to package instructions.",
+                "In a bowl, combine mixed greens, cherry tomatoes, and feta cheese (optional).",
+                "Drizzle with vinaigrette dressing (optional) to taste.",
+                "Serve the salad alongside the reheated soup."
+            ],
+            "tags": [23, 24, 1, 35, 33]
         }
-      ]
-    }
-  ]
+        ,
+
+        {
+            "name": "The Ultimate Grilled Cheese",
+            "description": "An indulgent grilled cheese sandwich with melted mozzarella and cheddar cheese. Perfect for lunch!",
+            "ingredients": [
+                "Cream cheese",
+                "Mozzarella",
+                "Cheddar",
+                "Italian bread"
+            ],
+            "directions": [
+                "Mix together cream cheese, mayonnaise, melted mozzarella, and cheddar cheese.",
+                "Spread the mixture onto one slice of Italian bread.",
+                "Top with the other slice of bread.",
+                "Cut the sandwich in half and enjoy!"
+            ],
+            "tags": [1, 2, 21, 32, 31, 32]
+        },
+        {
+            "name": "Chicken Pesto Wraps",
+            "description": "Quick and easy wraps with chicken, pesto, and mozzarella.",
+            "ingredients": [
+                "Ground chicken",
+                "Sun-dried tomato pesto",
+                "Mozzarella"
+            ],
+            "directions": [
+                "Swap sun-dried tomato pesto for basil pesto or your own homemade pesto.",
+                "Line a cookie sheet with foil for easy cleanup.",
+                "Add a dollop of sour cream or tomato basil pesto sauce if desired."
+            ],
+            "tags": [37, 11, 31, 32, 1, 2, 6, 21, 22, 23]
+        },
+        {
+            "name": "Easy Chicken Salad",
+            "description": "Creamy chicken salad with sweet grapes and crunchy celery.",
+            "ingredients": [
+                "Shredded rotisserie chicken",
+                "Seedless red grapes",
+                "Chopped pecans"
+            ],
+            "directions": [
+                "Mix shredded rotisserie chicken with sour cream and mayo sauce.",
+                "Add chopped pecans, sweet onion, and celery.",
+                "Serve in a sandwich or over lettuce."
+            ],
+            "tags": [1, 31, 32, 33, 37, 29, 22, 23]
+        },
+        {
+            "name": "Tuna Melt on Cornbread",
+            "description": "Open-faced tuna melt with cornbread and melted cheese.",
+            "ingredients": [
+                "Cornbread/muffin mix",
+                "Canned tuna",
+                "Celery",
+                "Avocado"
+            ],
+            "directions": [
+                "Prepare cornbread/muffin mix according to package instructions.",
+                "Mix canned tuna with celery.",
+                "Top cornbread with tuna mixture and melted cheese.",
+                "Serve for a quick lunch or dinner."
+            ],
+            "tags": [22, 23, 36, 37, 1, 2, 21, 22]
+        },
+        {
+            "name": "Turkey Spinach Salad with Maple Dressing",
+            "description": "A vibrant salad with fresh spinach, savory turkey, walnuts, and dried cranberries.",
+            "ingredients": [
+                "Baby spinach",
+                "Deli smoked turkey",
+                "Maple syrup"
+            ],
+            "directions": [
+                "Toss together baby spinach, deli smoked turkey, and crunchy walnuts.",
+                "Drizzle with maple syrup dressing.",
+                "Enjoy as a hearty lunch."
+            ],
+            "tags": [1, 2, 22, 23, 37, 29, 30]
+        },
+
+        {
+            "name": "Korean Beef Bulgogi Stir-Fry",
+            "description": "A quick and flavorful stir-fry with thinly sliced marinated beef",
+            "ingredients": [
+                "1 pound flank steak, thinly sliced",
+                "1/4 cup soy sauce",
+                "2 tablespoons brown sugar",
+                "1 tablespoon honey",
+                "1 tablespoon sesame oil",
+                "1 tablespoon rice vinegar",
+                "1 clove garlic, minced",
+                "1 teaspoon grated ginger",
+                "1/2 teaspoon red pepper flakes",
+                "1 tablespoon vegetable oil",
+                "1 bell pepper, sliced (any color)",
+                "1 onion, sliced",
+                "1 cup broccoli florets",
+                "1/2 cup cooked rice",
+                "Sesame seeds (optional)",
+                "Chopped green onions (optional)"
+            ],
+            "directions": [
+                "In a large bowl, combine soy sauce, brown sugar, honey, sesame oil, rice vinegar, garlic, ginger, and red pepper flakes.  Marinate the sliced beef for at least 30 minutes, or up to overnight.",
+                "Heat vegetable oil in a large skillet or wok over high heat.",
+                "Add the beef and cook for 3-4 minutes, or until browned and cooked through.",
+                "Add bell pepper, onion, and broccoli florets to the pan and stir-fry for another 3-4 minutes, or until vegetables are tender-crisp.",
+                "Stir in cooked rice and heat through.",
+                "Serve garnished with sesame seeds (optional) and chopped green onions (optional)."
+            ],
+            "tags": [20,23,37,29,30,31,32,35]
+        }
+
+
+    ]
 }

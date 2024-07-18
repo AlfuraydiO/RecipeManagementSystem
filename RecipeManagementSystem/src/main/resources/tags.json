@@ -1,14 +1,13 @@
 {
   "tags": [
     {
-      "id": 1,
       "name": "Budget-Friendly",
       "description": "Budget-Friendly meals with cheap ingredients",
       "type": "Descriptive"
     },
     {
       "name": "Quick & Easy",
-      "description": "This meal is asy and qwick to make less than 20 Minuinetes",
+      "description": "This meal is asy and Quick  to make less than 20 Minuinetes",
       "type": "Descriptive"
     },
     {
@@ -101,36 +100,7 @@
       "description": "Korean Cuisine",
       "type": "Cuisine"
     },
-    {
-      "name": "Breakfast",
-      "description": "The first meal of the day",
-      "type": "Meal Type"
-    },
-    {
-      "name": "Lunch",
-      "description": "A midday meal",
-      "type": "Meal Type"
-    },
-    {
-      "name": "Dinner",
-      "description": "The main evening meal",
-      "type": "Meal Type"
-    },
-    {
-      "name": "Snack",
-      "description": "A small meal between main meals",
-      "type": "Meal Type"
-    },
-    {
-      "name": "Appetizer",
-      "description": "A food served before a main course",
-      "type": "Meal Type"
-    },
-    {
-      "name": "Dessert",
-      "description": "A sweet course served after a meal",
-      "type": "Meal Type"
-    },
+        
     {
       "name": "Vegan",
       "description": "Food suitable for vegans",
@@ -180,6 +150,11 @@
       "name": "Pedestrian",
       "description": "Food that includes fish and seafood but not meat",
       "type": "Dietary Restriction"
-    }
+    },
+     {
+      "name": "High-Protine",
+      "description": "Food that high amount of protine",
+      "type": "Descriptive"
+    } 
   ]
 }

@@ -1,4 +1,4 @@
-package org.omar;
+package org.omar.IT;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +24,7 @@ import java.util.List;
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = RecipesApplication.class)
-public class recipesIT {
+public class RecipeIT {
 
     record idResponse(String id){};
 
@@ -53,11 +53,32 @@ public class recipesIT {
          Recipe recipe = response.getBody();
         Assertions.assertEquals("Cheesy Tomato Pasta",recipe.getName());
     }
+    
+    @Test
+    void UnauthorizedPutRecipeTest() {
+        RecipeRequest recipeRequest = new RecipeRequest("Steak","Simple desription", "Lunch,Dinner",List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2,3});
+        ResponseEntity<Object> putResponse =  ResponseEntity.ofNullable(Object.class);
+        try {
+            putResponse = this.restTemplate.withBasicAuth("tester@email.com","12345678").exchange(host + port + RecipeResource + 1, HttpMethod.PUT, new HttpEntity<>(recipeRequest), Object.class);
+        }catch (ResourceAccessException e){
+            System.out.println(e.getCause());
+        }
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED,putResponse.getStatusCode());
+
+    }
+
+    @Test
+    void UnauthorizedDeleteRecipeTest() {
+        //RecipeRequest recipeRequest = new RecipeRequest("Steak","Simple desription", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2,3});
+        ResponseEntity<Object> putResponse =  ResponseEntity.ofNullable(Object.class);
+        putResponse = this.restTemplate.withBasicAuth("tester@email.com","12345678").exchange(host + port + RecipeResource + 1, HttpMethod.DELETE, new HttpEntity<>(null), Object.class);
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED,putResponse.getStatusCode());
+    }
 
     @Test
     @Order(2)
     void postRecipeTest() throws Exception {
-        RecipeRequest recipeRequest = new RecipeRequest("Test Steak","Simple desription", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2});
+        RecipeRequest recipeRequest = new RecipeRequest("Test Steak","Simple desription","Lunch,Dinner", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2});
 
         ResponseEntity<idResponse> idresponse = this.restTemplate.postForEntity(host + port + RecipeResource + "/new",recipeRequest,idResponse.class);
         Assertions.assertEquals(idresponse.getStatusCode(), HttpStatus.OK);
@@ -71,7 +92,7 @@ public class recipesIT {
     @Test
     @Order(3)
     void putRecipeTest() throws Exception {
-        RecipeRequest recipeRequest = new RecipeRequest("Steak","Simple desription", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2,3});
+        RecipeRequest recipeRequest = new RecipeRequest("Steak","Simple desription","Lunch,Dinner", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2,3});
         //
         ResponseEntity<Object> putResponse = this.restTemplate.exchange(host + port + RecipeResource + recipeId, HttpMethod.PUT, new HttpEntity<>(recipeRequest), Object.class);
         Assertions.assertEquals(HttpStatus.NO_CONTENT,putResponse.getStatusCode());
@@ -84,29 +105,6 @@ public class recipesIT {
 
     @Test
     @Order(4)
-    void UnauthorizedPutRecipeTest() {
-        RecipeRequest recipeRequest = new RecipeRequest("Steak","Simple desription", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2,3});
-        ResponseEntity<Object> putResponse =  ResponseEntity.ofNullable(Object.class);
-        try {
-            putResponse = this.restTemplate.withBasicAuth("tester@email.com","12345678").exchange(host + port + RecipeResource + 1, HttpMethod.PUT, new HttpEntity<>(recipeRequest), Object.class);
-        }catch (ResourceAccessException e){
-            System.out.println(e.getCause());
-        }
-        Assertions.assertEquals(HttpStatus.UNAUTHORIZED,putResponse.getStatusCode());
-
-    }
-
-    @Test
-    @Order(4)
-    void UnauthorizedDeleteRecipeTest() {
-        //RecipeRequest recipeRequest = new RecipeRequest("Steak","Simple desription", List.of("ingredients 1 ","ingredients 2"),List.of("description 1","description 2"),new int[]{1,2,3});
-        ResponseEntity<Object> putResponse =  ResponseEntity.ofNullable(Object.class);
-        putResponse = this.restTemplate.withBasicAuth("tester@email.com","12345678").exchange(host + port + RecipeResource + 1, HttpMethod.DELETE, new HttpEntity<>(null), Object.class);
-        Assertions.assertEquals(HttpStatus.UNAUTHORIZED,putResponse.getStatusCode());
-    }
-
-    @Test
-    @Order(5)
     void DeleteRecipeTest() throws Exception {
         this.restTemplate.delete(host + port + RecipeResource +recipeId);
         ResponseEntity<Recipe> response = this.restTemplate.getForEntity(host + port + RecipeResource + recipeId,Recipe.class);

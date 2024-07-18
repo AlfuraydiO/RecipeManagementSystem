@@ -20,7 +20,6 @@ public class Rating implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
     @ManyToOne
@@ -133,4 +132,11 @@ public class Rating implements Serializable {
         }
         return Objects.equals(this.localDateTime, other.localDateTime);
     }
+
+    @Override
+    public String toString() {
+        return "Rating{" + "id=" + id + ", userAccount=" + userAccount + ", recipe=" + recipe + ", recipeRating=" + recipeRating + ", localDateTime=" + localDateTime + ", review=" + review + '}';
+    }
+    
+    
 }

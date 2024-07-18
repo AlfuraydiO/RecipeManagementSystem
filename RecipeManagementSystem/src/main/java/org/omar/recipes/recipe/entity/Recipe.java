@@ -38,6 +38,8 @@ public class Recipe implements Serializable {
     @ElementCollection
     List<String> directions;
 
+     @NotNull
+     String category;
 
     @Temporal(TemporalType.TIMESTAMP)
     LocalDateTime date;
@@ -76,12 +78,13 @@ public class Recipe implements Serializable {
     }
 
     public Recipe(Long id, String name, String description, List<String> ingredients,
-                  List<String> directions) {
+                  List<String> directions,String category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
         this.directions = directions;
+        this.category=category;
     }
 
     public String getName() {
@@ -178,17 +181,17 @@ public class Recipe implements Serializable {
         this.totalRating = totalRating;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", ingredients=" + ingredients +
-                ", directions=" + directions +
-                ", date=" + date +
-                ", user=" + user +
-                ", tags=" + tags +
-                '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", ingredients=" + ingredients + ", directions=" + directions + ", category=" + category + ", date=" + date + ", tags=" + tags + ", totalRating=" + totalRating + '}';
     }
+    
 }

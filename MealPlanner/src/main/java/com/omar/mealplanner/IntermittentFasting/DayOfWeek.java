@@ -9,5 +9,24 @@ package com.omar.mealplanner.IntermittentFasting;
  * @author oalfuraydi
  */
 public enum DayOfWeek {
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+    
+    private int numberOfMeal;
+
+    private DayOfWeek(int numberOfMeal) {
+        this.numberOfMeal = numberOfMeal;
+    }
+
+    private DayOfWeek() {
+    }
+
+    public int getNumberOfMeal() {
+        return numberOfMeal;
+    }
+
+    public void setNumberOfMeal(int numberOfMeal) {
+        this.numberOfMeal = numberOfMeal;
+    }
+    
+    
 }

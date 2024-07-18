@@ -8,6 +8,7 @@ import java.util.List;
 public record RecipeRequest(
         String name,
         String description,
+        String category,
         List<String> ingredients,
         List<String> directions,
         int[] tags) {

@@ -39,7 +39,6 @@ public class RecipeService {
         this.validator = validator;
     }
 
-
     public Optional<Recipe> getRecipeById(long id) {
         return recipeRepository.findById(id);
     }
@@ -50,7 +49,7 @@ public class RecipeService {
 
     public Recipe saveRecipe(RecipeRequest request, String email) {
         Recipe recipe = new Recipe(null, request.name(), request.description(), request.ingredients(),
-                request.directions());
+            request.directions(),request.category());
         recipe.setDate(LocalDateTime.now());
         recipe.setUser(email == null ? null : userService.loadUserByEmail(email));
         Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
@@ -58,11 +57,12 @@ public class RecipeService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, violations.stream().map(ConstraintViolation::getMessage).toList().toString());
         }
         List<Tag> tagList = new ArrayList<>();
-        if(request.tags()!=null){
-        for (int id : request.tags()) {
-            Tag tag = tagService.getTagById(id);
-            tagList.add(tag);
-        }}
+        if (request.tags() != null) {
+            for (int id : request.tags()) {
+                Tag tag = tagService.getTagById(id);
+                tagList.add(tag);
+            }
+        }
         recipe.setTags(new HashSet<>(tagList));
         return recipeRepository.save(recipe);
     }
@@ -73,7 +73,7 @@ public class RecipeService {
             UserAccount chefUser = userService.loadUserByEmail(email);
             if (exists.get().getUser().getEmail().equals(email)) {
                 Recipe recipe = new Recipe(exists.get().getId(), request.name(), request.description(), request.ingredients(),
-                        request.directions());
+                    request.directions(),request.category());
                 recipe.setDate(LocalDateTime.now());
                 recipe.setUser(chefUser);
                 Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
@@ -143,6 +143,12 @@ public class RecipeService {
         }
     }
 
+    public List<Recipe> getRecipesByTags(List<Integer> included, List<Integer> excluded) {
+       
+        List<Recipe> recipes = recipeRepository.findRecipesByTagsParam(included, excluded);
+        return recipes;
+    }
+
     public Iterable<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
@@ -155,6 +161,5 @@ public class RecipeService {
     public void setRatingService(@Lazy RatingService ratingService) {
         this.ratingService = ratingService;
     }
-
 
 }

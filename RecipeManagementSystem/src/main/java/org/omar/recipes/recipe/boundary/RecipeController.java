@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import org.omar.recipes.recipe.boundary.requestAndResponseBodies.SearchRecipeByTags;
 
 @RestController
 @RequestMapping("api/recipe/")
@@ -35,8 +36,14 @@ public class RecipeController {
 
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Recipe>> getRecipeByTags(@RequestBody SearchRecipeByTags searchRecipeByTags) {
+        List<Recipe> recipes = recipeService.getRecipesByTags(searchRecipeByTags.includedTags(), searchRecipeByTags.excludedTags());
+        return ResponseEntity.ok(recipes);
+    }
+
     @GetMapping("search/")
-    public ResponseEntity<List<Recipe>> searchRecipe( @RequestParam(defaultValue = "", required = false) String name) {
+    public ResponseEntity<List<Recipe>> searchRecipe(@RequestParam(defaultValue = "", required = false) String name) {
         if (name.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
