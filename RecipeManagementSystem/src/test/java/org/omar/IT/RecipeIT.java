@@ -37,7 +37,7 @@ public class RecipeIT {
 
     private long recipeId;
 
-    @BeforeAll
+    @BeforeAll()
       void CreateUser(){
         ResponseEntity response = this.restTemplate.postForEntity( host+port + "/recipes/api/register"
                 ,new RegistrationRequest("tester@email.com","12345678","ROLE_CHEF"),idResponse.class);

@@ -38,7 +38,7 @@ public class Recipe implements Serializable {
     @ElementCollection
     List<String> directions;
 
-     @NotNull
+     @NotNull(message = "Category must not be null")
      String category;
 
     @Temporal(TemporalType.TIMESTAMP)

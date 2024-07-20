@@ -3,6 +3,7 @@
         {
             "name": "Cheesy Tomato Pasta",
             "description": "A quick and easy weeknight meal",
+            "category": "Lunch,Dinner",
             "ingredients": [
                 "1 pound dried pasta (penne, rotini, or your favorite)",
                 "1 (28-ounce) can crushed tomatoes",
@@ -20,11 +21,12 @@
                 "Remove from heat and stir in Parmesan cheese and basil (if using). Season with salt and pepper to taste.",
                 "Serve immediately."
             ],
-            "tags": [1, 2, 27, 11]
+            "tags": [1,2,22,26,25]
         },
         {
             "name": "Scrambled Eggs with Toast",
             "description": "A classic and satisfying breakfast",
+            "category": "Lunch,Breakfast",
             "ingredients": [
                 "2 eggs",
                 "1 tablespoon milk",
@@ -40,11 +42,12 @@
                 "Meanwhile, toast bread to your liking.",
                 "Serve scrambled eggs on toast and enjoy!"
             ],
-            "tags": [1, 2, 6,37]
+            "tags": [1,2,31,26,25]
         },
         {
             "name": "Black Bean Burgers",
             "description": "A delicious and vegetarian alternative to traditional burgers",
+            "category": "Lunch,Dinner",
             "ingredients": [
                 "1 (15-ounce) can black beans, rinsed and drained",
                 "1/2 cup cooked brown rice",
@@ -68,11 +71,12 @@
                 "Place patties on the prepared baking sheet and bake for 20 minutes per side, or until golden brown and heated through.",
                 "Serve burgers on hamburger buns with your favorite toppings."
             ],
-            "tags": [1, 37, 28, 12, 22, 23]
+            "tags": [22,21,26,25]
         },
         {
             "name": "Spicy Chicken Stir-Fry",
             "description": "A quick and flavorful dish with a kick",
+            "category": "Lunch,Dinner",
             "ingredients": [
                 "1 pound boneless, skinless chicken breasts, thinly sliced",
                 "1 tablespoon soy sauce",
@@ -99,11 +103,12 @@
                 "Add the cooked chicken back to the pan and toss to coat with the sauce.",
                 "Serve over cooked rice (optional) and enjoy!"
             ],
-            "tags": [6, 9, 2, 22, 23, 33, 32, 15]
+            "tags": [31,25,31,10]
         },
         {
             "name": "Greek Yogurt Parfait",
             "description": "A healthy and delicious layered breakfast",
+            "category": "Lunch,Breakfast",
             "ingredients": [
                 "1 cup plain Greek yogurt",
                 "1/4 cup granola",
@@ -116,11 +121,12 @@
                 "Repeat layers with remaining yogurt, granola, and berries.",
                 "Drizzle with honey (optional) and serve immediately."
             ],
-            "tags": [21, 22, 1, 2, 37, 32]
+            "tags": [31,21,22,26]
         },
         {
             "name": "One-Pot Lemon Garlic Chicken",
             "description": "A simple and flavorful one-pot meal",
+            "category": "Dinner",
             "ingredients": [
                 "1 pound boneless, skinless chicken breasts, cut into bite-sized pieces",
                 "1 tablespoon olive oil",
@@ -140,11 +146,12 @@
                 "Bring to a boil, then reduce heat, cover, and simmer for 15 minutes, or until rice is cooked and fluffy.",
                 "Stir in remaining parsley and lemon slices. Serve immediately."
             ],
-            "tags": [10, 22, 23, 37, 33]
+            "tags": [31,10,26,25,29,27,1]
         },
         {
             "name": "Tuna Salad Sandwich",
             "description": "A classic and easy lunch option",
+            "category": "Lunch,Dinner,Breakfast",
             "ingredients": [
                 "2 slices of bread",
                 "1 can (5 oz) tuna in water, drained",
@@ -160,11 +167,12 @@
                 "Top with lettuce (optional) and the other slice of bread.",
                 "Cut the sandwich in half and enjoy!"
             ],
-            "tags": [1, 2, 36, 22, 21]
+            "tags": [31,1,2,22]
         },
         {
             "name": "Chicken Caesar Salad",
             "description": "A hearty and flavorful salad",
+            "category": "Lunch,Dinner,Breakfast",
             "ingredients": [
                 "4 cups romaine lettuce, chopped",
                 "1 grilled or baked chicken breast, sliced",
@@ -177,11 +185,12 @@
                 "Drizzle with Caesar salad dressing to taste and toss to coat.",
                 "Serve immediately."
             ],
-            "tags": [1, 2, 29, 33, 22, 21, 32, 35]
+            "tags": [1,2,31,27,29,26,25]
         },
         {
             "name": "Veggie Wraps",
             "description": "A customizable and light lunch option",
+            "category": "Lunch,Breakfast",
             "ingredients": [
                 "2 whole wheat tortillas",
                 "1 cup chopped mixed greens",
@@ -199,11 +208,12 @@
                 "Drizzle with a little olive oil (optional) for extra flavor.",
                 "Roll up the tortilla tightly and enjoy!"
             ],
-            "tags": [1, 12, 22, 21, 28, 27, 31, 32]
+            "tags": [21,22,26,25,2]
         },
         {
             "name": "Leftover Soup and Salad",
             "description": "A quick and easy way to use up leftovers",
+            "category": "Lunch,Dinner",
             "ingredients": [
                 "1 serving leftover soup (any kind)",
                 "2 cups mixed greens",
@@ -217,13 +227,14 @@
                 "Drizzle with vinaigrette dressing (optional) to taste.",
                 "Serve the salad alongside the reheated soup."
             ],
-            "tags": [23, 24, 1, 35, 33]
+            "tags": [26,25,21,22,1]
         }
         ,
 
         {
             "name": "The Ultimate Grilled Cheese",
             "description": "An indulgent grilled cheese sandwich with melted mozzarella and cheddar cheese. Perfect for lunch!",
+            "category": "Lunch,Breakfast",
             "ingredients": [
                 "Cream cheese",
                 "Mozzarella",
@@ -236,11 +247,12 @@
                 "Top with the other slice of bread.",
                 "Cut the sandwich in half and enjoy!"
             ],
-            "tags": [1, 2, 21, 32, 31, 32]
+            "tags": [1,2]
         },
         {
             "name": "Chicken Pesto Wraps",
             "description": "Quick and easy wraps with chicken, pesto, and mozzarella.",
+            "category": "Lunch,Dinner",
             "ingredients": [
                 "Ground chicken",
                 "Sun-dried tomato pesto",
@@ -251,11 +263,12 @@
                 "Line a cookie sheet with foil for easy cleanup.",
                 "Add a dollop of sour cream or tomato basil pesto sauce if desired."
             ],
-            "tags": [37, 11, 31, 32, 1, 2, 6, 21, 22, 23]
+            "tags": [11,31,27,1,26,25]
         },
         {
             "name": "Easy Chicken Salad",
             "description": "Creamy chicken salad with sweet grapes and crunchy celery.",
+            "category": "Lunch,Dinner,Breakfast",
             "ingredients": [
                 "Shredded rotisserie chicken",
                 "Seedless red grapes",
@@ -266,11 +279,12 @@
                 "Add chopped pecans, sweet onion, and celery.",
                 "Serve in a sandwich or over lettuce."
             ],
-            "tags": [1, 31, 32, 33, 37, 29, 22, 23]
+            "tags": [11,31,27,1,26,25]
         },
         {
             "name": "Tuna Melt on Cornbread",
             "description": "Open-faced tuna melt with cornbread and melted cheese.",
+            "category": "Lunch,Dinner,Breakfast",
             "ingredients": [
                 "Cornbread/muffin mix",
                 "Canned tuna",
@@ -283,11 +297,12 @@
                 "Top cornbread with tuna mixture and melted cheese.",
                 "Serve for a quick lunch or dinner."
             ],
-            "tags": [22, 23, 36, 37, 1, 2, 21, 22]
+            "tags": [31,1,2,30]
         },
         {
             "name": "Turkey Spinach Salad with Maple Dressing",
             "description": "A vibrant salad with fresh spinach, savory turkey, walnuts, and dried cranberries.",
+            "category": "Lunch,Breakfast",
             "ingredients": [
                 "Baby spinach",
                 "Deli smoked turkey",
@@ -298,12 +313,13 @@
                 "Drizzle with maple syrup dressing.",
                 "Enjoy as a hearty lunch."
             ],
-            "tags": [1, 2, 22, 23, 37, 29, 30]
+            "tags": [1,2,31,26,25]
         },
 
         {
             "name": "Korean Beef Bulgogi Stir-Fry",
             "description": "A quick and flavorful stir-fry with thinly sliced marinated beef",
+            "category": "Lunch,Dinner",
             "ingredients": [
                 "1 pound flank steak, thinly sliced",
                 "1/4 cup soy sauce",
@@ -330,7 +346,7 @@
                 "Stir in cooked rice and heat through.",
                 "Serve garnished with sesame seeds (optional) and chopped green onions (optional)."
             ],
-            "tags": [20,23,37,29,30,31,32,35]
+            "tags": [26,25,31,10]
         }
 
 
