@@ -5,8 +5,8 @@ package org.omar.recipes.MealPlanner.entity.enums;
  *
  * @author oalfuraydi
  */
-public enum Meal {
+public enum MealType {
     BREAKFAST,
-    LANUCH,
-    DINNER,
+    LUNCH,
+    DINNER
 }

@@ -104,7 +104,7 @@ public class UserAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "ChefUser{" +
+        return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

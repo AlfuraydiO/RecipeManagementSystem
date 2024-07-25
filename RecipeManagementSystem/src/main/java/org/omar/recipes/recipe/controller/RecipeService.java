@@ -3,6 +3,7 @@ package org.omar.recipes.recipe.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import java.time.LocalDate;
 import org.omar.recipes.rating.controller.RatingService;
 import org.omar.recipes.rating.entity.Rating;
 import org.omar.recipes.recipe.boundary.requestAndResponseBodies.RecipeRequest;
@@ -18,7 +19,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +50,7 @@ public class RecipeService {
     public Recipe saveRecipe(RecipeRequest request, String email) {
         Recipe recipe = new Recipe(null, request.name(), request.description(), request.ingredients(),
             request.directions(),request.category());
-        recipe.setDate(LocalDateTime.now());
+        recipe.setDate(LocalDate.now());
         recipe.setUser(email == null ? null : userService.loadUserByEmail(email));
         Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
         if (!violations.isEmpty()) {
@@ -70,12 +70,12 @@ public class RecipeService {
     public ResponseEntity<?> updateRecipe(Long id, RecipeRequest request, String email) {
         Optional<Recipe> exists = recipeRepository.findById(id);
         if (exists.isPresent()) {
-            UserAccount chefUser = userService.loadUserByEmail(email);
+            UserAccount user = userService.loadUserByEmail(email);
             if (exists.get().getUser().getEmail().equals(email)) {
                 Recipe recipe = new Recipe(exists.get().getId(), request.name(), request.description(), request.ingredients(),
                     request.directions(),request.category());
-                recipe.setDate(LocalDateTime.now());
-                recipe.setUser(chefUser);
+                recipe.setDate(LocalDate.now());
+                recipe.setUser(user);
                 Set<ConstraintViolation<Recipe>> violations = validator.validate(recipe);
                 if (!violations.isEmpty()) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, violations.stream().map(ConstraintViolation::getMessage).toList().toString());
@@ -144,7 +144,6 @@ public class RecipeService {
     }
 
     public List<Recipe> getRecipesByTags(List<Integer> included, List<Integer> excluded) {
-       
         List<Recipe> recipes = recipeRepository.findRecipesByTagsParam(included, excluded);
         return recipes;
     }

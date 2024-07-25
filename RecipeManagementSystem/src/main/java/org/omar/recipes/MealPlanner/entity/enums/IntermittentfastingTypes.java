@@ -4,50 +4,51 @@
  */
 package org.omar.recipes.MealPlanner.entity.enums;
 
-import org.omar.recipes.MealPlanner.entity.enums.Meal;
+import org.omar.recipes.MealPlanner.entity.enums.MealType;
 import java.time.DayOfWeek;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 
 public enum IntermittentfastingTypes {
     Hours16Till8(EnumSet.allOf(DayOfWeek.class),
-        Set.of(), Set.of(Meal.LANUCH, Meal.DINNER), Set.of(),
+        Set.of(), List.of(MealType.LUNCH, MealType.DINNER), List.of(),
     "Fast for 16 hours and eat within an 8-hour window each day."),
     
     Days5OffAnd2On(EnumSet.of(DayOfWeek.MONDAY,  DayOfWeek.WEDNESDAY), 
         Set.of(DayOfWeek.TUESDAY,DayOfWeek.SATURDAY,DayOfWeek.FRIDAY,DayOfWeek.THURSDAY, DayOfWeek.SUNDAY),
-         Set.of(Meal.LANUCH, Meal.DINNER), Set.of(Meal.BREAKFAST, Meal.LANUCH, Meal.DINNER),
+         List.of(MealType.LUNCH, MealType.DINNER), List.of(MealType.BREAKFAST, MealType.LUNCH, MealType.DINNER),
     "Eat normally for 5 days and restrict calories (500-600) on 2 non-consecutive days."),
 
     AlternateDay(EnumSet.of(DayOfWeek.MONDAY,  DayOfWeek.WEDNESDAY,  DayOfWeek.FRIDAY,DayOfWeek.SUNDAY), 
         Set.of(DayOfWeek.TUESDAY,DayOfWeek.THURSDAY,DayOfWeek.SATURDAY),
-         Set.of(Meal.LANUCH, Meal.DINNER), 
-      Set.of(Meal.BREAKFAST, Meal.LANUCH, Meal.DINNER),"Fast every other day"),
+         List.of(MealType.LUNCH, MealType.DINNER), 
+      List.of(MealType.BREAKFAST, MealType.LUNCH, MealType.DINNER),"Fast every other day"),
     
     OneMealaDay(EnumSet.allOf(DayOfWeek.class), 
         Set.of(),
-         Set.of(Meal.DINNER), 
-      Set.of(),"One Large Meal a day"),
+         List.of(MealType.DINNER,MealType.DINNER), 
+      List.of(),"One Large Meal a day"),
     
      TwelveTillTwelve(EnumSet.allOf(DayOfWeek.class),
-        Set.of(), Set.of(Meal.LANUCH, Meal.DINNER), Set.of()
+        Set.of(), List.of(MealType.LUNCH, MealType.DINNER), List.of()
          ,"Fast for 12 hours and eat within a 12-hour window each day.");
      
     //Consider a set for the Number of days since we can exlicly deifned which days;
     private Set<DayOfWeek> fastingDays;
     private Set<DayOfWeek> nonFastingDays;
-    private Set<Meal> Fastingmeales;
-    private Set<Meal> nonFastingmeales;
-    private String desvribtion;
+    private List<MealType> Fastingmeales;
+    private List<MealType> nonFastingmeales;
+    private String description;
 
      
-    private IntermittentfastingTypes(Set<DayOfWeek> fastingDays, Set<DayOfWeek> nonFastingDays, Set<Meal> Fastingmeales, Set<Meal> nonFastingmeales, String desvribtion) {
+    private IntermittentfastingTypes(Set<DayOfWeek> fastingDays, Set<DayOfWeek> nonFastingDays, List<MealType> Fastingmeales, List<MealType> nonFastingmeales, String description) {
         this.fastingDays = fastingDays;
         this.nonFastingDays = nonFastingDays;
         this.Fastingmeales = Fastingmeales;
         this.nonFastingmeales = nonFastingmeales;
-        this.desvribtion = desvribtion;
+        this.description = description;
     }
 
     public Set<DayOfWeek> getFastingDays() {
@@ -66,28 +67,35 @@ public enum IntermittentfastingTypes {
         this.nonFastingDays = nonFastingDays;
     }
 
-    public Set<Meal> getFastingmeales() {
+    public List<MealType> getFastingmeales() {
         return Fastingmeales;
     }
 
-    public void setFastingmeales(Set<Meal> Fastingmeales) {
+    public void setFastingmeales(List<MealType> Fastingmeales) {
         this.Fastingmeales = Fastingmeales;
     }
 
-    public Set<Meal> getNonFastingmeales() {
+    public List<MealType> getNonFastingmeales() {
         return nonFastingmeales;
     }
 
-    public void setNonFastingmeales(Set<Meal> nonFastingmeales) {
+    public void setNonFastingmeales(List<MealType> nonFastingmeales) {
         this.nonFastingmeales = nonFastingmeales;
     }
 
-    public String getDesvribtion() {
-        return desvribtion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesvribtion(String desvribtion) {
-        this.desvribtion = desvribtion;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "IntermittentfastingTypes{" + "ordinal=" + ordinal() + ", name=" + name() + ", fastingDays=" + fastingDays + ", nonFastingDays=" + nonFastingDays + ", Fastingmeales=" + Fastingmeales + ", nonFastingmeales=" + nonFastingmeales + ", desvribtion=" + description + '}';
+    }
+    
+    
 
 }

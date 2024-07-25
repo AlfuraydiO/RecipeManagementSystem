@@ -1,5 +1,6 @@
 package org.omar.recipes.recipe.entity;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +11,7 @@ import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,6 @@ public class Recipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
     @NotBlank(message = "Recipe name needed")
     String name;
@@ -41,8 +41,8 @@ public class Recipe implements Serializable {
      @NotNull(message = "Category must not be null")
      String category;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    LocalDateTime date;
+    @Temporal(TemporalType.DATE)
+    LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
@@ -51,6 +51,7 @@ public class Recipe implements Serializable {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     // @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     //@ElementCollection
+    //@JsonIgnoreProperties(value = {"type","description","name"})
     @JoinTable(name = "RECIPE_TAGS",
             joinColumns
                     = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
@@ -62,15 +63,6 @@ public class Recipe implements Serializable {
     private double totalRating;
 
     public Recipe(Long id) {
-        this.id = id;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
         this.id = id;
     }
 
@@ -87,6 +79,14 @@ public class Recipe implements Serializable {
         this.category=category;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -119,11 +119,11 @@ public class Recipe implements Serializable {
         this.directions = directions;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -191,7 +191,14 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", ingredients=" + ingredients + ", directions=" + directions + ", category=" + category + ", date=" + date + ", tags=" + tags + ", totalRating=" + totalRating + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", category=" + category + '}';
+    }
+
+    
+    
+    @JsonGetter("tags")
+    public List<Long> getTagsList() {
+       return this.tags.stream().map(e->e.getId()).toList();
     }
     
 }
