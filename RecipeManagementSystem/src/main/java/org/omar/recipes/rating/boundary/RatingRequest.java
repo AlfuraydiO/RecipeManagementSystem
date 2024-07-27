@@ -10,6 +10,6 @@ import jakarta.validation.constraints.NotNull;
  */
 public record RatingRequest(@NotNull(message = "Recipe id is mandatory") long recipeId,
                             @Min(value = 1, message = "Rating must be larger than 0")
-                            @Max(value = 10, message = "Rating must be no larger than 10") double rating,
+                            @Max(value = 10, message = "Rating must be no larger than 10") int rating,
                             String review) {
 }

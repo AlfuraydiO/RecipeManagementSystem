@@ -93,13 +93,13 @@ public class UserAccount implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserAccount user = (UserAccount) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(authority, user.authority);
+        UserAccount that = (UserAccount) o;
+        return Objects.equals(id, that.id) && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, authority);
+        return Objects.hash(id, email);
     }
 
     @Override

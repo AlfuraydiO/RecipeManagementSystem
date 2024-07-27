@@ -8,20 +8,16 @@ import jakarta.validation.Valid;
 import java.util.List;
 import org.omar.recipes.MealPlanner.boundery.RequestAndResponseBodies.MealPlanRequest;
 import org.omar.recipes.MealPlanner.controller.MealPlannerService;
+import org.omar.recipes.MealPlanner.entity.MasterMealPlan;
 import org.omar.recipes.MealPlanner.entity.MealPlan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
- 
+
 @RestController
-@RequestMapping("api/mealplanner/")
+@RequestMapping("api/mealplanner")
 public class MealPlannerController {
     
     MealPlannerService mealPlannerService;
@@ -30,29 +26,22 @@ public class MealPlannerController {
         this.mealPlannerService = mealPlannerService;
     }
     
-    @GetMapping(value = "/", produces = "application/json")
-    public ResponseEntity RequestMealPlan(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid MealPlanRequest mealPlanRequest) {
-        List<MealPlan> mealPlan = mealPlannerService.RequestPlan(userDetails.getUsername(), mealPlanRequest);
-        return ResponseEntity.ok(mealPlan);
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity RequestMasterMealPla(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid MealPlanRequest mealPlanRequest) {
+        MasterMealPlan masterMealPlan = mealPlannerService.RequestPlan(userDetails.getUsername(), mealPlanRequest);
+        return ResponseEntity.ok(masterMealPlan);
     }
     
-    @DeleteMapping(value = "/", produces = "application/json")
-    public ResponseEntity CancenlPlan(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid  List<MealPlan> mealPlanList) {
-    
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity CancenlMasterMealPla(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long id) {
+        mealPlannerService.cancelMasterMealPlan(userDetails.getUsername(), id);
         return ResponseEntity.ok().build();
     }
     
       @GetMapping(value = "/{id}/", produces = "application/json")
-    public ResponseEntity GetMealPlan(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid MealPlanRequest mealPlanRequest) {
-        List<MealPlan> mealPlan = mealPlannerService.RequestPlan(userDetails.getUsername(), mealPlanRequest);
-        return ResponseEntity.ok(mealPlan);
+    public ResponseEntity GetMasterMealPlan(@AuthenticationPrincipal UserDetails userDetails,  @PathVariable long id) {
+        MasterMealPlan masterMealPlan = mealPlannerService.getMasterPlan(userDetails.getUsername(), id);
+        return ResponseEntity.ok(masterMealPlan);
     }
-    
-      @PostMapping(value = "/{id}/", produces = "application/json")
-    public ResponseEntity EditMealPlan(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid MealPlanRequest mealPlanRequest) {
-       // List<MealPlan> mealPlan = mealPlannerService.RequestPlan(userDetails.getUsername(), mealPlanRequest);
-        return ResponseEntity.ok().build();
-    }
-    
-   
+
 }

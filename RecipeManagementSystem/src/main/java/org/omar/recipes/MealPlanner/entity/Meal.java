@@ -6,17 +6,8 @@ package org.omar.recipes.MealPlanner.entity;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +29,7 @@ public class Meal {
     @Enumerated(EnumType.STRING)
     private MealType mealType;
     
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinTable(name = "MEAL_RECIPE",
             inverseJoinColumns 
                     = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),

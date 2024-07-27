@@ -1,7 +1,6 @@
 
 package org.omar.recipes.MealPlanner.controller;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +16,9 @@ import org.omar.recipes.recipe.controller.RecipeService;
 import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.users.controller.UserAccountService;
 import org.omar.recipes.users.entity.UserAccount;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  *
@@ -27,29 +28,32 @@ import org.springframework.stereotype.Service;
 public class MealPlannerService {
 
     RecipeService recipeService;
-    MealPlanRepository mealPlanRepository;
-    UserAccountService userAccountService;
 
-    public MealPlannerService(RecipeService recipeService, MealPlanRepository mealPlanRepository, UserAccountService userAccountService) {
+    UserAccountService userAccountService;
+    MasterMealPlanRepository masterMealPlanRepository;
+
+    public MealPlannerService(RecipeService recipeService, UserAccountService userAccountService, MasterMealPlanRepository masterMealPlanRepository) {
         this.recipeService = recipeService;
-        this.mealPlanRepository = mealPlanRepository;
         this.userAccountService = userAccountService;
+        this.masterMealPlanRepository = masterMealPlanRepository;
     }
 
-    public List<MealPlan> RequestPlan(String userEmail, MealPlanRequest mealPlanRequest) {
+    public MasterMealPlan RequestPlan(String userEmail, MealPlanRequest mealPlanRequest) {
         System.err.println(mealPlanRequest.intermittentfastingType());
         IntermittentfastingTypes intermittentfastingType = mealPlanRequest.intermittentfastingType();
 
-        List<MealPlan> mealPlanDays = new ArrayList<>();
+
 
         List<Recipe> recipesByTags = recipeService.getRecipesByTags(mealPlanRequest.included(), mealPlanRequest.excluded());
         UserAccount user = userAccountService.loadUserByEmail(userEmail);
         LocalDate date = mealPlanRequest.startingDate();
         LocalDate lastdate = date.plusWeeks(mealPlanRequest.numberOfweeks());
+        MasterMealPlan masterMealPlan=new MasterMealPlan();
+
         do {
             MealPlan mealPlanADay = new MealPlan();
             mealPlanADay.setDate(date);
-            mealPlanADay.setNotes(intermittentfastingType.getDescription());
+
             if (intermittentfastingType.getFastingDays().contains(date.getDayOfWeek())) {
                 if (!intermittentfastingType.getFastingmeales().isEmpty()) {
                     for (MealType mealtype : intermittentfastingType.getFastingmeales()) {
@@ -63,7 +67,7 @@ public class MealPlannerService {
                             .findAny();
                         System.err.println("findAnyrecipe " + findAnyrecipe);
                         if (findAnyrecipe.isEmpty()) {
-                            throw new RuntimeException("No meal found for plan");
+                            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No recipes Found for requested Plan");
                         } else {
                             if (findAnyrecipe.isPresent()) {
                                 System.out.println("Recipes chose for meal " + meal + " Day " + date.getDayOfWeek() + " Recipe " + findAnyrecipe.get());
@@ -90,7 +94,7 @@ public class MealPlannerService {
                             .findAny();
                         System.err.println("findAnyrecipe" + findAnyrecipe);
                         if (findAnyrecipe.isEmpty() && mealPlanADay.getMeals().isEmpty()) {
-                            throw new RuntimeException("No meal found for plan");
+                            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No recipes Found for requested Plan");
                         } else {
                             if (findAnyrecipe.isPresent()) {
                                 System.out.println("Recipes chose for meal " + meal + " Day " + date.getDayOfWeek() + " Recipe " + findAnyrecipe.get());
@@ -103,17 +107,13 @@ public class MealPlannerService {
                 }
             }
             date = date.plusDays(1);
-            mealPlanDays.add(mealPlanADay);
-            System.out.println("Day "+mealPlanDays.size()+" Date "+date);
-            //this.mealPlanRepository.save(mealPlanADay);
-
+            masterMealPlan.addMealPlan(mealPlanADay);
         } while (date.isBefore(lastdate));
-        MasterMealPlan masterMealPlan=new MasterMealPlan();
-        masterMealPlan.setMealPlans(mealPlanDays);
-        masterMealPlan.setUserAccount(user);
-        System.out.println("-----------");
 
-        return mealPlanDays;
+        masterMealPlan.setUserAccount(user);
+        masterMealPlan.setNotes(intermittentfastingType.getDescription());
+        System.out.println("-----------");
+        return this.masterMealPlanRepository.save(masterMealPlan);
 
     }
 
@@ -122,9 +122,31 @@ public class MealPlannerService {
 
     }
 
-    public void cancelMealPlan() {
-
+    public MasterMealPlan getMasterPlan(String username, long masterPlanId) {
+        UserAccount user = userAccountService.loadUserByEmail(username);
+        Optional<MasterMealPlan> byId = this.masterMealPlanRepository.findById(masterPlanId);
+        if(byId.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plan not Found");
+        }else{
+            if (byId.get().getUserAccount().equals(user)){
+                return byId.get();
+            }else{
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are Unauthorized to view this plan ");
+            }
+        }
     }
 
-
+    public void cancelMasterMealPlan(String username, long masterPlanId) {
+        UserAccount user = userAccountService.loadUserByEmail(username);
+        Optional<MasterMealPlan> byId = this.masterMealPlanRepository.findById(masterPlanId);
+        if(byId.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plan not Found");
+        }else{
+            if (byId.get().getUserAccount().equals(user)){
+                this.masterMealPlanRepository.delete(byId.get());
+            }else{
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are Unauthorized to cancel this plan ");
+            }
+        }
+    }
 }

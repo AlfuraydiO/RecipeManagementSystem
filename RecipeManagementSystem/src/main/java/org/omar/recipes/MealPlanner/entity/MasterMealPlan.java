@@ -17,12 +17,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.omar.recipes.MealPlanner.entity.enums.MealType;
 import org.omar.recipes.users.entity.UserAccount;
 
-/**
- *
- * @author oalfuraydi
- */
+
 @Entity
 public class MasterMealPlan {
 
@@ -37,6 +36,8 @@ public class MasterMealPlan {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private UserAccount userAccount;
+
+    private String Notes;
 
     public MasterMealPlan() {
     }
@@ -59,6 +60,14 @@ public class MasterMealPlan {
         this.mealPlans = mealPlans;
     }
 
+    public void addMealPlan(MealPlan mealPlan){
+        mealPlans.add(mealPlan);
+        mealPlan.setMasterMealPlan(this);
+    }
+    public void removeMealPlan(MealPlan mealPlan){
+        mealPlans.remove(mealPlan);
+        mealPlan.setMasterMealPlan(null);
+    }
     public UserAccount getUserAccount() {
         return userAccount;
     }
@@ -66,6 +75,13 @@ public class MasterMealPlan {
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
     }
-    
+
+    public String getNotes() {
+        return Notes;
+    }
+
+    public void setNotes(String Notes) {
+        this.Notes = Notes;
+    }
 
 }

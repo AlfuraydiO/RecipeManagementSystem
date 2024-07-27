@@ -6,6 +6,4 @@ import org.omar.recipes.MealPlanner.entity.MealPlan;
 
 public interface MealPlanRepository extends CrudRepository<MealPlan, Long> {
 
-    
-    
 }

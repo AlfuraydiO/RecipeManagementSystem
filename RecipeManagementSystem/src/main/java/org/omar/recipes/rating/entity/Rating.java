@@ -32,7 +32,7 @@ public class Rating implements Serializable {
     private Recipe recipe;
 
     @NotNull
-    private Double recipeRating;
+    private int recipeRating;
 
     private LocalDateTime localDateTime;
 
@@ -42,7 +42,7 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(UserAccount userAccount, Recipe recipe, Double recipeRating, LocalDateTime localDateTime, String review) {
+    public Rating(UserAccount userAccount, Recipe recipe, int recipeRating, LocalDateTime localDateTime, String review) {
         this.userAccount = userAccount;
         this.recipe = recipe;
         this.recipeRating = recipeRating;
@@ -74,11 +74,11 @@ public class Rating implements Serializable {
         this.recipe = recipe;
     }
 
-    public Double getRecipeRating() {
+    public int getRecipeRating() {
         return recipeRating;
     }
 
-    public void setRecipeRating(Double recipeRating) {
+    public void setRecipeRating(int recipeRating) {
         this.recipeRating = recipeRating;
     }
 

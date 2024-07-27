@@ -1,5 +1,7 @@
 package org.omar.recipes.MealPlanner.entity;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,21 +31,17 @@ public class MealPlan {
     
     @ManyToOne
     @JoinColumn(name = "master_id")
-    MasterMealPlan masterMealPlan;
- 
+    MasterMealPlan masterMealPlan=new MasterMealPlan();
 
     @OneToMany(mappedBy = "mealPlan", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Meal> meals = new ArrayList<>();
 
-    private String Notes;
-
     public MealPlan() {
     }
 
-    public MealPlan(Long id, LocalDate date, String Notes) {
+    public MealPlan(Long id, LocalDate date) {
         this.id = id;
         this.date = date;
-        this.Notes = Notes;
     }
 
     public Long getId() {
@@ -62,13 +60,7 @@ public class MealPlan {
         this.date = date;
     }
  
-    public String getNotes() {
-        return Notes;
-    }
 
-    public void setNotes(String Notes) {
-        this.Notes = Notes;
-    }
 
     public List<Meal> getMeals() {
         return meals;
@@ -102,10 +94,18 @@ public class MealPlan {
 
     @Override
     public String toString() {
-        return "MealPlan{" + "id=" + id + ", date=" + date + ", masterMealPlan=" + masterMealPlan + ", meals=" + meals + ", Notes=" + Notes + '}';
+        return "MealPlan{" + "id=" + id + ", date=" + date + ", masterMealPlan=" + masterMealPlan + ", meals=" + meals +'}';
     }
-    
-    
+
+    @JsonGetter("masterMealPlan")
+    public long getMasterMealPlanId() {
+        return this.masterMealPlan.getId();
+    }
+
+    @JsonSetter("masterMealPlan")
+    public void getMasterMealPlanId(long id) {
+         this.masterMealPlan.setId(id);
+    }
 
     @Override
     public int hashCode() {
