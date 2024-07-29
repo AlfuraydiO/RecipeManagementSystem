@@ -34,8 +34,8 @@ public class MealPlannerController {
     
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity CancenlMasterMealPla(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long id) {
-        mealPlannerService.cancelMasterMealPlan(userDetails.getUsername(), id);
-        return ResponseEntity.ok().build();
+        return mealPlannerService.cancelMasterMealPlan(userDetails.getUsername(), id);
+
     }
     
       @GetMapping(value = "/{id}/", produces = "application/json")

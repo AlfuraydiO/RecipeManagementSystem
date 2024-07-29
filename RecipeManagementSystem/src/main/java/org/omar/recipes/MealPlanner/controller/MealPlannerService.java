@@ -2,7 +2,6 @@
 package org.omar.recipes.MealPlanner.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +16,7 @@ import org.omar.recipes.recipe.entity.Recipe;
 import org.omar.recipes.users.controller.UserAccountService;
 import org.omar.recipes.users.entity.UserAccount;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -136,7 +136,7 @@ public class MealPlannerService {
         }
     }
 
-    public void cancelMasterMealPlan(String username, long masterPlanId) {
+    public ResponseEntity<Object> cancelMasterMealPlan(String username, long masterPlanId) {
         UserAccount user = userAccountService.loadUserByEmail(username);
         Optional<MasterMealPlan> byId = this.masterMealPlanRepository.findById(masterPlanId);
         if(byId.isEmpty()){
@@ -144,6 +144,7 @@ public class MealPlannerService {
         }else{
             if (byId.get().getUserAccount().equals(user)){
                 this.masterMealPlanRepository.delete(byId.get());
+                return ResponseEntity.noContent().build();
             }else{
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are Unauthorized to cancel this plan ");
             }

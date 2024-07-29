@@ -32,7 +32,7 @@ public class MasterMealPlan {
     @OneToMany(mappedBy = "masterMealPlan", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<MealPlan> mealPlans = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private UserAccount userAccount;

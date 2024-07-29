@@ -1,5 +1,6 @@
 package org.omar.recipes.MealPlanner.controller;
 
+import jakarta.transaction.Transactional;
 import org.omar.recipes.MealPlanner.entity.MasterMealPlan;
 import org.omar.recipes.MealPlanner.entity.Meal;
 import org.omar.recipes.MealPlanner.entity.MealPlan;
@@ -30,14 +31,17 @@ public class MealService {
         this.masterMealPlanRepository = masterMealPlanRepository;
         this.recipeRepository = recipeRepository;
     }
-
+    @Transactional
     public ResponseEntity removeMeal(String email, long id){
          //UserAccount userAccount = userAccountService.loadUserByEmail(email);
         Optional<MealPlan> mealPlamByid = mealPlanRepository.findById(id);
         if (mealPlamByid.isPresent()){
-            if(mealPlamByid.get().getMasterMealPlan().getUserAccount().getEmail().equals(email)){
+            MealPlan mealPlan = mealPlamByid.get();
+            if(mealPlan.getMasterMealPlan().getUserAccount().getEmail().equals(email)){
                 try {
-                    mealPlanRepository.delete(mealPlamByid.get());
+
+                    mealPlanRepository.deleteById(mealPlan.getId());
+
                     return ResponseEntity.noContent().build();
                 }catch (Exception e){
                     throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getLocalizedMessage());
@@ -51,9 +55,6 @@ public class MealService {
         }
     }
 
-    public void editMeal(){
-
-    }
 
     public MealPlan getMeal(String email,long id){
        // UserAccount userAccount = userAccountService.loadUserByEmail(email);
@@ -71,27 +72,27 @@ public class MealService {
     }
 
     //Fix
+    @Transactional
     public ResponseEntity<Object> editMealPlan(String email, long id, MealPlan mealPlan) {
         UserAccount userAccount = userAccountService.loadUserByEmail(email);
         Optional<MealPlan> mealPlamByid = mealPlanRepository.findById(id);
         if (mealPlamByid.isPresent()){
-            MealPlan plan = mealPlamByid.get();
+            MealPlan planByid = mealPlamByid.get();
             Optional<MasterMealPlan> optionalMasterMealPlan = masterMealPlanRepository.findById(mealPlan.getMasterMealPlanId());
 
             if(optionalMasterMealPlan.isPresent()){
-                if(optionalMasterMealPlan.get().getUserAccount().equals(userAccount)){
-                    mealPlan.setMasterMealPlan(optionalMasterMealPlan.get());
-                }else{
+                if (!optionalMasterMealPlan.get().getUserAccount().equals(userAccount)) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Incorrect master plan id"+mealPlan.getMasterMealPlanId());
                 }
             }else{
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No meal Plan percent with this master plan id "+id);
             }
-            if(plan.getMasterMealPlan().getUserAccount().getEmail().equals(email)){
+            if(planByid.getMasterMealPlan().getUserAccount().getEmail().equals(email)){
                 try {
-                    plan.setMasterMealPlan(optionalMasterMealPlan.get());
+                    planByid.setMasterMealPlan(optionalMasterMealPlan.get());
+                    planByid.getMeals().clear();
                     //here?
-                    for(Meal meal:plan.getMeals()){
+                    for(Meal meal:mealPlan.getMeals()){
                         Set<Recipe> recipes = new HashSet<>();
                         for(Recipe recipe:meal.getRecipes().stream().toList()){
                             Optional<Recipe> optionalRecipe = this.recipeRepository.findById(recipe.getId());
@@ -102,9 +103,10 @@ public class MealService {
                             }
                         }
                         meal.setRecipes(recipes);
+                        planByid.addMeals(meal);
                     }
 
-                    mealPlanRepository.save(plan);
+                    mealPlanRepository.save(planByid);
                     return ResponseEntity.noContent().build();
                 }catch (Exception e){
                     throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getLocalizedMessage());

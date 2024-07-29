@@ -12,13 +12,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.omar.recipes.MealPlanner.entity.enums.MealType;
 import org.omar.recipes.recipe.entity.Recipe;
 
-/**
- *
- * @author oalfuraydi
- */
+
 @Entity
 public class Meal {
 
@@ -27,6 +28,7 @@ public class Meal {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private MealType mealType;
     
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
@@ -37,7 +39,7 @@ public class Meal {
                     = @JoinColumn(name = "MEAL_ID", referencedColumnName = "ID"))
     private Set<Recipe> recipes = new HashSet<>();
     
-    @ManyToOne
+    @ManyToOne()
     @JsonIgnore
     private MealPlan mealPlan;
 

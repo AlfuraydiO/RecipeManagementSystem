@@ -17,6 +17,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.omar.recipes.recipe.entity.Recipe;
  
 @Entity
@@ -33,16 +36,12 @@ public class MealPlan {
     @JoinColumn(name = "master_id")
     MasterMealPlan masterMealPlan=new MasterMealPlan();
 
-    @OneToMany(mappedBy = "mealPlan", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mealPlan", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Meal> meals = new ArrayList<>();
 
     public MealPlan() {
     }
 
-    public MealPlan(Long id, LocalDate date) {
-        this.id = id;
-        this.date = date;
-    }
 
     public Long getId() {
         return id;
@@ -108,34 +107,15 @@ public class MealPlan {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.date);
-        hash = 67 * hash + Objects.hashCode(this.masterMealPlan);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MealPlan mealPlan = (MealPlan) o;
+        return Objects.equals(id, mealPlan.id) && Objects.equals(date, mealPlan.date) && Objects.equals(masterMealPlan, mealPlan.masterMealPlan);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final MealPlan other = (MealPlan) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        return Objects.equals(this.masterMealPlan, other.masterMealPlan);
+    public int hashCode() {
+        return Objects.hash(id, date, masterMealPlan);
     }
-     
-     
 }
