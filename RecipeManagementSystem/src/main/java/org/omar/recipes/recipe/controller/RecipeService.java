@@ -1,6 +1,6 @@
 package org.omar.recipes.recipe.controller;
 
-import jakarta.transaction.Transactional;
+ import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import java.time.LocalDate;
@@ -21,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import org.springframework.cache.annotation.Cacheable;
 
 @Service
 @Transactional
@@ -38,7 +39,7 @@ public class RecipeService {
         this.tagService = tagService;
         this.validator = validator;
     }
-
+    
     public Optional<Recipe> getRecipeById(long id) {
         return recipeRepository.findById(id);
     }

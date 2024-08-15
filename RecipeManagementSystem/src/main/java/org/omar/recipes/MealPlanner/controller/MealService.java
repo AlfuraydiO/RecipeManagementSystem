@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import static org.omar.recipes.MealPlanner.controller.MealPlanSpecs.*;
 
 @Service
 public class MealService {
@@ -31,42 +33,45 @@ public class MealService {
         this.masterMealPlanRepository = masterMealPlanRepository;
         this.recipeRepository = recipeRepository;
     }
-    @Transactional
-    public ResponseEntity removeMeal(String email, long id){
-         //UserAccount userAccount = userAccountService.loadUserByEmail(email);
-        Optional<MealPlan> mealPlamByid = mealPlanRepository.findById(id);
-        if (mealPlamByid.isPresent()){
-            MealPlan mealPlan = mealPlamByid.get();
-            if(mealPlan.getMasterMealPlan().getUserAccount().getEmail().equals(email)){
-                try {
 
-                    mealPlanRepository.deleteById(mealPlan.getId());
+    @Transactional
+    public ResponseEntity removeMeal(String email, long id) {
+        //UserAccount userAccount = userAccountService.loadUserByEmail(email);
+        Optional<MealPlan> mealPlamByid = mealPlanRepository.findById(id);
+        if (mealPlamByid.isPresent()) {
+            MealPlan mealPlan = mealPlamByid.get();
+            if (mealPlan.getMasterMealPlan().getUserAccount().getEmail().equals(email)) {
+                try {
+                    //Handel error
+                    MasterMealPlan masterMealPlan = this.masterMealPlanRepository.findById(mealPlan.getMasterMealPlanId()).get();
+                    masterMealPlan.getMealPlans().remove(mealPlan);
+                    masterMealPlanRepository.save(masterMealPlan);
+                    mealPlanRepository.delete(mealPlan);
 
                     return ResponseEntity.noContent().build();
-                }catch (Exception e){
-                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getLocalizedMessage());
+                } catch (Exception e) {
+                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
                 }
 
-            }else{
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"You are not authorized to delete this meal plan "+id);
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not authorized to delete this meal plan " + id);
             }
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No meal Plan percent with this id "+id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No meal Plan percent with this id " + id);
         }
     }
 
-
-    public MealPlan getMeal(String email,long id){
-       // UserAccount userAccount = userAccountService.loadUserByEmail(email);
+    public MealPlan getMeal(String email, long id) {
+        // UserAccount userAccount = userAccountService.loadUserByEmail(email);
         Optional<MealPlan> mealPlamByid = mealPlanRepository.findById(id);
-        if (mealPlamByid.isPresent()){
-            if(mealPlamByid.get().getMasterMealPlan().getUserAccount().getEmail().equals(email)){
-                return  mealPlamByid.get();
-            }else{
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"You are not authorized to view this meal plan "+id);
+        if (mealPlamByid.isPresent()) {
+            if (mealPlamByid.get().getMasterMealPlan().getUserAccount().getEmail().equals(email)) {
+                return mealPlamByid.get();
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not authorized to view this meal plan " + id);
             }
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No meal Plan percent with this id "+id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No meal Plan percent with this id " + id);
         }
 
     }
@@ -76,30 +81,30 @@ public class MealService {
     public ResponseEntity<Object> editMealPlan(String email, long id, MealPlan mealPlan) {
         UserAccount userAccount = userAccountService.loadUserByEmail(email);
         Optional<MealPlan> mealPlamByid = mealPlanRepository.findById(id);
-        if (mealPlamByid.isPresent()){
+        if (mealPlamByid.isPresent()) {
             MealPlan planByid = mealPlamByid.get();
             Optional<MasterMealPlan> optionalMasterMealPlan = masterMealPlanRepository.findById(mealPlan.getMasterMealPlanId());
 
-            if(optionalMasterMealPlan.isPresent()){
+            if (optionalMasterMealPlan.isPresent()) {
                 if (!optionalMasterMealPlan.get().getUserAccount().equals(userAccount)) {
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Incorrect master plan id"+mealPlan.getMasterMealPlanId());
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect master plan id" + mealPlan.getMasterMealPlanId());
                 }
-            }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No meal Plan percent with this master plan id "+id);
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No meal Plan percent with this master plan id " + id);
             }
-            if(planByid.getMasterMealPlan().getUserAccount().getEmail().equals(email)){
+            if (planByid.getMasterMealPlan().getUserAccount().getEmail().equals(email)) {
                 try {
                     planByid.setMasterMealPlan(optionalMasterMealPlan.get());
                     planByid.getMeals().clear();
                     //here?
-                    for(Meal meal:mealPlan.getMeals()){
+                    for (Meal meal : mealPlan.getMeals()) {
                         Set<Recipe> recipes = new HashSet<>();
-                        for(Recipe recipe:meal.getRecipes().stream().toList()){
+                        for (Recipe recipe : meal.getRecipes().stream().toList()) {
                             Optional<Recipe> optionalRecipe = this.recipeRepository.findById(recipe.getId());
-                            if(optionalRecipe.isPresent()){
+                            if (optionalRecipe.isPresent()) {
                                 recipes.add(optionalRecipe.get());
-                            }else{
-                                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Recipe not found");
+                            } else {
+                                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found");
                             }
                         }
                         meal.setRecipes(recipes);
@@ -108,14 +113,25 @@ public class MealService {
 
                     mealPlanRepository.save(planByid);
                     return ResponseEntity.noContent().build();
-                }catch (Exception e){
-                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getLocalizedMessage());
+                } catch (Exception e) {
+                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
                 }
-            }else{
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"You are not authorized to edit this meal plan "+id);
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not authorized to edit this meal plan " + id);
             }
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No meal Plan percent with this id "+id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No meal Plan percent with this id " + id);
         }
+    }
+
+    public List<MealPlan> getAheadeal(String email,int days) {
+        // UserAccount userAccount = userAccountService.loadUserByEmail(email);
+        List<MealPlan> mealPlamByspec = mealPlanRepository.findAll(DaysAhead(days));
+        if (!mealPlamByspec.isEmpty()) {
+            return mealPlamByspec;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No meal Plan percent with this id ");
+        }
+
     }
 }

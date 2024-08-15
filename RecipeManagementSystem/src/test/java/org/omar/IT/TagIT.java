@@ -4,29 +4,19 @@
  */
 package org.omar.IT;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.omar.recipes.RecipesApplication;
-import org.omar.recipes.rating.boundary.RatingRequest;
-import org.omar.recipes.rating.entity.Rating;
 import org.omar.recipes.recipe.entity.Tag;
 import org.omar.recipes.users.boundary.RegistrationRequest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(

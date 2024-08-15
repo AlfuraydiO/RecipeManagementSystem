@@ -1,4 +1,4 @@
-package org.omar.recipes.startupconfig;
+package org.omar.recipes.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.omar.recipes.rating.controller.RatingService;
