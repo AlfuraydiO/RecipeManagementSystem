@@ -1,3 +1,5 @@
 /RecipeManagementSystem/build/
 .*
 */target/*
+target
+build
