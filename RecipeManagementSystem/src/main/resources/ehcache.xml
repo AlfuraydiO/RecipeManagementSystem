@@ -17,7 +17,7 @@
         </expiry>
         <listeners>
             <listener>
-                <class>org.omar.recipes.config.CacheEventLogger</class>
+                <class>org.omar.recipemanagementsystem.config.CacheEventLogger</class>
                 <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
                 <event-ordering-mode>UNORDERED</event-ordering-mode>
                 <events-to-fire-on>CREATED</events-to-fire-on>
@@ -33,13 +33,13 @@
     
     <cache alias="tagCache"> 
         <key-type>java.lang.String</key-type>
-        <value-type>org.omar.recipes.recipe.entity.Tag</value-type>
+        <value-type>org.omar.recipemanagementsystem.recipe.entity.Tag</value-type>
         <expiry>
             <ttl unit="seconds">10000</ttl>
         </expiry>
         <listeners>
             <listener>
-                <class>org.omar.recipes.config.CacheEventLogger</class>
+                <class>org.omar.recipemanagementsystem.config.CacheEventLogger</class>
                 <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
                 <event-ordering-mode>UNORDERED</event-ordering-mode>
                 <events-to-fire-on>CREATED</events-to-fire-on>

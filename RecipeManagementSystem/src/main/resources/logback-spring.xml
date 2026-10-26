@@ -51,7 +51,7 @@
                         "timestamp": "@timestamp",
                         "severity": "%level",
                         "service": "${springAppName:-}",
-                        "trace": "%X{traceId:-}",
+                        "request-id": "%X{request-id:-}",
                         "span": "%X{spanId:-}",
                         "pid": "${PID:-}",
                         "thread": "%thread",
@@ -65,8 +65,6 @@
     </appender>
     <root level="INFO">
         <appender-ref ref="console"/>
-        <!-- uncomment this to have also JSON logs -->
-
         <appender-ref ref="flatfile"/>
     </root>
 </configuration>

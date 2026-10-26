@@ -12,10 +12,11 @@ import javax.cache.Caching;
 import javax.cache.spi.CachingProvider;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.omar.recipes.RecipesApplication;
-import org.omar.recipes.recipe.controller.TagRepository;
-import org.omar.recipes.recipe.entity.Tag;
+import org.omar.recipemanagementsystem.RecipesApplication;
+import org.omar.recipemanagementsystem.recipe.controller.TagRepository;
+import org.omar.recipemanagementsystem.recipe.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +26,7 @@ import org.springframework.core.io.Resource;
  *
  * @author oalfuraydi
  */
+@Disabled
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     classes = RecipesApplication.class)

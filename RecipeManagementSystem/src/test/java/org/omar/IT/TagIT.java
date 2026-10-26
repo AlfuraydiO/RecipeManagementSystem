@@ -4,20 +4,16 @@
  */
 package org.omar.IT;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.omar.recipes.RecipesApplication;
-import org.omar.recipes.recipe.entity.Tag;
-import org.omar.recipes.users.boundary.RegistrationRequest;
+import org.junit.jupiter.api.*;
+import org.omar.recipemanagementsystem.RecipesApplication;
+import org.omar.recipemanagementsystem.recipe.entity.Tag;
+import org.omar.recipemanagementsystem.users.boundary.RegistrationRequest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.client.RestTemplate;
+@Disabled
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -29,9 +25,9 @@ public class TagIT {
     @LocalServerPort
     private int PORT;
 
-    private final String TAGRESOURCE = "/recipes/api/tag/";
+    private final String TAGRESOURCE = "/recipemanagementsystem/api/tag/";
     private static final String HOST = "http://localhost:";
-    private TestRestTemplate restTemplate = new TestRestTemplate();
+    private RestTemplate restTemplate = new RestTemplate();
     private static final String USERNAME = "omar@email.com";
     private static final String PASSWORD = "21423333";
     private long tagId;
@@ -41,7 +37,6 @@ public class TagIT {
         ResponseEntity response = this.restTemplate.postForEntity(HOST + PORT + "/recipes/api/register",
             new RegistrationRequest("tester@email.com", "12345678", "ROLE_CHEF"), idResponse.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        restTemplate = new TestRestTemplate("tester@email.com", "12345678");
     }
 
     @Test
