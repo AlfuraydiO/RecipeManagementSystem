@@ -17,110 +17,101 @@ import jakarta.validation.constraints.NotNull;
 import org.omar.recipemanagementsystem.MealPlanner.entity.enums.MealType;
 import org.omar.recipemanagementsystem.recipe.entity.Recipe;
 
-
 @Entity
 public class Meal {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private MealType mealType;
-    
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinTable(name = "MEAL_RECIPE",
-            inverseJoinColumns 
-                    = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
-            joinColumns
-                    = @JoinColumn(name = "MEAL_ID", referencedColumnName = "ID"))
-    private Set<Recipe> recipes = new HashSet<>();
-    
-    @ManyToOne()
-    @JsonIgnore
-    private MealPlan mealPlan;
+  @Enumerated(EnumType.STRING)
+  @NotNull
+  private MealType mealType;
 
-    public Meal() {
-    }
+  @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+  @JoinTable(name = "MEAL_RECIPE", inverseJoinColumns = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"), joinColumns = @JoinColumn(name = "MEAL_ID", referencedColumnName = "ID"))
+  private Set<Recipe> recipes = new HashSet<>();
 
-    public Long getId() {
-        return id;
-    }
+  @ManyToOne()
+  @JsonIgnore
+  private MealPlan mealPlan;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Meal() {
+  }
 
-    public MealType getMealType() {
-        return mealType;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setMealType(MealType mealType) {
-        this.mealType = mealType;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
+  public MealType getMealType() {
+    return mealType;
+  }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
-    
-     public void addRecipes(Recipe r) {
-        this.recipes.add(r);
-    }
-     
-     public void removeRecipes(Recipe r) {
-        this.recipes.remove(r);
-    }
+  public void setMealType(MealType mealType) {
+    this.mealType = mealType;
+  }
 
-    public MealPlan getMealPlan() {
-        return mealPlan;
-    }
+  public Set<Recipe> getRecipes() {
+    return recipes;
+  }
 
-    public void setMealPlan(MealPlan mealPlan) {
-        this.mealPlan = mealPlan;
-    }
+  public void setRecipes(Set<Recipe> recipes) {
+    this.recipes = recipes;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.mealType);
-        return hash;
-    }
+  public void addRecipes(Recipe r) {
+    this.recipes.add(r);
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Meal other = (Meal) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return this.mealType == other.mealType;
-    }
-    
-    @JsonGetter("recipemanagementsystem")
-    public List<Long> getRecipesList() {
-       return this.recipes.stream().map(e->e.getId()).toList();
-    }
+  public void removeRecipes(Recipe r) {
+    this.recipes.remove(r);
+  }
 
-    @Override
-    public String toString() {
-        return "Meal{" + "id=" + id + ", mealType=" + mealType + ", recipemanagementsystem=" + recipes + '}';
+  public MealPlan getMealPlan() {
+    return mealPlan;
+  }
+
+  public void setMealPlan(MealPlan mealPlan) {
+    this.mealPlan = mealPlan;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 3;
+    hash = 53 * hash + Objects.hashCode(this.id);
+    hash = 53 * hash + Objects.hashCode(this.mealType);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-    
-    
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Meal other = (Meal) obj;
+    if (!Objects.equals(this.id, other.id)) {
+      return false;
+    }
+    return this.mealType == other.mealType;
+  }
 
+  @JsonGetter("recipemanagementsystem")
+  public List<Long> getRecipesList() {
+    return this.recipes.stream().map(e -> e.getId()).toList();
+  }
 
+  @Override
+  public String toString() {
+    return "Meal{" + "id=" + id + ", mealType=" + mealType + ", recipemanagementsystem=" + recipes + '}';
+  }
 }

@@ -26,7 +26,7 @@ public class UserAccountService implements UserDetailsService {
 
     private final UserAccountRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private Validator validator;
+    private final Validator validator;
 
     private static final Logger LOG = Logger.getLogger(UserAccountService.class.getName());
 
@@ -44,7 +44,7 @@ public class UserAccountService implements UserDetailsService {
     public ResponseEntity<String> saveUser(RegistrationRequest request) {
         Optional<UserAccount> userByEmail = userRepository.findUserByEmail(request.email());
         if (userByEmail.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No user exsit with provided Email");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No user exist with provided Email");
         }
         var user = new UserAccount();
         user.setEmail(request.email());
@@ -99,7 +99,7 @@ public class UserAccountService implements UserDetailsService {
     public ResponseEntity<String> saveNewUser(RegistrationRequest request) {
         Optional<UserAccount> userByEmail = userRepository.findUserByEmail(request.email());
         if (userByEmail.isPresent()) {
-            LOG.warning("Email Already exists");
+            LOG.severe("Email Already exists");
             return ResponseEntity.badRequest().body("Email already exists");
 
         }
@@ -130,6 +130,6 @@ public class UserAccountService implements UserDetailsService {
         return  ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/api/user/{id}")
                 .buildAndExpand(id)
-                .toUriString();
+                .getPath();
     }
 }

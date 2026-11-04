@@ -11,4 +11,5 @@ public record ResponseRecipe(long id, String href,
                              String name,
                              String description, String category, List<String> instructions, List<String>ingredients, LocalDate date,
                              UserAccountHref createdBy,
-                             List<TagHref> tags){}
+                             List<TagHref> tags,
+                             String avrReview){}

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MealPlanner-backend" />
+        <module name="RecipeManagementSystem" />
         <module name="MealPlanner-frontend" />
       </profile>
     </annotationProcessing>
@@ -18,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MealPlanner-backend" options="-parameters" />
       <module name="MealPlanner-frontend" options="-parameters" />
+      <module name="RecipeManagementSystem" options="-parameters" />
     </option>
   </component>
 </project>

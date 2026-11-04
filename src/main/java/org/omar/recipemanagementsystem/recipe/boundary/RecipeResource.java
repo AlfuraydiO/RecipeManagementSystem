@@ -21,7 +21,7 @@ import java.util.List;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(value = "api/recipe", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/recipe", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RecipeResource {
 
   private static final Logger log = LoggerFactory.getLogger(RecipeResource.class);
@@ -33,19 +33,18 @@ public class RecipeResource {
     this.applicationContext = applicationContext;
   }
 
-
   @GetMapping("{id}")
   public ResponseEntity<ResponseRecipe> getRecipe(@PathVariable Long id) {
-    log.info("name " + id);
     return recipeService.getRecipeById(id);
-
   }
 
   @GetMapping
-  public ResponseEntity<List<ResponseRecipe>> getRecipeByTags(@RequestParam(defaultValue = "", required = false) String name,
-                                                              @RequestParam(required = false) String includedTags,
-                                                              @RequestParam(required = false) String excludeTags,
-                                                              @RequestParam(defaultValue = "0", required = false) int offset, @RequestParam(defaultValue = "5", required = false) int limit) {
+  public ResponseEntity<List<ResponseRecipe>> getRecipeByTags(
+      @RequestParam(defaultValue = "", required = false) String name,
+      @RequestParam(required = false) String includedTags,
+      @RequestParam(required = false) String excludeTags,
+      @RequestParam(defaultValue = "0", required = false) int offset,
+      @RequestParam(defaultValue = "5", required = false) int limit) {
     if (limit == 0) {
       return ResponseEntity.badRequest().body(List.of());
     }
@@ -61,23 +60,25 @@ public class RecipeResource {
     }
 
     Page<ResponseRecipe> recipes = recipeService.getRecipesByTagsAndNamePagination(includedTagslist,
-            excludedTagList, offset, limit, name);
+        excludedTagList, offset, limit, name);
     if (recipes.getTotalElements() > 0 && !recipes.isEmpty()) {
       return ResponseEntity.status(206).header("X-Total-Count", String.valueOf(recipes.getTotalElements()))
-              .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
+          .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
 
     } else if (recipes.getTotalElements() > 0) {
       return ResponseEntity.status(416).header("X-Total-Count", String.valueOf(recipes.getTotalElements()))
-              .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
+          .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
     } else {
       return ResponseEntity.status(404).header("X-Total-Count", String.valueOf(recipes.getTotalElements()))
-              .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
+          .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
     }
   }
 
-  @GetMapping("search/")
-  public ResponseEntity<List<ResponseRecipe>> searchRecipePagination(@RequestParam(defaultValue = "", required = false) String name
-          , @RequestParam(defaultValue = "0", required = false) int offset, @RequestParam(defaultValue = "5", required = false) int limit) {
+  @GetMapping("search")
+  public ResponseEntity<List<ResponseRecipe>> searchRecipePagination(
+      @RequestParam(defaultValue = "", required = false) String name,
+      @RequestParam(defaultValue = "0", required = false) int offset,
+      @RequestParam(defaultValue = "5", required = false) int limit) {
     if (offset == 0 && limit == 0) {
       List<ResponseRecipe> recipes = recipeService.SearchRecipe(name);
       return ResponseEntity.ok(recipes);
@@ -87,29 +88,28 @@ public class RecipeResource {
       }
       Page<ResponseRecipe> recipes = recipeService.SearchRecipe(name, offset, limit);
       return ResponseEntity.status(206).header("X-Total-Count", String.valueOf(recipes.getTotalElements()))
-              .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
+          .header("X-Total-Pages", String.valueOf(recipes.getTotalPages())).body(recipes.stream().toList());
     }
   }
 
-
   @PutMapping("{id}")
-  public ResponseEntity<ResponseRecipe> updateRecipe(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id,
-                                                     @RequestBody RecipeRequest recipe) {
+  public ResponseEntity<ResponseRecipe> updateRecipe(@AuthenticationPrincipal UserDetails userDetails,
+      @PathVariable Long id,
+      @RequestBody RecipeRequest recipe) {
     return recipeService.updateRecipe(id, recipe, userDetails.getUsername());
   }
 
-
-  @PatchMapping(value = "{id}", consumes = "application/merge-patch+json",
-          produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ResponseRecipe> partialUpdateRecipe(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id,
-                                            @RequestBody JsonNode recipeUpdate) {
+  @PatchMapping(value = "{id}", consumes = "application/merge-patch+json", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<ResponseRecipe> partialUpdateRecipe(@AuthenticationPrincipal UserDetails userDetails,
+      @PathVariable Long id,
+      @RequestBody JsonNode recipeUpdate) {
 
     return recipeService.partialUpdateRecipe(id, recipeUpdate, userDetails.getUsername());
   }
 
   @PostMapping
   public ResponseEntity<ResponseRecipe> PostRecipe(@AuthenticationPrincipal UserDetails userDetails,
-                                                   @RequestBody RecipeRequest recipe) {
+      @RequestBody RecipeRequest recipe) {
 
     return recipeService.saveRecipe(recipe, userDetails.getUsername());
   }

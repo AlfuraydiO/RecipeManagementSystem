@@ -1,4 +1,4 @@
-package org.omar.recipemanagementsystem.rating.entity;
+package org.omar.recipemanagementsystem.review.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Validated
 @DynamicUpdate
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"recipe_id", "user_account_id"})})
-public class Rating implements Serializable {
+public class Review implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rating_seq")
@@ -33,20 +33,20 @@ public class Rating implements Serializable {
     private Recipe recipe;
 
     @NotNull
-    private int recipeRating;
+    private int rating;
 
     private LocalDateTime localDateTime;
 
     private String review;
 
 
-    public Rating() {
+    public Review() {
     }
 
-    public Rating(UserAccount userAccount, Recipe recipe, int recipeRating, LocalDateTime localDateTime, String review) {
+    public Review(UserAccount userAccount, Recipe recipe, int rating, LocalDateTime localDateTime, String review) {
         this.userAccount = userAccount;
         this.recipe = recipe;
-        this.recipeRating = recipeRating;
+        this.rating = rating;
         this.localDateTime = localDateTime;
         this.review = review;
     }
@@ -75,12 +75,12 @@ public class Rating implements Serializable {
         this.recipe = recipe;
     }
 
-    public int getRecipeRating() {
-        return recipeRating;
+    public int getRating() {
+        return rating;
     }
 
-    public void setRecipeRating(int recipeRating) {
-        this.recipeRating = recipeRating;
+    public void setRating(int recipeRating) {
+        this.rating = recipeRating;
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -105,7 +105,7 @@ public class Rating implements Serializable {
         int hash = 5;
         hash = 89 * hash + Objects.hashCode(this.userAccount);
         hash = 89 * hash + Objects.hashCode(this.recipe);
-        hash = 89 * hash + Objects.hashCode(this.recipeRating);
+        hash = 89 * hash + Objects.hashCode(this.rating);
         hash = 89 * hash + Objects.hashCode(this.localDateTime);
         return hash;
     }
@@ -121,14 +121,14 @@ public class Rating implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Rating other = (Rating) obj;
+        final Review other = (Review) obj;
         if (!Objects.equals(this.userAccount, other.userAccount)) {
             return false;
         }
         if (!Objects.equals(this.recipe, other.recipe)) {
             return false;
         }
-        if (!Objects.equals(this.recipeRating, other.recipeRating)) {
+        if (!Objects.equals(this.rating, other.rating)) {
             return false;
         }
         return Objects.equals(this.localDateTime, other.localDateTime);
@@ -136,7 +136,7 @@ public class Rating implements Serializable {
 
     @Override
     public String toString() {
-        return "Rating{" + "id=" + id + ", userAccount=" + userAccount + ", recipe=" + recipe + ", recipeRating=" + recipeRating + ", localDateTime=" + localDateTime + ", review=" + review + '}';
+        return "Review{" + "id=" + id + ", userAccount=" + userAccount + ", recipe=" + recipe + ", recipeRating=" + rating + ", localDateTime=" + localDateTime + ", review=" + review + '}';
     }
     
     

@@ -8,14 +8,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface RecipeRepository extends CrudRepository<Recipe, Long> , JpaSpecificationExecutor<Recipe> {
+public interface RecipeRepository extends CrudRepository<Recipe, Long>, JpaSpecificationExecutor<Recipe> {
 
-    //List<Recipe> findByCategoryIgnoreCaseOrderByDateDesc(String category);
+  // List<Recipe> findByCategoryIgnoreCaseOrderByDateDesc(String category);
 
-    List<Recipe> findByNameContainingIgnoreCaseOrderByDateDesc(String name);
+  List<Recipe> findByNameContainingIgnoreCaseOrderByDateDesc(String name);
 
-    Page<Recipe> findByNameContainingIgnoreCaseOrderByDateDesc(String name, Pageable pageable);
+  Page<Recipe> findByNameContainingIgnoreCaseOrderByDateDesc(String name, Pageable pageable);
 
-
-    boolean existsByName(String name);
+  boolean existsByName(String name);
 }

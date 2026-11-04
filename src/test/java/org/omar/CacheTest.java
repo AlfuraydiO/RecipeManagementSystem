@@ -1,18 +1,17 @@
-
 package org.omar;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
-import java.util.Iterator;
- 
 import java.util.Optional;
+
 import javax.cache.Cache;
-import javax.cache.Cache.Entry;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
 import javax.cache.spi.CachingProvider;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.omar.recipemanagementsystem.RecipesApplication;
 import org.omar.recipemanagementsystem.recipe.controller.TagRepository;
@@ -22,49 +21,36 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 
-/**
- *
- * @author oalfuraydi
- */
-@Disabled
-@SpringBootTest(
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = RecipesApplication.class)
-public class CacheTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = RecipesApplication.class)
+class CacheTest {
 
-    @Autowired
-    TagRepository tagRepository;
-    
-     @Value("classpath:ehcache.xml")
-    Resource resourcefile;
- 
-    @BeforeEach
-    void setUp() {
-        tagRepository.save(new Tag(null, "TEst tag", "testing tag caache", "TEST"));
-        tagRepository.save(new Tag(null, "TEst tag 1", "testing tag caache 2", "TEST"));
-    }
+  @Autowired
+  TagRepository tagRepository;
 
-    private Optional<Tag> getCachedTag(String name) throws IOException {
+  @Value("classpath:ehcache.xml")
+  Resource resourceFile;
 
-        CachingProvider provider = Caching.getCachingProvider();
-        CacheManager cacheManager = null;
-        cacheManager = provider.getCacheManager(resourcefile.getURI(), getClass().getClassLoader());
-        Iterable<String> cacheNames = cacheManager.getCacheNames();
-        cacheNames.forEach(System.out::println);
-        Cache<String, Tag> cache = cacheManager.getCache("tagCache", String.class, Tag.class);
-         for (Iterator iterator = cache.iterator(); iterator.hasNext();) {
-            Entry<String,Tag> next =  (Entry<String,Tag>) iterator.next();
-            if (next.getValue().getName().equals(name));
-            return Optional.of(next.getValue());
-        }
-        return Optional.empty();
-    }
+  @BeforeEach
+  void setUp() {
+    tagRepository.save(new Tag(null, "Test tag", "Testing tag cache", "TEST"));
+    tagRepository.save(new Tag(null, "Test tag 1", "Testing tag cache 2", "TEST"));
+  }
 
-    @Test
-    void TestCacheTag() throws IOException {
-        Optional<Tag> testTag = tagRepository.findByName("TEst tag");
-        System.err.println("Testing....");
-        assertEquals(testTag, getCachedTag("TEst tag"));
-    }
+  private Optional<Tag> getCachedTag(String name) throws IOException {
+    CachingProvider provider = Caching.getCachingProvider();
+    CacheManager cacheManager = provider.getCacheManager(resourceFile.getURI(), getClass().getClassLoader());
+    Cache<String, Tag> cache = cacheManager.getCache("tagCache", String.class, Tag.class);
+    return Optional.ofNullable(cache.get(name));
+  }
 
+  @Test
+  void cachesTagByName() throws IOException {
+    Optional<Tag> tag = tagRepository.findByName("Test tag");
+
+    assertTrue(tag.isPresent());
+    Optional<Tag> cachedTag = getCachedTag("Test tag");
+    assertTrue(cachedTag.isPresent());
+    assertEquals(tag.get().getName(), cachedTag.get().getName());
+    assertEquals(tag.get().getDescription(), cachedTag.get().getDescription());
+  }
 }

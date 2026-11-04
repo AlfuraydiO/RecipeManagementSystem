@@ -13,29 +13,33 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(matcherRegistry -> matcherRegistry
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+        .authorizeHttpRequests(matcherRegistry -> matcherRegistry
 
-                        .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/recipe/**").hasAnyRole("CHEF")
-                        .requestMatchers(HttpMethod.PUT, "/api/recipe/**").hasAnyRole("CHEF")
-                        .requestMatchers(HttpMethod.PATCH, "/api/recipe/**").hasAnyRole("CHEF")
-                        .requestMatchers(HttpMethod.DELETE, "/api/**").authenticated()
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/actuator/**").permitAll()
-                        .anyRequest().permitAll()
-                )
-                .httpBasic(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .build();
-    }
+            .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/**").authenticated()
+            .requestMatchers(HttpMethod.POST, "/api/recipe/**").hasAnyRole("CHEF")
+            .requestMatchers(HttpMethod.PUT, "/api/recipe/**").hasAnyRole("CHEF")
+            .requestMatchers(HttpMethod.PATCH, "/api/recipe/**").hasAnyRole("CHEF")
+            .requestMatchers(HttpMethod.POST, "/api/tag/**").hasAnyRole("CHEF")
+            .requestMatchers(HttpMethod.PUT, "/api/tag/**").hasAnyRole("CHEF")
+            .requestMatchers(HttpMethod.PATCH, "/api/tag/**").hasAnyRole("CHEF")
+            .requestMatchers(HttpMethod.POST, "/api/rating/**").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/api/rating/**").authenticated()
+            .requestMatchers(HttpMethod.PUT, "/api/rating/**").authenticated()
+            .requestMatchers("/h2-console/**").permitAll()
+            .requestMatchers("/actuator/**").permitAll()
+            .anyRequest().permitAll())
+        .httpBasic(Customizer.withDefaults())
+        .csrf(AbstractHttpConfigurer::disable)
+        .build();
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
 }

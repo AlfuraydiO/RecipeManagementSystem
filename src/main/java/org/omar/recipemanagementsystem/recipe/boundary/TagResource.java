@@ -3,62 +3,61 @@ package org.omar.recipemanagementsystem.recipe.boundary;
 import jakarta.validation.Valid;
 import org.omar.recipemanagementsystem.recipe.controller.TagService;
 import org.omar.recipemanagementsystem.recipe.entity.Tag;
+import org.omar.recipemanagementsystem.recipe.entity.bodies.tag.TagResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import tools.jackson.databind.JsonNode;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/tag/")
+@RequestMapping(value = "api/tag", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TagResource {
 
-    TagService tagService;
+  TagService tagService;
 
-    public TagResource(TagService tagService) {
-        this.tagService = tagService;
-    }
+  public TagResource(TagService tagService) {
+    this.tagService = tagService;
+  }
 
-    public record id(long id) {
-    }
+  @GetMapping("{id}")
+  public ResponseEntity<TagResponse> getTag(@PathVariable long id) {
+    return tagService.getTagById(id);
+  }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Tag> getTag(@PathVariable Long id) {
-        Tag tagById = tagService.getTagById(id);
-        return ResponseEntity.ok(tagById);
-    }
 
-    @GetMapping("search/")
-    public ResponseEntity<List<Tag>> searchTag(@RequestParam String search) {
-        if (search.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-        List<Tag> tags = tagService.searchTag(search);
-        return ResponseEntity.ok(tags);
+  @GetMapping()
+  public ResponseEntity<List<TagResponse>> searchTag(@RequestParam String search) {
+    if (search.isEmpty()) {
+      return ResponseEntity.badRequest().build();
     }
-    @PatchMapping("{id}")
-    public ResponseEntity partialUpdateTag(@PathVariable Long id, @RequestBody @Valid Tag tag) {
-        ResponseEntity<?> responseEntity = tagService.updateTag(id, tag);
-        return responseEntity;
-    }
-    @PutMapping("{id}")
-    public ResponseEntity updateTag(@PathVariable Long id, @RequestBody @Valid Tag tag) {
-        ResponseEntity<?> responseEntity = tagService.updateTag(id, tag);
-        return responseEntity;
-    }
-    @PostMapping(value = "new", produces = "application/json")
-    public ResponseEntity PostTag(@RequestBody @Valid Tag tag) {
-        Optional<Tag> tag1 = tagService.saveTag(tag);
-        return ResponseEntity.ok(new TagResource.id(tag1.get().getId()));
-    }
+    return tagService.searchTag(search);
+  }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity deleteTag(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
-        HttpStatus status = tagService.removeTag(id);
-        return ResponseEntity.status(status.value()).build();
-    }
-    
+  @PutMapping("{id}")
+  public ResponseEntity<?> updateTag(@PathVariable long id, @RequestBody @Valid Tag tag) {
+    return tagService.updateTag(id, tag);
+  }
+
+  @PostMapping(consumes = "application/json", produces = "application/json")
+  public ResponseEntity<TagResponse> PostTag(@RequestBody @Valid Tag tag) {
+    return tagService.saveTag(tag);
+  }
+
+  @PatchMapping("{id}")
+  public ResponseEntity<TagResponse> patchTag(@PathVariable long id, @RequestBody JsonNode jsonNode) {
+    return tagService.partialUpdate(id, jsonNode);
+  }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity deleteTag(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+    HttpStatus status = tagService.removeTag(id);
+    return ResponseEntity.status(status.value()).build();
+  }
+
 }

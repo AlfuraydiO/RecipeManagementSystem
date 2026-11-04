@@ -50,6 +50,9 @@ INSERT INTO USER_ACCOUNT (ID, EMAIL, PASSWORD, AUTHORITY, IS_ACCOUNT_NON_LOCKED,
   (4, 'user.sara@email.com',  '$2a$10$NQO6b8ROgW6XZvL3iGhykOyVmoZqm2wzTMuBpW3HOWdPg1cjdDTMW', 'ROLE_USER',  TRUE, TRUE),
   (5, 'user.kenji@email.com', '$2a$10$NQO6b8ROgW6XZvL3iGhykOyVmoZqm2wzTMuBpW3HOWdPg1cjdDTMW', 'ROLE_USER',  TRUE, TRUE);
 
+-- Keep the generated user ID sequence ahead of the explicitly seeded IDs.
+ALTER TABLE USER_ACCOUNT ALTER COLUMN ID RESTART WITH 6;
+
 -- ======================  RECIPES (25)  ===============================
 INSERT INTO RECIPE (ID, NAME, DESCRIPTION, CATEGORY, DATE, TOTAL_RATING, CREATED_BY_ID) VALUES
   (1,  'Cheesy Tomato Pasta',                    'A quick and easy weeknight meal',                                       'Lunch,Dinner',         '2024-01-15', 0.0, 1),
@@ -627,8 +630,8 @@ INSERT INTO RECIPE_TAGS (RECIPE_ID, TAG_ID) VALUES (24,27),(24,4),(24,29),(24,31
 -- Recipe 25: Shakshuka [18,5,22,26]
 INSERT INTO RECIPE_TAGS (RECIPE_ID, TAG_ID) VALUES (25,18),(25,5),(25,22),(25,26);
 
--- ======================  RATINGS (sample)  ==========================
-INSERT INTO RATING (ID, USER_ACCOUNT_ID, RECIPE_ID, RECIPE_RATING, LOCAL_DATE_TIME, REVIEW) VALUES
+-- ======================  REVIEWS (sample)  ==========================
+INSERT INTO REVIEW (ID, USER_ACCOUNT_ID, RECIPE_ID, RATING, LOCAL_DATE_TIME, REVIEW) VALUES
   (1,  3, 1,  5, '2024-02-10 12:00:00', 'Delicious and so easy on a weeknight.'),
   (2,  4, 1,  4, '2024-02-11 13:00:00', 'Tasty but a little bland for our taste.'),
   (3,  5, 2,  5, '2024-02-12 08:00:00', 'Perfect quick breakfast.'),

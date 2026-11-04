@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
- */
+
 package org.omar.recipemanagementsystem.MealPlanner.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,67 +16,66 @@ import java.util.List;
 
 import org.omar.recipemanagementsystem.users.entity.UserAccount;
 
-
 @Entity
 public class MasterMealPlan {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @OneToMany(mappedBy = "masterMealPlan", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<MealPlan> mealPlans = new ArrayList<>();
+  @OneToMany(mappedBy = "masterMealPlan", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  private List<MealPlan> mealPlans = new ArrayList<>();
 
-    @OneToOne()
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private UserAccount userAccount;
+  @OneToOne()
+  @JoinColumn(name = "user_id")
+  @JsonIgnore
+  private UserAccount userAccount;
 
-    private String Notes;
+  private String Notes;
 
-    public MasterMealPlan() {
-    }
+  public MasterMealPlan() {
+  }
 
-     
-    
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public List<MealPlan> getMealPlans() {
-        return mealPlans;
-    }
+  public List<MealPlan> getMealPlans() {
+    return mealPlans;
+  }
 
-    public void setMealPlans(List<MealPlan> mealPlans) {
-        this.mealPlans = mealPlans;
-    }
+  public void setMealPlans(List<MealPlan> mealPlans) {
+    this.mealPlans = mealPlans;
+  }
 
-    public void addMealPlan(MealPlan mealPlan){
-        mealPlans.add(mealPlan);
-        mealPlan.setMasterMealPlan(this);
-    }
-    public void removeMealPlan(MealPlan mealPlan){
-        mealPlans.remove(mealPlan);
-        mealPlan.setMasterMealPlan(null);
-    }
-    public UserAccount getUserAccount() {
-        return userAccount;
-    }
+  public void addMealPlan(MealPlan mealPlan) {
+    mealPlans.add(mealPlan);
+    mealPlan.setMasterMealPlan(this);
+  }
 
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
-    }
+  public void removeMealPlan(MealPlan mealPlan) {
+    mealPlans.remove(mealPlan);
+    mealPlan.setMasterMealPlan(null);
+  }
 
-    public String getNotes() {
-        return Notes;
-    }
+  public UserAccount getUserAccount() {
+    return userAccount;
+  }
 
-    public void setNotes(String Notes) {
-        this.Notes = Notes;
-    }
+  public void setUserAccount(UserAccount userAccount) {
+    this.userAccount = userAccount;
+  }
+
+  public String getNotes() {
+    return Notes;
+  }
+
+  public void setNotes(String Notes) {
+    this.Notes = Notes;
+  }
 
 }

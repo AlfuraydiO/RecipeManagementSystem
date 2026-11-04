@@ -24,14 +24,16 @@ public class ResourceFilter extends OncePerRequestFilter {
   private static final Logger log = LoggerFactory.getLogger(ResourceFilter.class);
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+      throws ServletException, IOException {
     if (shouldNotFilter(request)) {
       filterChain.doFilter(request, response);
     }
 
-    MDC.put("request-id", UUID.randomUUID().toString());
-    var creq = new ContentCachingRequestWrapper(request,0);
+    MDC.put("x-request-id", UUID.randomUUID().toString());
+    var creq = new ContentCachingRequestWrapper(request, 0);
     var cres = new ContentCachingResponseWrapper(response);
+    cres.addHeader("x-request-id", MDC.get("x-request-id"));
     long start = System.currentTimeMillis();
     filterChain.doFilter(creq, cres);
     long duration = System.currentTimeMillis() - start;
@@ -40,19 +42,18 @@ public class ResourceFilter extends OncePerRequestFilter {
     cres.copyBodyToResponse();
     MDC.clear();
 
-
   }
 
   private String getBody(byte[] content, String encoding) {
-    if (content == null || content.length == 0) return "";
+    if (content == null || content.length == 0)
+      return "";
     try {
-      return new String(content, encoding != null ? encoding : StandardCharsets.UTF_8.name()).replaceAll("\\R+","");
+      return new String(content, encoding != null ? encoding : StandardCharsets.UTF_8.name()).replaceAll("\\R+", "");
     } catch (Exception e) {
       log.error("unable to decode string");
       return "";
     }
   }
-
 
   @Override
   protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -64,21 +65,20 @@ public class ResourceFilter extends OncePerRequestFilter {
     String body = getBody(request.getContentAsByteArray(), request.getCharacterEncoding());
 
     log.info("{} {} {} Remote IP:{} Body: {}",
-            request.getMethod(),
-            request.getRequestURI() + (request.getQueryString() != null ? "?" + request.getQueryString() : ""),
-            request.getProtocol(),
-            request.getRemoteAddr(),
-            body.isBlank() ? "[empty]" : body);
+        request.getMethod(),
+        request.getRequestURI() + (request.getQueryString() != null ? "?" + request.getQueryString() : ""),
+        request.getProtocol(),
+        request.getRemoteAddr(),
+        body.isBlank() ? "[empty]" : body);
   }
 
   private void logResponse(ContentCachingResponseWrapper response, long duration) {
     String body = getBody(response.getContentAsByteArray(), response.getCharacterEncoding());
 
     log.info("Status:{} Duratio:{}ms Body:{}",
-            response.getStatus(),
-            duration,
-            body.isBlank() ? "[empty]" : body);
+        response.getStatus(),
+        duration,
+        body.isBlank() ? "[empty]" : body);
   }
 
 }
-
