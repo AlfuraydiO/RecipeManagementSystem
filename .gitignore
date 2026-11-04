@@ -1,0 +1,7 @@
+/RecipeManagementSystem/build/
+.*
+*/target/*
+target
+build
+.project
+.classpath

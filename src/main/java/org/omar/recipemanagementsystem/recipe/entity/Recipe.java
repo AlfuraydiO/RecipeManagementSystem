@@ -1,0 +1,206 @@
+package org.omar.recipemanagementsystem.recipe.entity;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.DynamicUpdate;
+import org.omar.recipemanagementsystem.users.entity.UserAccount;
+import org.springframework.validation.annotation.Validated;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
+@Validated
+@DynamicUpdate
+public class Recipe implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_seq")
+    @SequenceGenerator(name = "recipe_seq", sequenceName = "recipe_seq", allocationSize = 1)
+    private Long id;
+    @NotBlank(message = "Recipe name needed")
+    String name;
+    @NotBlank(message = "Recipe description needed")
+    String description;
+    @Size(min = 1, message = "At least one ingredient needed")
+
+    @NotNull
+    @ElementCollection
+    List<String> ingredients;
+    @Size(min = 1, message = "At least one direction needed")
+    @NotNull
+    @ElementCollection
+    List<String> instructions;
+
+     @NotNull(message = "Category must not be null")
+     String category;
+
+    //@Temporal(TemporalType.DATE)
+    LocalDate date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    UserAccount createdBy;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    // @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    //@ElementCollection
+    //@JsonIgnoreProperties(value = {"type","description","name"})
+    @JoinTable(name = "RECIPE_TAGS",
+            joinColumns
+                    = @JoinColumn(name = "RECIPE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns
+                    = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
+    private Set<Tag> tags = new HashSet<>();
+
+
+    private double totalRating;
+
+    public Recipe(Long id) {
+        this.id = id;
+    }
+
+    public Recipe() {
+    }
+
+    public Recipe(Long id, String name, String description, List<String> ingredients,
+                  List<String> instructions, String category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.category=category;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<String> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<String> directions) {
+        this.instructions = directions;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public UserAccount getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(UserAccount user) {
+        this.createdBy = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(name, recipe.name) && Objects.equals(description, recipe.description) && Objects.equals(ingredients, recipe.ingredients) && Objects.equals(instructions, recipe.instructions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, ingredients, instructions);
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+
+    public void AddTag(Tag tag) {
+        this.tags.add(tag);
+        tag.getRecipeSet().add(this);
+
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+        tag.getRecipeSet().remove(this);
+
+    }
+
+    public double getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(double totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" + "id=" + id + ", name=" + name + ", category=" + category + '}';
+    }
+
+    
+    
+    @JsonGetter("tags")
+    public List<Long> getTagsList() {
+       return this.tags.stream().map(e->e.getId()).toList();
+    }
+    
+}
